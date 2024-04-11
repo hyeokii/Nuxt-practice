@@ -1,11 +1,14 @@
 <template>
   <div class="todoDetail">
-    <input
-      class="contentsInput"
-      v-model="editContents"
-      placeholder="수정할 컨텐츠"
-    />
-    <button class="saveBtn" @click="updateTodo">저장</button>
+    <h1 class="title">{{ message }}</h1>
+    <div>
+      <input
+        class="contentsInput"
+        v-model="editContents"
+        placeholder="수정할 컨텐츠"
+      />
+      <button class="saveBtn" @click="updateTodo">저장</button>
+    </div>
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
     return {
       todo: {},
       editContents: "",
-      message: "TodoList",
+      message: "Update Todo",
     };
   },
   async asyncData({ $axios, params }) {
@@ -64,17 +67,29 @@ export default {
 
 <style>
 .todoDetail {
-  background-color: white;
-  width: 300px;
-  height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 3rem;
+  margin-top: 5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
 }
 
 .contentsInput {
-  border: 1px solid black;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
 }
 
 .saveBtn {
-  border: 1px solid black;
-  color: black;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 </style>

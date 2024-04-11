@@ -1,11 +1,14 @@
 <template>
-  <div>
-    {{ message }} <br />
+  <div class="todoListBox">
+    <h1>{{ message }}</h1>
     <ul>
-      <li v-for="data in dataList" :key="data.id">
+      <li class="todoItem" v-for="data in dataList" :key="data.id">
+        {{ data.id }}.
         {{ data.contents }}
         <NuxtLink :to="`/todo/${data.id}`">
-          <button v-if="curUserName === data.userNm">수정</button>
+          <button class="updateBtn" v-if="curUserName === data.userNm">
+            수정
+          </button>
         </NuxtLink>
       </li>
     </ul>
@@ -37,3 +40,28 @@ export default {
   mounted() {},
 };
 </script>
+
+<style>
+.todoListBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.updateBtn {
+  color: white;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+</style>
