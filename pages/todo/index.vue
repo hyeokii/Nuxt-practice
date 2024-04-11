@@ -3,13 +3,23 @@
     <h1>{{ message }}</h1>
     <ul>
       <li class="todoItem" v-for="data in dataList" :key="data.id">
-        {{ data.id }}.
-        {{ data.contents }}
+        <div class="todoContents">
+          <span>{{ data.id }}.</span>
+          <span>{{ data.contents }}</span>
+          <span>({{ data.userNm }})</span>
+        </div>
         <NuxtLink :to="`/todo/${data.id}`">
-          <button class="updateBtn" v-if="curUserName === data.userNm">
+          <button class="btn updateBtn" v-if="curUserName === data.userNm">
             수정
           </button>
         </NuxtLink>
+        <button
+          class="btn deleteBtn"
+          v-if="curUserName === data.userNm"
+          @click="deleteTodo(data.id)"
+        >
+          삭제
+        </button>
       </li>
     </ul>
   </div>
@@ -17,12 +27,12 @@
 
 <script>
 // 서버사이드
-
+import { reactive } from "vue";
 export default {
   name: "MainPage",
   data() {
     return {
-      dataList: [],
+      dataList: reactive([]),
       curUserName: "",
       message: "TodoList",
     };
@@ -38,6 +48,21 @@ export default {
   },
   created() {},
   mounted() {},
+  methods: {
+    async deleteTodo(todoId) {
+      try {
+        const response = await this.$axios.delete(
+          `http://localhost:3001/todoList/${todoId}`
+        );
+        if (response.status === 200) {
+          this.dataList = this.dataList.filter((todo) => todo.id !== todoId);
+          alert("삭제되었습니다.");
+        }
+      } catch (err) {
+        console.log("err", err);
+      }
+    },
+  },
 };
 </script>
 
@@ -45,8 +70,8 @@ export default {
 .todoListBox {
   display: flex;
   flex-direction: column;
+  flex: 1 1;
   align-items: center;
-  justify-content: center;
   margin-top: 5rem;
 }
 
@@ -55,9 +80,16 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin: 20px;
+  width: 400px;
 }
 
-.updateBtn {
+.todoContents {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
   color: white;
   border: 1px solid white;
   padding: 5px 10px;
