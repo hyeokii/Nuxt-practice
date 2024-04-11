@@ -29,7 +29,7 @@ export default {
     const usersRes = await $axios.get("http://localhost:3001/users");
     const users = usersRes.data;
     const curUserId = await $axios.get("http://localhost:3001/currentUser");
-    const curUser = users.find((user) => user.id === curUserId.data.id);
+    const curUser = users.find((user) => user.id === String(curUserId.data.id));
 
     return { dataList: todoData.data, curUserName: curUser.userNm };
   },

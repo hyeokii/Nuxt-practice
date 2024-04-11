@@ -35,7 +35,7 @@
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "할 일4",
-      "contents": "끝내주게",
+      "contents": "끝내주게eeddd",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
@@ -52,7 +52,7 @@
     }
   ],
   "currentUser": {
-    "id": "3"
+    "id": 3
   },
   "users": [
     {
