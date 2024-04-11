@@ -1,17 +1,17 @@
 {
   "todoList": [
     {
-      "id": 1,
-      "loginId": "yj.shin",
-      "userNm": "신예진",
-      "title": "할 일1",
-      "contents": "개신나게 놀기",
+      "id": "1",
+      "loginId": "song",
+      "userNm": "이송",
+      "title": "할 일2",
+      "contents": "맛나게ㅇㅇㅇㅇㅇㅇㅇㅇ",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "loginId": "song",
       "userNm": "이송",
       "title": "할 일2",
@@ -21,57 +21,57 @@
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "loginId": "re2volution",
       "userNm": "김재혁",
       "title": "할 일3",
-      "contents": "기깔나게 숨쉬기",
+      "contents": "기깔나게 숨",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "할 일4",
-      "contents": "끝내주게 낮잠자기",
+      "contents": "끝내주게",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "loginId": "re2volution",
       "userNm": "김재혁",
       "title": "할 일5",
-      "contents": "쓰레기버리기",
+      "contents": "안녕하세요",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     }
   ],
   "currentUser": {
-
+    "id": "3"
   },
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "loginId": "yj.shin",
       "userNm": "신예진"
     },
     {
-      "id": 2,
+      "id": "2",
       "loginId": "song",
       "userNm": "이송"
     },
     {
-      "id": 3,
+      "id": "3",
       "loginId": "ccomo07071",
       "userNm": "김지은"
     },
     {
-      "id": 4,
+      "id": "4",
       "loginId": "re2volution",
       "userNm": "김재혁"
     }
