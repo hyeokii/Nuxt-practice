@@ -4,12 +4,6 @@
 <script>
 export default {
   name: 'todoDetail',
-  props: {
-    name: {
-      type: String,
-      default: ''
-    }
-  },
   data() {
     return {}
   },
