@@ -19,22 +19,26 @@
             v-model="data.checked"
             @change="toggleStatus(data)"
           />
-          <span>{{ idx + 1 }}.</span>
-          <span>{{ data.contents }}</span>
+          <div class="text">
+            <span>{{ idx + 1 }}.</span> &nbsp;
+            <span>{{ data.contents }}</span>
+          </div>
           <span>({{ data.userNm }})</span>
         </div>
-        <NuxtLink :to="`/todo/${data.id}`">
-          <button class="btn updateBtn" v-if="curUserName === data.userNm">
-            수정
+        <div class="btnBox">
+          <NuxtLink :to="`/todo/${data.id}`">
+            <button class="btn updateBtn" v-if="curUserName === data.userNm">
+              수정
+            </button>
+          </NuxtLink>
+          <button
+            class="btn deleteBtn"
+            v-if="curUserName === data.userNm"
+            @click="deleteTodo(data.id)"
+          >
+            삭제
           </button>
-        </NuxtLink>
-        <button
-          class="btn deleteBtn"
-          v-if="curUserName === data.userNm"
-          @click="deleteTodo(data.id)"
-        >
-          삭제
-        </button>
+        </div>
       </li>
     </ul>
   </div>
@@ -95,6 +99,7 @@ export default {
       try {
         await this.$axios.patch(`http://localhost:3001/todoList/${data.id}`, {
           status: data.status,
+          updatedDtm: new Date(),
         });
       } catch (error) {
         console.error("Error:", error);
@@ -118,18 +123,29 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin: 20px;
-  width: 400px;
 }
 
 .completed {
   text-decoration: line-through;
-  color: #999;
+  color: #b6b6b6;
 }
 
 .todoContents {
-  width: 250px;
+  width: 300px;
+  flex: 1 1 1;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.btnbox {
+  width: 100px;
 }
 
 .btn {
