@@ -1,10 +1,15 @@
 <template>
   <div class="todoListBox">
     <h1>{{ message }}</h1>
+    <AddTodo
+      :dataList="dataList"
+      :curUser="curUserInfo"
+      @addedTodo="handleAddTodo"
+    />
     <ul>
-      <li class="todoItem" v-for="data in dataList" :key="data.id">
+      <li class="todoItem" v-for="(data, idx) in dataList" :key="data.id">
         <div class="todoContents">
-          <span>{{ data.id }}.</span>
+          <span>{{ idx + 1 }}.</span>
           <span>{{ data.contents }}</span>
           <span>({{ data.userNm }})</span>
         </div>
@@ -27,13 +32,14 @@
 
 <script>
 // 서버사이드
-import { reactive } from "vue";
+
 export default {
   name: "MainPage",
   data() {
     return {
-      dataList: reactive([]),
+      dataList: [],
       curUserName: "",
+      curUserInfo: {},
       message: "TodoList",
     };
   },
@@ -44,7 +50,11 @@ export default {
     const curUserId = await $axios.get("http://localhost:3001/currentUser");
     const curUser = users.find((user) => user.id === String(curUserId.data.id));
 
-    return { dataList: todoData.data, curUserName: curUser.userNm };
+    return {
+      dataList: todoData.data,
+      curUserName: curUser.userNm,
+      curUserInfo: curUser,
+    };
   },
   created() {},
   mounted() {},
@@ -61,6 +71,9 @@ export default {
       } catch (err) {
         console.log("err", err);
       }
+    },
+    async handleAddTodo(newTodo) {
+      this.dataList.push(newTodo);
     },
   },
 };

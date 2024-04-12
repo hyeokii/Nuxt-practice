@@ -52,6 +52,7 @@ export default {
           {
             ...this.todo,
             contents: this.editContents,
+            updatedDtm: new Date(),
           }
         );
         if (response.status === 200) {

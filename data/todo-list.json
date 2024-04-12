@@ -39,6 +39,16 @@
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
+    },
+    {
+      "id": "251e",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "테스트",
+      "status": "1",
+      "createdDtm": "2024-04-12T00:57:03.566Z",
+      "updatedDtm": "2024-04-12T00:57:03.566Z"
     }
   ],
   "currentUser": {
