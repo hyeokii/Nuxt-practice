@@ -7,8 +7,18 @@
       @addedTodo="handleAddTodo"
     />
     <ul>
-      <li class="todoItem" v-for="(data, idx) in dataList" :key="data.id">
+      <li
+        class="todoItem"
+        v-for="(data, idx) in dataList"
+        :key="data.id"
+        :class="{ completed: data.status === '2' }"
+      >
         <div class="todoContents">
+          <input
+            type="checkbox"
+            v-model="data.checked"
+            @change="toggleStatus(data)"
+          />
           <span>{{ idx + 1 }}.</span>
           <span>{{ data.contents }}</span>
           <span>({{ data.userNm }})</span>
@@ -31,8 +41,6 @@
 </template>
 
 <script>
-// 서버사이드
-
 export default {
   name: "MainPage",
   data() {
@@ -56,24 +64,41 @@ export default {
       curUserInfo: curUser,
     };
   },
-  created() {},
+  created() {
+    this.dataList.forEach((item) => {
+      item.checked = item.status === "2";
+      // 2외에는 false
+    });
+  },
   mounted() {},
   methods: {
     async deleteTodo(todoId) {
       try {
-        const response = await this.$axios.delete(
-          `http://localhost:3001/todoList/${todoId}`
-        );
-        if (response.status === 200) {
-          this.dataList = this.dataList.filter((todo) => todo.id !== todoId);
-          alert("삭제되었습니다.");
-        }
+        const response = await this.$axios
+          .delete(`http://localhost:3001/todoList/${todoId}`)
+          .then(() => {
+            this.dataList = this.dataList.filter((todo) => todo.id !== todoId);
+            alert("삭제되었습니다.");
+          });
       } catch (err) {
         console.log("err", err);
       }
     },
     async handleAddTodo(newTodo) {
       this.dataList.push(newTodo);
+      // 자식 컴포넌트에서 추가 이벤트가 일어났을 때 추가 된 할일 dataList에 추가해주기
+    },
+
+    async toggleStatus(data) {
+      data.status = data.status === "1" ? "2" : "1";
+
+      try {
+        await this.$axios.patch(`http://localhost:3001/todoList/${data.id}`, {
+          status: data.status,
+        });
+      } catch (error) {
+        console.error("Error:", error);
+      }
     },
   },
 };
@@ -94,6 +119,11 @@ export default {
   align-items: center;
   margin: 20px;
   width: 400px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
 }
 
 .todoContents {

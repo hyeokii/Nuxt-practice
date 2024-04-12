@@ -37,6 +37,7 @@ export default {
           .post(`http://localhost:3001/todoList`, { ...newTodo })
           .then((res) => {
             this.$emit("addedTodo", { id: res.data.id, ...newTodo });
+            // 할일 추가 했을 때 부모 컴포넌트에게 이벤트 발생 알려주기
             this.inputValue = "";
           });
       } catch (err) {

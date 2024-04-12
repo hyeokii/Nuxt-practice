@@ -47,17 +47,15 @@ export default {
   methods: {
     async updateTodo() {
       try {
-        const response = await this.$axios.put(
-          `http://localhost:3001/todoList/${this.todo.id}`,
-          {
+        const response = await this.$axios
+          .put(`http://localhost:3001/todoList/${this.todo.id}`, {
             ...this.todo,
             contents: this.editContents,
             updatedDtm: new Date(),
-          }
-        );
-        if (response.status === 200) {
-          this.$router.push("/todo");
-        }
+          })
+          .then(() => {
+            this.$router.push("/todo");
+          });
       } catch (err) {
         console.log("err", err);
       }
