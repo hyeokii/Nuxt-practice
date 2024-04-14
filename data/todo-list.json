@@ -1,17 +1,17 @@
 {
   "todoList": [
     {
-      "id": 1,
-      "loginId": "yj.shin",
-      "userNm": "신예진",
       "title": "할 일1",
       "contents": "개신나게 놀기",
+      "id": "1",
+      "loginId": "yj.shin",
+      "userNm": "신예진",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-10T23:51:05.763Z"
+      "updatedDtm": "2024-04-12T00:18:21.886Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "loginId": "song",
       "userNm": "이송",
       "title": "할 일2",
@@ -21,17 +21,7 @@
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 3,
-      "loginId": "re2volution",
-      "userNm": "김재혁",
-      "title": "할 일3",
-      "contents": "기깔나게 숨쉬기",
-      "status": "1",
-      "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-10T23:51:05.763Z"
-    },
-    {
-      "id": 4,
+      "id": "4",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "할 일4",
@@ -41,37 +31,56 @@
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
-      "id": 5,
+      "title": "할 일5ㅁㄴㅇㄹ",
+      "contents": "쓰레기버리기줍기",
+      "id": "5",
       "loginId": "re2volution",
       "userNm": "김재혁",
-      "title": "할 일5",
-      "contents": "쓰레기버리기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-10T23:51:05.763Z"
+      "updatedDtm": "2024-04-12T02:40:49.201Z"
+    },
+    {
+      "title": "ㅋㅋㅋ",
+      "contents": "ㅋㅋ",
+      "id": "6",
+      "loginId": 4,
+      "userNm": "김재혁",
+      "status": 1,
+      "createdDtm": "2024-04-12T04:57:39.662Z",
+      "updatedDtm": "2024-04-12T04:57:43.697Z"
+    },
+    {
+      "id": "7",
+      "title": "ㄴㄹㄴ",
+      "contents": "ㄴㅇㄹㄴㅇㄹ",
+      "loginId": 4,
+      "userNm": "김재혁",
+      "createdDtm": "2024-04-12T07:14:16.707Z",
+      "updatedDtm": "2024-04-12T07:14:16.707Z"
     }
   ],
   "currentUser": {
-    "id": 3
+    "id": 4
   },
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "loginId": "yj.shin",
       "userNm": "신예진"
     },
     {
-      "id": 2,
+      "id": "2",
       "loginId": "song",
       "userNm": "이송"
     },
     {
-      "id": 3,
+      "id": "3",
       "loginId": "ccomo07071",
       "userNm": "김지은"
     },
     {
-      "id": 4,
+      "id": "4",
       "loginId": "re2volution",
       "userNm": "김재혁"
     }
