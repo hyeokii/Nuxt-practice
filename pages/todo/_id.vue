@@ -6,6 +6,7 @@
         class="contentsInput"
         v-model="editContents"
         placeholder="수정할 컨텐츠"
+        @keyup.enter="updateTodo"
       />
       <button class="saveBtn" @click="updateTodo">저장</button>
     </div>

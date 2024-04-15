@@ -8,7 +8,7 @@
       "contents": "맛나게 밥먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-12T04:16:14.200Z"
+      "updatedDtm": "2024-04-15T05:49:04.614Z"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "contents": "맛나게밥먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-12T04:16:15.049Z"
+      "updatedDtm": "2024-04-15T05:49:05.890Z"
     },
     {
       "id": "3",
@@ -28,7 +28,7 @@
       "contents": "기깔나게 숨",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-12T04:16:15.724Z"
+      "updatedDtm": "2024-04-15T05:49:06.624Z"
     },
     {
       "id": "5",
@@ -38,17 +38,37 @@
       "contents": "안녕하세요",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-12T04:16:18.386Z"
+      "updatedDtm": "2024-04-15T05:49:08.020Z"
     },
     {
       "id": "4fe3",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "",
-      "contents": "밥먹기",
-      "status": "1",
+      "contents": "밥먹기ㅎㅎㅎㅇㄹㄴㄻㄴㅇㄹㄴㅇㄹ",
+      "status": "2",
       "createdDtm": "2024-04-12T04:16:06.596Z",
-      "updatedDtm": "2024-04-12T04:16:17.089Z"
+      "updatedDtm": "2024-04-15T05:49:10.779Z"
+    },
+    {
+      "id": "1f99",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "퇴근하기ㅎㅎㅎ",
+      "status": "1",
+      "createdDtm": "2024-04-12T04:23:24.927Z",
+      "updatedDtm": "2024-04-12T04:26:18.330Z"
+    },
+    {
+      "id": "a3e2",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "집에가기ㅎㅎㅎ",
+      "status": "1",
+      "createdDtm": "2024-04-12T04:23:29.766Z",
+      "updatedDtm": "2024-04-12T04:26:28.674Z"
     }
   ],
   "currentUser": {

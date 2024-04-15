@@ -5,6 +5,7 @@
       type="text"
       v-model="inputValue"
       placeholder="할일을 입력해주세요."
+      @keyup.enter="addTodo"
     />
     <button class="btn addBtn" @click="addTodo">추가</button>
   </div>
