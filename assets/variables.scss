@@ -8,6 +8,7 @@ li {
 .v-application--wrap {
   padding: 10px;
   height: 100%;
+<<<<<<< HEAD
   & > div:first-child {
     display: flex;
     flex-flow: column wrap;
@@ -16,6 +17,8 @@ li {
     margin: 100px auto 0;
     width: 800px;
   }
+=======
+>>>>>>> db809b3c9c05108e2acdf8788c50c921f055585d
 }
 h2 {
   font-size: 20px;
@@ -28,10 +31,15 @@ h2 {
 .inp-text {
   width: 300px;
   height: 35px;
+<<<<<<< HEAD
   padding: 5px;
   border: 1px solid white;
   color: white;
   &::placeholder {
     color: white;
   }
+=======
+  border: 1px solid white;
+  color: white;
+>>>>>>> db809b3c9c05108e2acdf8788c50c921f055585d
 }
