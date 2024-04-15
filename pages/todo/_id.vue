@@ -7,7 +7,7 @@
     </div>
     <div class="box-info">
       <span>해야할 사람 : {{ todoDetail.userNm }}</span>
-      <template v-if="todoDetail.loginId == userId">
+      <template v-if="todoDetail.id == currentUser">
         <div class="box-modify">
           <input
             type="text"
@@ -35,7 +35,7 @@ export default {
       id: null,
       todoDetail: null,
       currentUser: null,
-      userId : null
+      // userId : null
     };
   },
   async asyncData({ $axios, route }) {
@@ -48,7 +48,7 @@ export default {
       todoDetail: data.data[0],
       id: id,
       currentUser: currentData.data.id, // 현재 사용자의 id
-      userId : usersData.data[0].loginId  // 로그인한 아이디의 loginID
+      userID : usersData    // 로그인한 아이디의 loginID
     };
   },
   created() {
