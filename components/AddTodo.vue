@@ -34,13 +34,17 @@ export default {
         updatedDtm: new Date(),
       };
       try {
-        const response = await this.$axios
-          .post(`http://localhost:3001/todoList`, { ...newTodo })
-          .then((res) => {
-            this.$emit("addedTodo", { id: res.data.id, ...newTodo });
-            // 할일 추가 했을 때 부모 컴포넌트에게 이벤트 발생 알려주기
-            this.inputValue = "";
-          });
+        if (this.inputValue.length !== 0) {
+          const response = await this.$axios
+            .post(`http://localhost:3001/todoList`, { ...newTodo })
+            .then((res) => {
+              this.$emit("addedTodo", { id: res.data.id, ...newTodo });
+              // 할일 추가 했을 때 부모 컴포넌트에게 이벤트 발생 알려주기
+              this.inputValue = "";
+            });
+        } else {
+          alert("할일을 입력해주세요!");
+        }
       } catch (err) {
         console.log("err", err);
       }
@@ -49,23 +53,24 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .addTodoBox {
-  margin: 1rem 0;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 .addInput {
   border: 1px solid white;
   border-radius: 5px;
   margin-right: 5px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   color: white;
 }
 
 .btn {
   color: white;
   border: 1px solid white;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
   margin-left: 1rem;
 }

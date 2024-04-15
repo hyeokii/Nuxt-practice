@@ -1,24 +1,24 @@
 <template>
   <div class="todoListBox">
-    <h1>{{ message }}</h1>
+    <span class="pageTitle">{{ message }}</span>
     <AddTodo
       :dataList="dataList"
       :curUser="curUserInfo"
       @addedTodo="handleAddTodo"
     />
     <ul>
-      <li class="todoItem" v-for="(data, idx) in dataList" :key="data.id">
+      <li class="todoItem" v-for="data in dataList" :key="data.id">
         <div class="todoContents" :class="{ completed: data.status === '2' }">
           <input
             type="checkbox"
+            style="zoom: 1.5"
             v-model="data.checked"
             @change="toggleStatus(data)"
           />
           <div class="text">
-            <span>{{ idx + 1 }}.</span> &nbsp;
             <span>{{ data.contents }}</span>
           </div>
-          <span>({{ data.userNm }})</span>
+          <span>{{ data.userNm }}</span>
         </div>
         <div class="btnBox">
           <NuxtLink :to="`/todo/${data.id}`">
@@ -109,7 +109,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .todoListBox {
   display: flex;
   flex-direction: column;
@@ -118,11 +118,16 @@ export default {
   margin-top: 5rem;
 }
 
+.pageTitle {
+  font-size: 72px;
+  font-weight: 700;
+}
+
 .todoItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .completed {
@@ -135,6 +140,8 @@ export default {
   flex: 1 1 1;
   display: flex;
   align-items: center;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.251);
+  padding-bottom: 10px;
 }
 
 .text {

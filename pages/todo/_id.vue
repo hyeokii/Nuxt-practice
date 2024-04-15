@@ -5,13 +5,13 @@
         <NuxtLink to="/todo" class="prev"
           ><span class="prevBtn">&#10094;</span></NuxtLink
         >
-        <h1 class="title">{{ message }}</h1>
+        <span class="pageTitle">{{ message }}</span>
       </div>
       <div class="inputBox">
         <input
           class="contentsInput"
           v-model="editContents"
-          placeholder="수정할 컨텐츠"
+          placeholder="수정 내용을 입력해주세요."
           @keyup.enter="updateTodo"
         />
         <button class="saveBtn" @click="updateTodo">저장</button>
@@ -55,15 +55,19 @@ export default {
   methods: {
     async updateTodo() {
       try {
-        const response = await this.$axios
-          .put(`http://localhost:3001/todoList/${this.todo.id}`, {
-            ...this.todo,
-            contents: this.editContents,
-            updatedDtm: new Date(),
-          })
-          .then(() => {
-            this.$router.push("/todo");
-          });
+        if (this.editContents.length !== 0) {
+          const response = await this.$axios
+            .put(`http://localhost:3001/todoList/${this.todo.id}`, {
+              ...this.todo,
+              contents: this.editContents,
+              updatedDtm: new Date(),
+            })
+            .then(() => {
+              this.$router.push("/todo");
+            });
+        } else {
+          alert("수정 내용을 입력해주세요!");
+        }
       } catch (err) {
         console.log("err", err);
       }
@@ -72,7 +76,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .flex {
   display: flex;
   justify-content: center;
@@ -86,7 +90,7 @@ export default {
   justify-content: center;
   padding: 0 3rem;
   margin-top: 5rem;
-  width: 400px;
+  width: 450px;
 }
 
 .titleBox {
@@ -96,6 +100,10 @@ export default {
   position: relative;
   width: 100%;
   margin-bottom: 3rem;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
 }
 
 .prev {
@@ -119,7 +127,8 @@ export default {
 
 .contentsInput {
   border: 1px solid white;
-  padding: 10px 15px;
+  padding: 5px 15px;
+  width: 250px;
   border-radius: 5px;
   color: white;
 }
