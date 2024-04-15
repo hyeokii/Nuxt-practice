@@ -7,13 +7,8 @@
       @addedTodo="handleAddTodo"
     />
     <ul>
-      <li
-        class="todoItem"
-        v-for="(data, idx) in dataList"
-        :key="data.id"
-        :class="{ completed: data.status === '2' }"
-      >
-        <div class="todoContents">
+      <li class="todoItem" v-for="(data, idx) in dataList" :key="data.id">
+        <div class="todoContents" :class="{ completed: data.status === '2' }">
           <input
             type="checkbox"
             v-model="data.checked"
@@ -27,7 +22,11 @@
         </div>
         <div class="btnBox">
           <NuxtLink :to="`/todo/${data.id}`">
-            <button class="btn updateBtn" v-if="curUserName === data.userNm">
+            <button
+              class="btn updateBtn"
+              v-if="curUserName === data.userNm"
+              :disabled="data.status === '2'"
+            >
               수정
             </button>
           </NuxtLink>
@@ -35,6 +34,7 @@
             class="btn deleteBtn"
             v-if="curUserName === data.userNm"
             @click="deleteTodo(data.id)"
+            :disabled="data.status === '2'"
           >
             삭제
           </button>
@@ -127,7 +127,7 @@ export default {
 
 .completed {
   text-decoration: line-through;
-  color: #b6b6b6;
+  color: #777777;
 }
 
 .todoContents {
@@ -154,5 +154,18 @@ export default {
   padding: 5px 10px;
   border-radius: 5px;
   margin-left: 1rem;
+}
+
+.updateBtn {
+  background-color: #337ab7;
+}
+
+.deleteBtn {
+  background-color: #a94442;
+}
+
+button:disabled {
+  background-color: #777777;
+  color: black;
 }
 </style>

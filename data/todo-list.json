@@ -38,17 +38,17 @@
       "contents": "안녕하세요",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-15T05:49:08.020Z"
+      "updatedDtm": "2024-04-15T06:05:40.197Z"
     },
     {
       "id": "4fe3",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "",
-      "contents": "밥먹기ㅎㅎㅎㅇㄹㄴㄻㄴㅇㄹㄴㅇㄹ",
-      "status": "2",
+      "contents": "밥을 먹읍시다",
+      "status": "1",
       "createdDtm": "2024-04-12T04:16:06.596Z",
-      "updatedDtm": "2024-04-15T05:49:10.779Z"
+      "updatedDtm": "2024-04-15T06:05:39.177Z"
     },
     {
       "id": "1f99",
@@ -58,7 +58,7 @@
       "contents": "퇴근하기ㅎㅎㅎ",
       "status": "1",
       "createdDtm": "2024-04-12T04:23:24.927Z",
-      "updatedDtm": "2024-04-12T04:26:18.330Z"
+      "updatedDtm": "2024-04-15T06:05:41.061Z"
     },
     {
       "id": "a3e2",
@@ -68,7 +68,7 @@
       "contents": "집에가기ㅎㅎㅎ",
       "status": "1",
       "createdDtm": "2024-04-12T04:23:29.766Z",
-      "updatedDtm": "2024-04-12T04:26:28.674Z"
+      "updatedDtm": "2024-04-15T06:05:42.552Z"
     }
   ],
   "currentUser": {
