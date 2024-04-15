@@ -6,31 +6,29 @@
 </template>
 <script>
 export default {
-  layout: 'DefaultLayout',
+  layout: "DefaultLayout",
   created() {
-    console.log('created')
+    console.log("created");
   },
   mounted() {
-    console.log('mounted')
+    console.log("mounted");
   },
   data() {
     return {
-      hello: '1'
-    }
+      hello: "1",
+    };
   },
   computed: {
     hi() {
-      return `hi_${this.hello}`
-    }
+      return `hi_${this.hello}`;
+    },
   },
-  methods: {
-
-  },
+  methods: {},
   beforeRouteLeave(to, from, next) {
-    alert(to.path)
-    next()
-  }
-}
+    alert(to.path);
+    next();
+  },
+};
 </script>
 
 <style scoped lang="scss">

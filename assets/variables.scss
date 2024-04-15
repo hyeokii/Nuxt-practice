@@ -2,3 +2,24 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+li {
+  list-style: none;
+}
+.v-application--wrap {
+  padding: 10px;
+  height: 100%;
+}
+h2 {
+  font-size: 20px;
+}
+.btn {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid white;
+}
+.inp-text {
+  width: 300px;
+  height: 35px;
+  border: 1px solid white;
+  color: white;
+}
