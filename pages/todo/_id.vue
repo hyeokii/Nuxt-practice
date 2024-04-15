@@ -1,14 +1,21 @@
 <template>
-  <div class="todoDetail">
-    <h1 class="title">{{ message }}</h1>
-    <div>
-      <input
-        class="contentsInput"
-        v-model="editContents"
-        placeholder="수정할 컨텐츠"
-        @keyup.enter="updateTodo"
-      />
-      <button class="saveBtn" @click="updateTodo">저장</button>
+  <div class="flex">
+    <div class="todoDetail">
+      <div class="titleBox">
+        <NuxtLink to="/todo" class="prev"
+          ><span class="prevBtn">&#10094;</span></NuxtLink
+        >
+        <h1 class="title">{{ message }}</h1>
+      </div>
+      <div class="inputBox">
+        <input
+          class="contentsInput"
+          v-model="editContents"
+          placeholder="수정할 컨텐츠"
+          @keyup.enter="updateTodo"
+        />
+        <button class="saveBtn" @click="updateTodo">저장</button>
+      </div>
     </div>
   </div>
 </template>
@@ -66,30 +73,62 @@ export default {
 </script>
 
 <style>
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
 .todoDetail {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 3rem;
   margin-top: 5rem;
+  width: 400px;
 }
 
-.title {
-  margin-bottom: 1rem;
+.titleBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.prev {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
+}
+
+.prev .prevBtn {
+  color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.inputBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .contentsInput {
   border: 1px solid white;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
   color: white;
 }
 
 .saveBtn {
   border: 1px solid white;
+  background-color: #3c763d;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
 }
 </style>
