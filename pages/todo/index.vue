@@ -59,14 +59,9 @@ export default {
 
 <style lang="scss">
 .list-todo {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 100px auto 0;
-  width: 800px;
   ul {
     padding: 0;
+    margin-top: 30px;
     width: 100%;
   }
   li {
@@ -75,7 +70,7 @@ export default {
     margin-top: 20px;
     width: 100%;
     &:first-child {
-      margin-top: 30px;
+      margin-top: 0;
     }
     .name {
       margin-left: 20px;

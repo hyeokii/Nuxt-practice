@@ -1,42 +1,38 @@
 <template>
-  <div @click="$router.push('/')" class="">
-    {{ hi }}
+  <div class="pg-hello">
+    <h2 class="tit">HELLO</h2>
     <Hello />
+    <!-- {{ hi }} -->
   </div>
 </template>
 <script>
 export default {
-  layout: "DefaultLayout",
+  layout: "Hello",
   created() {
-    console.log("created");
+    // console.log("created");
   },
   mounted() {
-    console.log("mounted");
+    // console.log("mounted");
   },
   data() {
     return {
-      hello: "1",
+      // hello: "1",
     };
   },
   computed: {
-    hi() {
-      return `hi_${this.hello}`;
-    },
+    // hi() {
+    //   return `hi_${this.hello}`;
+    // },
   },
   methods: {},
   beforeRouteLeave(to, from, next) {
-    alert(to.path);
+    // alert(to.path);
     next();
   },
 };
 </script>
 
 <style scoped lang="scss">
-.main {
-  .testhi {
-    width: 50px;
-    height: 50px;
-    border: 1px solid blue;
-  }
+.pg-hello {
 }
 </style>

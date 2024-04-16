@@ -8,6 +8,14 @@ li {
 .v-application--wrap {
   padding: 10px;
   height: 100%;
+  & > div:first-child {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 100px auto 0;
+    width: 800px;
+  }
 }
 h2 {
   font-size: 20px;
@@ -20,6 +28,10 @@ h2 {
 .inp-text {
   width: 300px;
   height: 35px;
+  padding: 5px;
   border: 1px solid white;
   color: white;
+  &::placeholder {
+    color: white;
+  }
 }

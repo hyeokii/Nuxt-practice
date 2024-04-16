@@ -7,7 +7,7 @@
     </div>
     <div class="box-info">
       <span>해야할 사람 : {{ todoDetail.userNm }}</span>
-      <template v-if="todoDetail.id == currentUser">
+      <template v-if="todoDetail.loginId == userId">
         <div class="box-modify">
           <input
             type="text"
@@ -41,10 +41,15 @@ export default {
     const id = route.query.id;
     const data = await $axios.get("http://localhost:3001/todoList?id=" + id);
     const currentData = await $axios.get("http://localhost:3001/currentUser");
+    const userData = await $axios.get(
+      "http://localhost:3001/users?id=" + currentData.data.id
+    ); // 로그인 한 아이디
+    // console.log(userData);
     return {
-      todoDetail: data.data[0],
       id: id,
-      currentUser: currentData.data.id,
+      todoDetail: data.data[0],
+      currentUser: currentData.data.id, // 현재 사용자의 id
+      userId: userData.data[0].loginId, //로그인한 아이디의 loginId
     };
   },
   created() {},
@@ -82,14 +87,6 @@ export default {
 </script>
 
 <style lang="scss">
-.pg-todo {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 100px auto 0;
-  width: 800px;
-}
 .top-area {
   display: flex;
   justify-content: space-between;
