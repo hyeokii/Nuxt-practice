@@ -15,7 +15,7 @@
           type="text"
           placeholder="내용"
           @keyup.enter="addTodo"
-        />
+        ></textarea>
         <button class="add-button" @click="addTodo">추가하기</button>
       </div>
     </div>
@@ -34,31 +34,28 @@ export default {
     return {
       newTitle: "",
       newContents: "",
-      newData: {
-        id: "",
-        loginId: "",
-        userNm: "",
-        status: 1,
-        createdDtm: "",
-        updatedDtm: "",
-      },
     };
   },
   methods: {
     async addTodo() {
       const { newTitle, newContents, dataList, $axios } = this;
-      if (confirm("추가하시겠습니까?") && newTitle && newContents) {
+      try {
+        if (!newTitle || !newContents) {
+          throw new Error("제목과 내용을 입력해주세요.");
+        }
         const currentTime = new Date();
         const nextId = dataList.length
-          ? Math.max(...dataList.map((todo) => todo.id)) + 1
+          ? Math.max(...dataList.map((todo) => parseInt(todo.id))) + 1
           : 1;
+
         const {
           data: { id: currentId },
         } = await $axios.get("http://localhost:3001/currentUser");
         const {
           data: [{ userNm }],
         } = await $axios.get(`http://localhost:3001/users?id=${currentId}`);
-        this.newData = {
+
+        const newData = {
           title: newTitle,
           contents: newContents,
           id: nextId.toString(),
@@ -67,13 +64,15 @@ export default {
           createdDtm: currentTime.toISOString(),
           updatedDtm: currentTime.toISOString(),
         };
-        await $axios.post("http://localhost:3001/todoList", this.newData);
+
+        await $axios.post("http://localhost:3001/todoList", newData);
+        this.$emit("add-todo", newData);
+        this.$emit("handle-modal");
         this.newTitle = "";
         this.newContents = "";
-        this.$emit("add-todo", this.newData);
-        this.$emit("handle-modal");
-      } else {
-        alert("제목과 내용을 입력해주세요");
+        alert("추가 완료하였습니다.");
+      } catch (error) {
+        alert(error.message);
       }
     },
     closeModal() {
@@ -83,7 +82,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .backdrop {
   position: fixed;
   top: 0;
@@ -104,44 +103,41 @@ export default {
   text-align: center;
   width: 500px;
   height: 500px;
-}
 
-.addModal h2 {
-  color: black;
-}
+  h2 {
+    color: black;
+  }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  height: 100%;
-}
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
 
-.addModal input {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box;
-}
+    input,
+    textarea {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
 
-.addModal textarea {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box;
-  height: 100%;
-}
+    textarea {
+      height: 100%;
+    }
+  }
 
-.add-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  .add-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-.add-button:hover {
-  background-color: #388e3c;
+    &:hover {
+      background-color: #388e3c;
+    }
+  }
 }
 </style>

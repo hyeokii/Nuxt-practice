@@ -32,15 +32,20 @@ export default {
   },
   methods: {
     async updateData() {
-      const currentTime = new Date();
-      this.newData.updatedDtm = currentTime.toISOString();
-      await this.$axios.put(
-        `http://localhost:3001/todoList/${this.todo.id}`,
-        this.newData
-      );
-      alert("수정완료하였습니다.");
-      this.$emit("edit-todo", this.newData);
-      this.$emit("handle-modal");
+      try {
+        const currentTime = new Date();
+        this.newData.updatedDtm = currentTime.toISOString();
+        await this.$axios.put(
+          `http://localhost:3001/todoList/${this.todo.id}`,
+          this.newData
+        );
+        alert("수정완료하였습니다.");
+        this.$emit("edit-todo", this.newData);
+        this.$emit("handle-modal");
+      } catch (error) {
+        console.error("수정 오류 방생", error);
+        alert("수정 중 오류가 발생했습니다.");
+      }
     },
     closeModal() {
       this.$emit("handle-modal");
@@ -49,7 +54,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .backdrop {
   position: fixed;
   top: 0;
@@ -70,10 +75,9 @@ export default {
   text-align: center;
   width: 500px;
   height: 500px;
-}
-
-.editModal h2 {
-  color: black;
+  h2 {
+    color: black;
+  }
 }
 
 .input-container {
@@ -81,23 +85,20 @@ export default {
   flex-direction: column;
   gap: 20px;
   height: 100%;
+  input {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  textarea {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    height: 100%;
+  }
 }
-
-.editModal input {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.editModal textarea {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box;
-  height: 100%;
-}
-
 .update-button {
   background-color: #9accfd;
   color: white;
@@ -105,9 +106,9 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
 
-.update-button:hover {
-  background-color: skyblue;
+  &:hover {
+    background-color: skyblue;
+  }
 }
 </style>
