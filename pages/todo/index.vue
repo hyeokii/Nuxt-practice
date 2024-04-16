@@ -109,7 +109,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .todoListBox {
   display: flex;
   flex-direction: column;
@@ -165,10 +165,18 @@ export default {
 
 .updateBtn {
   background-color: #337ab7;
+
+  &:hover {
+    background-color: #256ead;
+  }
 }
 
 .deleteBtn {
   background-color: #a94442;
+
+  &:hover {
+    background-color: #a9302e;
+  }
 }
 
 button:disabled {

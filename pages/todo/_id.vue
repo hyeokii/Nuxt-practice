@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .flex {
   display: flex;
   justify-content: center;
@@ -139,5 +139,9 @@ export default {
   color: white;
   padding: 10px 15px;
   border-radius: 5px;
+
+  &:hover {
+    background-color: #247425;
+  }
 }
 </style>
