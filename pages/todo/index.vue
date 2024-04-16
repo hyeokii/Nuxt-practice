@@ -8,18 +8,7 @@
     />
     <ul>
       <li class="todoItem" v-for="data in dataList" :key="data.id">
-        <div class="todoContents" :class="{ completed: data.status === '2' }">
-          <input
-            type="checkbox"
-            style="zoom: 1.5"
-            v-model="data.checked"
-            @change="toggleStatus(data)"
-          />
-          <div class="text">
-            <span>{{ data.contents }}</span>
-          </div>
-          <span>{{ data.userNm }}</span>
-        </div>
+        <TodoItem :data="data" />
         <div class="btnBox">
           <NuxtLink :to="`/todo/${data.id}`">
             <button
@@ -133,22 +122,6 @@ export default {
 .completed {
   text-decoration: line-through;
   color: #777777;
-}
-
-.todoContents {
-  width: 300px;
-  flex: 1 1 1;
-  display: flex;
-  align-items: center;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.251);
-  padding-bottom: 10px;
-}
-
-.text {
-  width: 150px;
-  display: flex;
-  align-items: center;
-  margin: 0 1rem;
 }
 
 .btnbox {
