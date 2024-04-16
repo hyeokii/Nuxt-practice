@@ -6,7 +6,7 @@
       :curUser="curUserInfo"
       @addedTodo="handleAddTodo"
     />
-    <ul>
+    <ul v-if="dataList.length > 0">
       <li class="todoItem" v-for="data in dataList" :key="data.id">
         <TodoItem :data="data" />
         <div class="btnBox">
@@ -28,6 +28,9 @@
         </div>
       </li>
     </ul>
+    <div v-else>
+      <p>할 일이 없습니다.</p>
+    </div>
   </div>
 </template>
 
