@@ -2,12 +2,15 @@
   <div class="container">
     <h1>Todo List</h1>
     <div>
-      <div v-for="list in dataList" :key="list.id" class="list-item">
-        <nuxt-link :to="'/todo/' + list.id" class="list-link"
-          ><span class="list-span">{{ list.userNm }}</span
-          ><span class="list-span">{{ list.title }}</span>
-          <span class="list-span">{{ list.contents }}</span></nuxt-link
-        >
+      <div
+        v-for="list in dataList"
+        :key="list.id"
+        class="list-item"
+        @click="moveTodo(list.id)"
+      >
+        <span class="list-span">{{ list.userNm }}</span>
+        <span class="list-span">{{ list.title }}</span>
+        <span class="list-span">{{ list.contents }}</span>
       </div>
     </div>
     <button @click="handleAddModal" class="add-button">리스트 추가</button>
@@ -38,6 +41,9 @@ export default {
     return { dataList: res.data };
   },
   methods: {
+    moveTodo(id) {
+      this.$router.push(`todo/${id}`);
+    },
     addTodoList(data) {
       this.dataList.push(data);
     },
@@ -62,36 +68,24 @@ h1 {
   margin-bottom: 20px;
 }
 
-.list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .list-item {
   margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   transition: transform 0.3s ease;
+  display: flex;
 }
 
 .list-item:hover {
   transform: translateY(-2px);
 }
 
-.list-link {
-  padding: 10px 0;
-  text-decoration: none;
-  color: inherit;
+.list-span {
   display: flex;
   align-items: center;
-  width: 100%;
-}
-
-.list-span {
-  text-align: center;
+  justify-content: center;
   flex: 1;
 }
 

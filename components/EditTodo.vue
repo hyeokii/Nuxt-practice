@@ -2,12 +2,12 @@
   <div>
     <div class="backdrop" @click="closeModal"></div>
     <div class="editModal">
-      <h2>수정하기</h2>
       <div class="input-container">
+        <h2>수정하기</h2>
         <input type="text" v-model="newData.title" placeholder="제목" />
-        <input type="text" v-model="newData.contents" placeholder="내용" />
+        <textarea type="text" v-model="newData.contents" placeholder="내용" />
+        <button class="update-button" @click="updateData">완료</button>
       </div>
-      <button class="update-button" @click="updateData">완료</button>
     </div>
   </div>
 </template>
@@ -68,6 +68,8 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  width: 500px;
+  height: 500px;
 }
 
 .editModal h2 {
@@ -78,19 +80,27 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
 }
 
 .editModal input {
   border: 1px solid black;
   border-radius: 5px;
   padding: 8px;
-  width: 100%;
   box-sizing: border-box;
 }
 
+.editModal textarea {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 8px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
 .update-button {
-  background-color: white;
-  color: blue;
+  background-color: #9accfd;
+  color: white;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -98,6 +108,6 @@ export default {
 }
 
 .update-button:hover {
-  background-color: #f0f0f0;
+  background-color: skyblue;
 }
 </style>

@@ -2,22 +2,22 @@
   <div>
     <div class="backdrop" @click="closeModal"></div>
     <div class="addModal">
-      <h2>할 일 추가</h2>
       <div class="input-container">
+        <h2>할 일 추가</h2>
         <input
           v-model="newTitle"
           type="text"
           placeholder="제목"
           @keyup.enter="addTodo"
         />
-        <input
+        <textarea
           v-model="newContents"
           type="text"
           placeholder="내용"
           @keyup.enter="addTodo"
         />
+        <button class="add-button" @click="addTodo">추가하기</button>
       </div>
-      <button class="add-button" @click="addTodo">추가하기</button>
     </div>
   </div>
 </template>
@@ -102,6 +102,8 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  width: 500px;
+  height: 500px;
 }
 
 .addModal h2 {
@@ -112,19 +114,27 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
 }
 
 .addModal input {
   border: 1px solid black;
   border-radius: 5px;
   padding: 8px;
-  width: 100%;
   box-sizing: border-box;
 }
 
+.addModal textarea {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 8px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
 .add-button {
-  background-color: white;
-  color: black;
+  background-color: #4caf50;
+  color: white;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -132,6 +142,6 @@ export default {
 }
 
 .add-button:hover {
-  background-color: #f0f0f0;
+  background-color: #388e3c;
 }
 </style>
