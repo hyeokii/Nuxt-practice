@@ -45,7 +45,6 @@ export default {
           this.$router.push("/todo");
         }
       } catch (error) {
-        console.error("삭제 중 오류 발생:", error);
         alert("삭제 중 오류가 발생했습니다.");
       }
     },
@@ -58,23 +57,24 @@ export default {
 
 <style lang="scss" scoped>
 .button-container {
+  position: absolute;
+  left: 0;
   display: flex;
   gap: 20px;
-  margin: 20px 0;
-}
 
-.edit-button,
-.delete-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  .edit-button,
+  .delete-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #388e3c;
+    &:hover {
+      background-color: #388e3c;
+    }
   }
 }
 </style>

@@ -6,12 +6,16 @@
       <div><strong>내용:</strong> {{ todoData.contents }}</div>
       <div><strong>수정날짜:</strong> {{ formattedDate }}</div>
     </div>
-    <MyTodoBtn
-      v-if="isMyTodo"
-      :todoData="todoData"
-      @mytodo-btn="updateTodoData"
-    ></MyTodoBtn>
-    <button class="back-button" @click="$router.push('/todo')">뒤로가기</button>
+    <div class="btn-wrapper">
+      <MyTodoBtn
+        v-if="isMyTodo"
+        :todoData="todoData"
+        @mytodo-btn="updateTodoData"
+      ></MyTodoBtn>
+      <button class="back-button" @click="$router.push('/todo')">
+        뒤로가기
+      </button>
+    </div>
   </div>
 </template>
 
@@ -86,29 +90,35 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.todo-info {
-  margin-bottom: 20px;
-  div {
-    margin-bottom: 10px;
+  .btn-wrapper {
+    display: flex;
+    justify-content: end;
+    position: relative;
+
+    .back-button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
   }
-  strong {
-    margin-right: 10px;
-  }
-}
 
-.back-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #388e3c;
+  .todo-info {
+    margin-bottom: 20px;
+    div {
+      margin-bottom: 10px;
+    }
+    strong {
+      margin-right: 10px;
+    }
   }
 }
 </style>

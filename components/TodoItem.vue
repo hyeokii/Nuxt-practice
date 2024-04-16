@@ -19,7 +19,6 @@ export default {
       try {
         this.$router.push(`todo/${id}`);
       } catch (error) {
-        console.error("이동 중 오류 발생:", error);
         alert("이동 중 오류가 발생했습니다.");
       }
     },

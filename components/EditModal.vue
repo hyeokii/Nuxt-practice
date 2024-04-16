@@ -43,7 +43,6 @@ export default {
         this.$emit("edit-todo", this.newData);
         this.$emit("handle-modal");
       } catch (error) {
-        console.error("수정 오류 방생", error);
         alert("수정 중 오류가 발생했습니다.");
       }
     },

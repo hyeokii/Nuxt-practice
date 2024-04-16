@@ -41,6 +41,7 @@ export default {
 .add-button {
   margin-top: 20px;
   background-color: #4caf50;
+  width: 100%;
   color: white;
   padding: 10px 20px;
   border: none;

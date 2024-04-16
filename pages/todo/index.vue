@@ -31,7 +31,6 @@ export default {
       const res = await $axios.get("http://localhost:3001/todoList");
       return { dataList: res.data };
     } catch (error) {
-      console.error("Failed to fetch todo list:", error);
       return { errorMessage: "데이터를 불러오는 도중 오류가 발생했습니다." };
     }
   },
