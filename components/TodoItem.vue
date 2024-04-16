@@ -4,7 +4,7 @@
       type="checkbox"
       style="zoom: 1.5"
       v-model="data.checked"
-      @change="toggleStatus(data)"
+      @change="onClick"
     />
     <div class="text">
       <span>{{ data.contents }}</span>
@@ -17,6 +17,7 @@
 export default {
   props: {
     data: Object,
+    onClick: Function,
   },
 };
 </script>
@@ -36,5 +37,10 @@ export default {
   display: flex;
   align-items: center;
   margin: 0 1rem;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #777777;
 }
 </style>

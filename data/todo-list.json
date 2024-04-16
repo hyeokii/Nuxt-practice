@@ -1,16 +1,6 @@
 {
   "todoList": [
     {
-      "id": "1",
-      "loginId": "song",
-      "userNm": "김지은",
-      "title": "할 일2",
-      "contents": "맛나게밥먹기ddddfsasdf",
-      "status": "1",
-      "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T05:41:29.846Z"
-    },
-    {
       "id": "2",
       "loginId": "song",
       "userNm": "이송",
@@ -18,7 +8,7 @@
       "contents": "맛나게밥먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T00:42:58.650Z"
+      "updatedDtm": "2024-04-16T06:16:14.860Z"
     },
     {
       "id": "5",
@@ -28,7 +18,47 @@
       "contents": "안녕하세요",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-15T07:32:00.421Z"
+      "updatedDtm": "2024-04-16T06:16:16.015Z"
+    },
+    {
+      "id": "f47c",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "밥먹기",
+      "status": "1",
+      "createdDtm": "2024-04-16T06:21:46.600Z",
+      "updatedDtm": "2024-04-16T06:21:46.600Z"
+    },
+    {
+      "id": "277b",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "자기",
+      "status": "1",
+      "createdDtm": "2024-04-16T06:21:48.279Z",
+      "updatedDtm": "2024-04-16T06:21:48.279Z"
+    },
+    {
+      "id": "d288",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "놀기",
+      "status": "1",
+      "createdDtm": "2024-04-16T06:21:48.925Z",
+      "updatedDtm": "2024-04-16T06:21:48.925Z"
+    },
+    {
+      "id": "3e64",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "",
+      "contents": "퇴근하기ㅇㅇㅇ",
+      "status": "1",
+      "createdDtm": "2024-04-16T06:21:51.369Z",
+      "updatedDtm": "2024-04-16T06:21:51.369Z"
     }
   ],
   "currentUser": {

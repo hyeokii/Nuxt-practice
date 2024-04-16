@@ -8,7 +8,7 @@
     />
     <ul v-if="dataList.length > 0">
       <li class="todoItem" v-for="data in dataList" :key="data.id">
-        <TodoItem :data="data" />
+        <TodoItem :data="data" :onClick="() => toggleStatus(data)" />
         <div class="btnBox">
           <NuxtLink :to="`/todo/${data.id}`">
             <CustomBtn
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import apiData from "@/api/apiData.js";
 export default {
   name: "MainPage",
   data() {
@@ -68,12 +69,10 @@ export default {
   methods: {
     async deleteTodo(todoId) {
       try {
-        const response = await this.$axios
-          .delete(`http://localhost:3001/todoList/${todoId}`)
-          .then(() => {
-            this.dataList = this.dataList.filter((todo) => todo.id !== todoId);
-            alert("삭제되었습니다.");
-          });
+        await apiData.deleteTodo(todoId).then(() => {
+          this.dataList = this.dataList.filter((todo) => todo.id !== todoId);
+          alert("삭제되었습니다.");
+        });
       } catch (err) {
         console.log("err", err);
       }
@@ -85,12 +84,8 @@ export default {
 
     async toggleStatus(data) {
       data.status = data.status === "1" ? "2" : "1";
-
       try {
-        await this.$axios.patch(`http://localhost:3001/todoList/${data.id}`, {
-          status: data.status,
-          updatedDtm: new Date(),
-        });
+        await apiData.toggleTodoStatus(data.id, data.status);
       } catch (error) {
         console.error("Error:", error);
       }

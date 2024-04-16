@@ -17,7 +17,7 @@
         <CustomBtn
           :label="'저장'"
           buttonType="saveBtn"
-          :onClick="() => updateTodo()"
+          :onClick="() => updateTodo(todo)"
         />
       </div>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import apiData from "@/api/apiData.js";
 export default {
   name: "todoDetail",
   props: {
@@ -57,15 +58,11 @@ export default {
   },
 
   methods: {
-    async updateTodo() {
+    async updateTodo(todo) {
       try {
         if (this.editContents.length !== 0) {
-          const response = await this.$axios
-            .put(`http://localhost:3001/todoList/${this.todo.id}`, {
-              ...this.todo,
-              contents: this.editContents,
-              updatedDtm: new Date(),
-            })
+          await apiData
+            .updateTodo(todo.id, { ...todo, contents: this.editContents })
             .then(() => {
               this.$router.push("/todo");
             });
