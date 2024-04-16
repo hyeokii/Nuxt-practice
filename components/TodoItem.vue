@@ -26,7 +26,7 @@
         :label="'삭제'"
         buttonType="deleteBtn"
         :isDisabled="data.status === '2'"
-        :onClick="() => deleteTodo(data.id)"
+        :onClick="() => confirmDelete(data.id)"
       />
     </div>
   </div>
@@ -45,10 +45,17 @@ export default {
       try {
         await apiData.deleteTodo(todoId).then((res) => {
           this.$emit("deletedTodo", res.data.id);
-          alert("삭제되었습니다.");
         });
       } catch (err) {
         console.log("err", err);
+      }
+    },
+    async confirmDelete(todoId) {
+      if (!confirm("삭제하시겠습니까?")) {
+        alert("취소 되었습니다.");
+      } else {
+        this.deleteTodo(todoId);
+        alert("삭제 되었습니다.");
       }
     },
   },

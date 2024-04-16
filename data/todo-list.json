@@ -8,7 +8,7 @@
       "contents": "맛나게밥먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T08:35:46.318Z"
+      "updatedDtm": "2024-04-16T08:48:56.116Z"
     },
     {
       "id": "2",
@@ -18,37 +18,17 @@
       "contents": "안녕하세요",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T08:34:25.390Z"
+      "updatedDtm": "2024-04-16T08:48:56.581Z"
     },
     {
-      "id": "2963",
+      "id": "ebf1",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "",
-      "contents": "안녕하세요.",
-      "status": "2",
-      "createdDtm": "2024-04-16T08:25:23.368Z",
-      "updatedDtm": "2024-04-16T08:34:28.286Z"
-    },
-    {
-      "id": "3753",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "히히..퇴근...",
+      "contents": "퇴근퇴근",
       "status": "1",
-      "createdDtm": "2024-04-16T08:25:47.680Z",
-      "updatedDtm": "2024-04-16T08:30:07.075Z"
-    },
-    {
-      "id": "5203",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "ㅇㅇㅇㅂㅂㅂ",
-      "status": "1",
-      "createdDtm": "2024-04-16T08:25:58.138Z",
-      "updatedDtm": "2024-04-16T08:30:02.681Z"
+      "createdDtm": "2024-04-16T08:54:53.715Z",
+      "updatedDtm": "2024-04-16T08:54:53.715Z"
     }
   ],
   "currentUser": {
