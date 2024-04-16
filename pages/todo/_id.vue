@@ -35,6 +35,7 @@ export default {
       id: null,
       todoDetail: null,
       currentUser: null,
+      // userId : null
     };
   },
   async asyncData({ $axios, route }) {
