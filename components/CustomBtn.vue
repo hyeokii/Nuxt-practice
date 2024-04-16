@@ -33,6 +33,7 @@ export default {
   cursor: pointer;
   color: white;
   border: 1px solid white;
+  height: 45px;
 }
 .updateBtn {
   background-color: #337ab7;
@@ -64,5 +65,11 @@ export default {
 button:disabled {
   background-color: #777777;
   color: black;
+
+  &:hover {
+    background-color: #777777;
+    color: black;
+    cursor: default;
+  }
 }
 </style>

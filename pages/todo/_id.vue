@@ -12,7 +12,7 @@
           class="contentsInput"
           v-model="editContents"
           placeholder="수정 내용을 입력해주세요."
-          @keyup.enter="updateTodo"
+          @keyup.enter="updateTodo(todo)"
         />
         <CustomBtn
           :label="'저장'"

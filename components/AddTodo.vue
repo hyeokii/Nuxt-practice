@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import apiData from "@/api/apiData.js";
 export default {
   props: {
     dataList: Array,
@@ -35,13 +36,11 @@ export default {
       };
       try {
         if (this.inputValue.length !== 0) {
-          const response = await this.$axios
-            .post(`http://localhost:3001/todoList`, { ...newTodo })
-            .then((res) => {
-              this.$emit("addedTodo", { id: res.data.id, ...newTodo });
-              // 할일 추가 했을 때 부모 컴포넌트에게 이벤트 발생 알려주기
-              this.inputValue = "";
-            });
+          await apiData.addTodo({ ...newTodo }).then((res) => {
+            this.$emit("addedTodo", { id: res.data.id, ...newTodo });
+            // 할일 추가 했을 때 부모 컴포넌트에게 이벤트 발생 알려주기
+            this.inputValue = "";
+          });
         } else {
           alert("할일을 입력해주세요!");
         }
