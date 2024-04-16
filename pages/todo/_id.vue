@@ -14,7 +14,11 @@
           placeholder="수정 내용을 입력해주세요."
           @keyup.enter="updateTodo"
         />
-        <button class="saveBtn" @click="updateTodo">저장</button>
+        <CustomBtn
+          :label="'저장'"
+          buttonType="saveBtn"
+          :onClick="() => updateTodo()"
+        />
       </div>
     </div>
   </div>
@@ -131,17 +135,5 @@ export default {
   width: 250px;
   border-radius: 5px;
   color: white;
-}
-
-.saveBtn {
-  border: 1px solid white;
-  background-color: #3c763d;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #247425;
-  }
 }
 </style>

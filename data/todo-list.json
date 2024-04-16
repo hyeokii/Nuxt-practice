@@ -5,10 +5,10 @@
       "loginId": "song",
       "userNm": "김지은",
       "title": "할 일2",
-      "contents": "퇴근 7시간 17분전...",
+      "contents": "맛나게밥먹기ddddfsasdf",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T00:43:20.040Z"
+      "updatedDtm": "2024-04-16T05:41:29.846Z"
     },
     {
       "id": "2",
@@ -21,16 +21,6 @@
       "updatedDtm": "2024-04-16T00:42:58.650Z"
     },
     {
-      "id": "3",
-      "loginId": "re2volution",
-      "userNm": "김지은",
-      "title": "할 일3",
-      "contents": "기깔나게 숨쉬기",
-      "status": "1",
-      "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T00:42:59.707Z"
-    },
-    {
       "id": "5",
       "loginId": "re2volution",
       "userNm": "김재혁",
@@ -39,36 +29,6 @@
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-15T07:32:00.421Z"
-    },
-    {
-      "id": "a3e2",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "집에가기ㅎㅎㅎ",
-      "status": "1",
-      "createdDtm": "2024-04-12T04:23:29.766Z",
-      "updatedDtm": "2024-04-16T00:43:02.027Z"
-    },
-    {
-      "id": "343d",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "수정 내용임니다",
-      "status": "1",
-      "createdDtm": "2024-04-15T06:57:03.170Z",
-      "updatedDtm": "2024-04-16T00:43:03.135Z"
-    },
-    {
-      "id": "690c",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "ㅎㅎㅎㅎㅎ",
-      "status": "1",
-      "createdDtm": "2024-04-16T00:52:07.848Z",
-      "updatedDtm": "2024-04-16T01:06:38.764Z"
     }
   ],
   "currentUser": {

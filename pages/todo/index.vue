@@ -11,22 +11,20 @@
         <TodoItem :data="data" />
         <div class="btnBox">
           <NuxtLink :to="`/todo/${data.id}`">
-            <button
-              class="btn updateBtn"
+            <CustomBtn
               v-if="curUserName === data.userNm"
-              :disabled="data.status === '2'"
-            >
-              수정
-            </button>
+              :label="'수정'"
+              buttonType="updateBtn"
+              :isDisabled="data.status === '2'"
+            />
           </NuxtLink>
-          <button
-            class="btn deleteBtn"
+          <CustomBtn
             v-if="curUserName === data.userNm"
-            @click="deleteTodo(data.id)"
-            :disabled="data.status === '2'"
-          >
-            삭제
-          </button>
+            :label="'삭제'"
+            buttonType="deleteBtn"
+            :isDisabled="data.status === '2'"
+            :onClick="() => deleteTodo(data.id)"
+          />
         </div>
       </li>
     </ul>
