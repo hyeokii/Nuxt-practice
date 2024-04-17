@@ -18,19 +18,12 @@ export default {
       currentUser: null,
     };
   },
-  // async asyncData({ $axios, route }) {
-
-  //   return {
-  //     currentUser: null,
-  //   };
-  // },
   methods: {
     async login() {
       const userId = document.querySelector("#inp-login").value;
       const userData = await this.$axios.get(
         "http://localhost:3001/users?loginId=" + userId
       );
-      // console.log(userData.data[0].id);
       this.$axios.put("http://localhost:3001/currentUser", {
         id: userData.data[0].id,
       });

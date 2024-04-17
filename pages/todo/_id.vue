@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "todoDetail",
+  name: "TodoDetail",
   data() {
     return {
       id: null,
@@ -40,7 +40,7 @@ export default {
   },
   async asyncData({ $axios, route }) {
     const id = route.query.id;
-    const data = await $axios.get("http://localhost:3001/todoList?id=" + id);
+    const dataId = await $axios.get("http://localhost:3001/todoList?id=" + id);
     const currentData = await $axios.get("http://localhost:3001/currentUser");
     const userData = await $axios.get(
       "http://localhost:3001/users?id=" + currentData.data.id
@@ -48,7 +48,7 @@ export default {
     // console.log(userData);
     return {
       id: id,
-      todoDetail: data.data[0],
+      todoDetail: dataId.data[0],
       currentUser: currentData.data.id, // 현재 사용자의 id
       userId: userData.data[0].loginId, //로그인한 아이디의 loginId
     };

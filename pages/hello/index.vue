@@ -2,7 +2,6 @@
   <div class="pg-hello">
     <h2 class="tit">HELLO</h2>
     <Hello />
-    <!-- {{ hi }} -->
   </div>
 </template>
 <script>
@@ -32,7 +31,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.pg-hello {
-}
+<style lang="scss">
+// .pg-hello {
+// }
 </style>

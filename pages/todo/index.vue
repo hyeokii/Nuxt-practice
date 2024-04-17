@@ -1,15 +1,14 @@
 <template>
-  <div class="list-todo">
+  <div class="pg-todo">
     <h2 class="pg-tit">TODOLIST</h2>
-    <ul>
-      <li v-for="(data, index) in dataList" v-bind:key="`${index}_${data.id}`">
-        {{ data.title }} <span class="name">{{ data.userNm }}</span>
-        <button type="button" @click="testMethods(data)" class="btn">
-          자세히
-        </button>
-      </li>
+    <Todo-Add />
+    <ul class="list-todo">
+      <Todo
+        v-for="(data, index) in dataList"
+        :data="data"
+        v-bind:key="`${index}_${data.id}`"
+      />
     </ul>
-    <!-- <Hello :test-name="lastClicked" /> -->
   </div>
 </template>
 
@@ -18,19 +17,20 @@
 // import testMixins from "@/mixins/test-mixins";
 
 export default {
-  name: "MainPage",
+  layout: "Todopage",
   // filters: { addCommaFilter },
   // mixins: [testMixins],
   // Serverside, pages Only
   async asyncData({ $axios }) {
     const data = await $axios.get("http://localhost:3001/todoList");
-    return { dataList: data.data };
+    return {
+      dataList: data.data,
+    };
   },
   data() {
     return {
       dataList: [],
-      // message: "안녕하세요",
-      lastClicked: undefined,
+      id: null,
     };
   },
   created() {
@@ -42,28 +42,20 @@ export default {
   mounted() {
     // console.log(this.$options.filters.addCommaFilter(11111));
     // console.log("test", this.testNm);
+    // console.log("data", this.dataList);
   },
   // useCallback
-  methods: {
-    testMethods(arg) {
-      // this.lastClicked = arg;
-      this.$router.push({ path: "/todo/_id", query: { id: arg.id } });
-    },
-  },
+  methods: {},
   // useMemo
-  computed: {
-    testName() {},
-  },
+  computed: {},
 };
 </script>
 
 <style lang="scss">
 .list-todo {
-  ul {
-    padding: 0;
-    margin-top: 30px;
-    width: 100%;
-  }
+  padding: 0;
+  margin-top: 30px;
+  width: 100%;
   li {
     display: flex;
     align-items: center;
@@ -75,7 +67,7 @@ export default {
     .name {
       margin-left: 20px;
     }
-    .btn {
+    .box-btn {
       margin-left: auto;
     }
   }
