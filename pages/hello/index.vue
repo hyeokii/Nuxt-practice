@@ -1,6 +1,6 @@
 <template>
   <div class="pg-hello">
-    <h2 class="tit">HELLO</h2>
+    <h2 class="tit">{{message}}</h2>
     <Hello />
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      // hello: "1",
+      message:'HELLO'
     };
   },
   computed: {

@@ -5,10 +5,10 @@
       "loginId": "yj.shin",
       "userNm": "신예진",
       "title": "할 일1",
-      "contents": "",
+      "contents": "개신나게 놀기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-17T06:49:02.176Z"
+      "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "contents": "행복하게 삼겹살 먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-16T04:04:49.370Z"
+      "updatedDtm": "2024-04-15T05:17:18.545Z"
     },
     {
       "id": "3",

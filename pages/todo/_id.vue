@@ -1,6 +1,6 @@
 <template>
   <div class="pg-todo">
-    <h2 class="pg-tit">TODODETAIL</h2>
+    <h2 class="pg-tit">{{message}}</h2>
     <div class="top-area">
       <p class="cont-tit">{{ todoDetail.title }}</p>
       <p class="date">{{ dateFormatting() }}</p>
@@ -36,6 +36,7 @@ export default {
       todoDetail: null,
       currentUser: null,
       // userId : null
+      message:"TODODETAIL"
     };
   },
   async asyncData({ $axios, route }) {

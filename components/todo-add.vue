@@ -13,7 +13,12 @@
 <script>
 export default {
   name: "TodoAdd",
-  props: {},
+  props: {
+    userData: {
+      type: Object,
+      defaultValue: undefined,
+    },
+  },
   data() {
     return {};
   },
@@ -24,9 +29,21 @@ export default {
   methods: {
     async addTodo() {
       const inpTodoValue = document.querySelector("#inpTextTodo").value;
-      // this.$axios.put(
-      //   "http://localhost:3001/todoList?contents=" + inpTodoValue
-      // );
+      // console.log(this.userData)
+      const todoData = {
+        id: "6", // 모르겠음 index
+        loginId: this.userData.loginId,
+        userNm: this.userData.userNm,
+        title: "할 일6", // 모르겠음 index
+        contents: inpTodoValue,
+        status: "1",
+        createdDtm: new Date(),
+        updatedDtm: new Date()
+      }
+      this.$axios.post(
+        "http://localhost:3001/todoList",
+        todoData
+      );
     },
   },
   // useMemo

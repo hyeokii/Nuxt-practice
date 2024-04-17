@@ -1,11 +1,12 @@
 <template>
   <div class="pg-todo">
-    <h2 class="pg-tit">TODOLIST</h2>
-    <Todo-Add />
+    <h2 class="pg-tit">{{message}}</h2>
+    <Todo-Add :userData="userData"/>
     <ul class="list-todo">
       <Todo
         v-for="(data, index) in dataList"
         :data="data"
+        :loginId="loginId"
         v-bind:key="`${index}_${data.id}`"
       />
     </ul>
@@ -13,36 +14,39 @@
 </template>
 
 <script>
-// import { addCommaFilter } from "@/utils/test-utils";
-// import testMixins from "@/mixins/test-mixins";
 
 export default {
   layout: "Todopage",
-  // filters: { addCommaFilter },
-  // mixins: [testMixins],
-  // Serverside, pages Only
+  
   async asyncData({ $axios }) {
     const data = await $axios.get("http://localhost:3001/todoList");
+    const currentData = await $axios.get("http://localhost:3001/currentUser");
+    const userData = await $axios.get(
+      "http://localhost:3001/users?id=" + currentData.data.id
+    ); // 로그인 한 아이디
     return {
       dataList: data.data,
+      currentData: currentData.data.id,
+      loginId : userData.data[0].loginId,
+      userData : userData.data[0]
     };
   },
   data() {
     return {
       dataList: [],
+      message: "TODOLIST",
       id: null,
+      currentData:null,
+      loginId:null,
+      userData:null
     };
   },
   created() {
-    // client 여부 체크
-    // console.log("window?", typeof window);
-    // console.log("data", this.dataList);
+   
   },
   // client
   mounted() {
-    // console.log(this.$options.filters.addCommaFilter(11111));
-    // console.log("test", this.testNm);
-    // console.log("data", this.dataList);
+   
   },
   // useCallback
   methods: {},
