@@ -17,22 +17,26 @@
           </div>
 
           <span class="userNm">{{ data.userNm }}</span>
-          <button
-            v-if="!isOpen(data.id)"
-            type="button"
-            class="accordion open"
-            @click="toggleAccordion(data.id)"
-          >
-            &#62;
-          </button>
-          <button
-            v-else
-            type="button"
-            class="accordion close"
-            @click="toggleAccordion(data.id)"
-          >
-            &#62;
-          </button>
+          <transition name="fade">
+            <button
+              v-if="!isOpen(data.id)"
+              type="button"
+              class="accordionBtn open"
+              @click="toggleAccordion(data.id)"
+            >
+              &#62;
+            </button>
+          </transition>
+          <transition name="fade">
+            <button
+              v-if="isOpen(data.id)"
+              type="button"
+              class="accordionBtn close"
+              @click="toggleAccordion(data.id)"
+            >
+              &#62;
+            </button>
+          </transition>
         </div>
 
         <div class="btnBox">
@@ -54,11 +58,13 @@
         </div>
       </div>
 
-      <div v-if="isOpen(data.id)" class="accordionContent">
-        <p>작성자 아이디 : {{ data.loginId }}</p>
-        <p>생성 일자 : {{ data.createdDtm }}</p>
-        <p>수정 일자 : {{ data.updatedDtm }}</p>
-      </div>
+      <transition name="accordion">
+        <div v-if="isOpen(data.id)" class="accordionContent">
+          <p>작성자 아이디 : {{ data.loginId }}</p>
+          <p>생성 일자 : {{ data.createdDtm }}</p>
+          <p>수정 일자 : {{ data.updatedDtm }}</p>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -212,6 +218,11 @@ export default {
   display: block;
 }
 
+.accordionBtn {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
 .open {
   transform: rotate(90deg);
   cursor: pointer;
@@ -224,5 +235,26 @@ export default {
 
 .accordionContent {
   margin-top: 2rem;
+  height: 120px;
+  overflow: hidden;
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.accordion-enter-active {
+  transition: height 0.4s linear;
+}
+
+.accordion-enter,
+.accordion-leave-active {
+  transition: height 0.4s linear;
+  height: 0;
 }
 </style>
