@@ -17,9 +17,22 @@
           </div>
 
           <span class="userNm">{{ data.userNm }}</span>
-          <span class="accordion" @click="toggleAccordion(data.id)">
-            &#62;</span
+          <button
+            v-if="!isOpen(data.id)"
+            type="button"
+            class="accordion open"
+            @click="toggleAccordion(data.id)"
           >
+            &#62;
+          </button>
+          <button
+            v-else
+            type="button"
+            class="accordion close"
+            @click="toggleAccordion(data.id)"
+          >
+            &#62;
+          </button>
         </div>
 
         <div class="btnBox">
@@ -42,9 +55,9 @@
       </div>
 
       <div v-if="isOpen(data.id)" class="accordionContent">
-        <p>작성자 아이디: {{ data.loginId }}</p>
-        <p>생성 일자: {{ data.createdDtm.split("T")[0] }}</p>
-        <p>수정 일자: {{ data.updatedDtm.split("T")[0] }}</p>
+        <p>작성자 아이디 : {{ data.loginId }}</p>
+        <p>생성 일자 : {{ data.createdDtm }}</p>
+        <p>수정 일자 : {{ data.updatedDtm }}</p>
       </div>
     </div>
   </div>
@@ -199,8 +212,13 @@ export default {
   display: block;
 }
 
-.accordion {
+.open {
   transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.close {
+  transform: rotate(-90deg);
   cursor: pointer;
 }
 

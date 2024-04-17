@@ -26,9 +26,9 @@
       "userNm": "김지은",
       "title": "할일5",
       "contents": "퇴근하기",
-      "status": "1",
+      "status": "2",
       "createdDtm": "2024-04-17T06:07:13.306Z",
-      "updatedDtm": "2024-04-17T06:07:13.306Z"
+      "updatedDtm": "2024-04-17T23:27:06.463Z"
     },
     {
       "id": "94c8",
@@ -36,9 +36,59 @@
       "userNm": "김지은",
       "title": "제목",
       "contents": "할일",
-      "status": "1",
+      "status": "2",
       "createdDtm": "2024-04-17T06:35:48.997Z",
-      "updatedDtm": "2024-04-17T06:35:48.997Z"
+      "updatedDtm": "2024-04-17T23:27:17.385Z"
+    },
+    {
+      "id": "634a",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "왜 ",
+      "contents": "아ㄴ돼",
+      "status": "1",
+      "createdDtm": "2024-04-17T07:57:38.084Z",
+      "updatedDtm": "2024-04-17T07:57:38.084Z"
+    },
+    {
+      "id": "fc26",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "ㅇㅇㅇㄴㄴㄴ",
+      "contents": "ㅇㅇㅇㄴㄴㄴ",
+      "status": "1",
+      "createdDtm": "2024-04-17T23:12:23.164Z",
+      "updatedDtm": "2024-04-17T23:12:23.164Z"
+    },
+    {
+      "id": "fa70",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "ㅇㅇ",
+      "contents": "ㅇㅇ",
+      "status": "1",
+      "createdDtm": "Thu Apr 18 2024 08:14:50 GMT+0900 (한국 표준시)",
+      "updatedDtm": "Thu Apr 18 2024 08:14:50 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": "23f4",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "ㅇㅇ",
+      "contents": "ㅇㅇ",
+      "status": "1",
+      "createdDtm": "2024-04-17T23:18:17.700Z",
+      "updatedDtm": "2024-04-17T23:18:17.700Z"
+    },
+    {
+      "id": "6e8a",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "테스트으으ㅡ으으으응",
+      "contents": "으란ㅇ므라;ㅣ얼;ㅣ만어리ㅏㄴㅇ퇴근퇴근퇴근;",
+      "status": "1",
+      "createdDtm": "2024. 4. 18. 오전 8:27:36",
+      "updatedDtm": "2024. 4. 18. 오전 8:27:49"
     }
   ],
   "currentUser": {

@@ -41,8 +41,8 @@ export default {
         title: this.titleValue,
         contents: this.inputValue,
         status: "1",
-        createdDtm: new Date(),
-        updatedDtm: new Date(),
+        createdDtm: new Date().toLocaleString("ko-KR"),
+        updatedDtm: new Date().toLocaleString("ko-KR"),
       };
       try {
         if (this.inputValue.length !== 0 && this.titleValue.length !== 0) {
