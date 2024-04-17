@@ -5,7 +5,10 @@
         <input type="checkbox" v-model="data.checked" @change="onClick" />
         <span class="checkmark"></span>
       </label>
-      <div class="text">
+      <div class="todoTitle">
+        <span>{{ data.title }}</span>
+      </div>
+      <div class="todoText">
         <span>{{ data.contents }}</span>
       </div>
       <span>{{ data.userNm }}</span>
@@ -66,7 +69,7 @@ export default {
 }
 
 .todoContents {
-  width: 300px;
+  width: 450px;
   flex: 1 1 1;
   display: flex;
   align-items: center;
@@ -74,7 +77,14 @@ export default {
   padding-bottom: 10px;
 }
 
-.text {
+.todoTitle {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.todoText {
   width: 150px;
   display: flex;
   align-items: center;

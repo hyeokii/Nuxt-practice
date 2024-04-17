@@ -6,9 +6,9 @@
       "userNm": "이송",
       "title": "할 일2",
       "contents": "맛나게밥먹기",
-      "status": "2",
+      "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-17T04:33:05.608Z"
+      "updatedDtm": "2024-04-17T05:34:03.655Z"
     },
     {
       "id": "2",
@@ -18,37 +18,17 @@
       "contents": "안녕하세요",
       "status": "2",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-17T04:33:06.100Z"
+      "updatedDtm": "2024-04-17T05:34:03.887Z"
     },
     {
-      "id": "ebf1",
+      "id": "7b19",
       "loginId": "ccomo07071",
       "userNm": "김지은",
-      "title": "",
-      "contents": "퇴근퇴근~~~~퇴근",
-      "status": "2",
-      "createdDtm": "2024-04-16T08:54:53.715Z",
-      "updatedDtm": "2024-04-17T04:28:15.113Z"
-    },
-    {
-      "id": "12a6",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "하세요~~~",
-      "status": "2",
-      "createdDtm": "2024-04-16T08:56:15.931Z",
-      "updatedDtm": "2024-04-17T04:28:15.473Z"
-    },
-    {
-      "id": "77cb",
-      "loginId": "ccomo07071",
-      "userNm": "김지은",
-      "title": "",
-      "contents": "아이스크림 먹기",
+      "title": "할일5",
+      "contents": "퇴근하기",
       "status": "1",
-      "createdDtm": "2024-04-17T04:10:45.802Z",
-      "updatedDtm": "2024-04-17T04:28:15.848Z"
+      "createdDtm": "2024-04-17T06:07:13.306Z",
+      "updatedDtm": "2024-04-17T06:07:13.306Z"
     }
   ],
   "currentUser": {

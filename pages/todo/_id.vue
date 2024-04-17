@@ -10,8 +10,14 @@
       <div class="inputBox">
         <input
           class="contentsInput"
+          v-model="editTitle"
+          placeholder="타이틀 수정 내용"
+          @keyup.enter="updateTodo(todo)"
+        />
+        <input
+          class="contentsInput"
           v-model="editContents"
-          placeholder="수정 내용을 입력해주세요."
+          placeholder="할 일 수정 내용"
           @keyup.enter="updateTodo(todo)"
         />
         <CustomBtn
@@ -41,6 +47,7 @@ export default {
   data() {
     return {
       todo: {},
+      editTitle: "",
       editContents: "",
       message: "Update Todo",
     };
@@ -54,20 +61,27 @@ export default {
   },
   created() {},
   mounted() {
+    this.editTitle = this.todo.title;
     this.editContents = this.todo.contents;
   },
 
   methods: {
     async updateTodo(todo) {
       try {
-        if (this.editContents.length !== 0) {
+        if (this.editContents.length !== 0 && this.editTitle.length !== 0) {
           await apiData
-            .updateTodo(todo.id, { ...todo, contents: this.editContents })
+            .updateTodo(todo.id, {
+              ...todo,
+              contents: this.editContents,
+              title: this.editTitle,
+            })
             .then(() => {
               this.$router.push("/todo");
             });
+        } else if (this.editContents.length === 0) {
+          alert("할일을 입력해주세요!");
         } else {
-          alert("수정 내용을 입력해주세요!");
+          alert("타이틀 내용을 입력해주세요.");
         }
       } catch (err) {
         console.log("err", err);
@@ -91,7 +105,7 @@ export default {
   justify-content: center;
   padding: 0 3rem;
   margin-top: 5rem;
-  width: 450px;
+  width: 700px;
 }
 
 .titleBox {
@@ -121,14 +135,15 @@ export default {
 }
 
 .inputBox {
-  width: 100%;
+  width: 600px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .contentsInput {
   border: 1px solid white;
-  padding: 5px 15px;
+  padding: 10px 15px;
   width: 250px;
   border-radius: 5px;
   color: white;
