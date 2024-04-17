@@ -4,6 +4,7 @@
     <div class="editModal">
       <div class="input-container">
         <h2>수정하기</h2>
+        <button class="close-button" @click="closeModal">X</button>
         <input type="text" v-model="newData.title" placeholder="제목" />
         <textarea type="text" v-model="newData.contents" placeholder="내용" />
         <button class="update-button" @click="updateData">완료</button>
@@ -97,8 +98,16 @@ export default {
     box-sizing: border-box;
     height: 100%;
   }
+  .close-button {
+    position: absolute;
+    right: 20px;
+    background-color: black;
+    width: 30px;
+    border-radius: 50%;
+    height: 30px;
+  }
   .update-button {
-    background-color: #9accfd;
+    background-color: #4caf50;
     color: white;
     padding: 10px 20px;
     border-radius: 10px;
@@ -106,7 +115,7 @@ export default {
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: skyblue;
+      background-color: #388e3c;
     }
   }
 }

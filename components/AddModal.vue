@@ -4,6 +4,7 @@
     <div class="addModal">
       <div class="input-container">
         <h2>할 일 추가</h2>
+        <button class="close-button" @click="closeModal">X</button>
         <input
           v-model="newTitle"
           type="text"
@@ -125,6 +126,14 @@ export default {
     textarea {
       height: 100%;
     }
+  }
+  .close-button {
+    position: absolute;
+    right: 20px;
+    background-color: black;
+    width: 30px;
+    border-radius: 50%;
+    height: 30px;
   }
 
   .add-button {

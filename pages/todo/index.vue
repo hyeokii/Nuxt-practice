@@ -2,7 +2,6 @@
   <div class="container">
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <div v-else>
-      <h1>Todo List</h1>
       <TodoList :dataList="dataList"></TodoList>
       <AddBtn :dataList="dataList"></AddBtn>
     </div>
@@ -40,13 +39,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  margin: auto;
 
   .error-message {
     color: red;

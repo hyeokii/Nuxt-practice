@@ -38,7 +38,7 @@
       "userNm": "김재혁",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-15T07:45:47.611Z"
+      "updatedDtm": "2024-04-17T06:24:26.015Z"
     },
     {
       "title": "ㅋㅋㅋ",
@@ -58,6 +58,15 @@
       "userNm": "김지은",
       "createdDtm": "2024-04-16T07:28:17.196Z",
       "updatedDtm": "2024-04-16T07:28:17.196Z"
+    },
+    {
+      "id": "8",
+      "title": "ㅇㅀㄴㅇ",
+      "contents": "ㅀㄴㅇㅀㄴㅇㅀㅁㄴㅇㄹ",
+      "loginId": 4,
+      "userNm": "김재혁",
+      "createdDtm": "2024-04-17T06:45:12.756Z",
+      "updatedDtm": "2024-04-17T06:45:12.756Z"
     }
   ],
   "currentUser": {

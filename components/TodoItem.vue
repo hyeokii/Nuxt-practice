@@ -28,9 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .list-item {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-bottom: 1px solid #ccc;
   padding: 20px;
   width: 100%;
   transition: transform 0.3s ease;
@@ -43,7 +41,6 @@ export default {
   .list-span {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex: 1;
   }
 }
