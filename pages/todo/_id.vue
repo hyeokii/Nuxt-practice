@@ -81,7 +81,7 @@ export default {
         } else if (this.editContents.length === 0) {
           alert("할일을 입력해주세요!");
         } else {
-          alert("타이틀 내용을 입력해주세요.");
+          alert("제목을 입력해주세요.");
         }
       } catch (err) {
         console.log("err", err);

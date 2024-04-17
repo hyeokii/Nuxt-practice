@@ -1,19 +1,21 @@
 <template>
   <div class="addTodoBox">
-    <input
-      class="titleInput"
-      type="text"
-      v-model="titleValue"
-      placeholder="타이틀을 입력해주세요."
-      @keyup.enter="addTodo"
-    />
-    <input
-      class="addInput"
-      type="text"
-      v-model="inputValue"
-      placeholder="할일을 입력해주세요."
-      @keyup.enter="addTodo"
-    />
+    <div>
+      <input
+        class="titleInput"
+        type="text"
+        v-model="titleValue"
+        placeholder="제목을 입력해주세요."
+        @keyup.enter="addTodo"
+      />
+      <input
+        class="addInput"
+        type="text"
+        v-model="inputValue"
+        placeholder="할일을 입력해주세요."
+        @keyup.enter="addTodo"
+      />
+    </div>
     <button class="btn addBtn" @click="addTodo">추가</button>
   </div>
 </template>
@@ -53,7 +55,7 @@ export default {
         } else if (this.inputValue.length === 0) {
           alert("할일을 입력해주세요!");
         } else {
-          alert("타이틀을 입력해주세요!");
+          alert("제목을 입력해주세요!");
         }
       } catch (err) {
         console.log("err", err);
@@ -67,6 +69,11 @@ export default {
 .addTodoBox {
   margin-top: 3rem;
   margin-bottom: 1rem;
+  width: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 1rem;
 }
 
 .addInput,
@@ -76,6 +83,7 @@ export default {
   margin-right: 5px;
   padding: 10px 15px;
   color: white;
+  margin-right: 2rem;
 }
 
 .btn {
