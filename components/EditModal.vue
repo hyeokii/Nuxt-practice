@@ -97,17 +97,17 @@ export default {
     box-sizing: border-box;
     height: 100%;
   }
-}
-.update-button {
-  background-color: #9accfd;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  .update-button {
+    background-color: #9accfd;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: skyblue;
+    &:hover {
+      background-color: skyblue;
+    }
   }
 }
 </style>
