@@ -1,12 +1,10 @@
 <template>
   <div class="todoItemBox">
     <div class="todoContents" :class="{ completed: data.status === '2' }">
-      <input
-        type="checkbox"
-        style="zoom: 1.5"
-        v-model="data.checked"
-        @change="onClick"
-      />
+      <label class="custom-checkbox">
+        <input type="checkbox" v-model="data.checked" @change="onClick" />
+        <span class="checkmark"></span>
+      </label>
       <div class="text">
         <span>{{ data.contents }}</span>
       </div>
@@ -45,6 +43,7 @@ export default {
       try {
         await apiData.deleteTodo(todoId).then((res) => {
           this.$emit("deletedTodo", res.data.id);
+          alert("삭제 되었습니다.");
         });
       } catch (err) {
         console.log("err", err);
@@ -55,7 +54,6 @@ export default {
         alert("취소 되었습니다.");
       } else {
         this.deleteTodo(todoId);
-        alert("삭제 되었습니다.");
       }
     },
   },
@@ -94,5 +92,47 @@ export default {
   justify-content: space-between;
   margin-left: 1rem;
   align-items: center;
+}
+
+.custom-checkbox {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  visibility: hidden;
+}
+
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #3c763d;
+}
+
+.custom-checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
 }
 </style>
