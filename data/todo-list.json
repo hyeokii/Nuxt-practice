@@ -6,7 +6,7 @@
       "id": "1",
       "loginId": "yj.shin",
       "userNm": "신예진",
-      "status": "1",
+      "status": false,
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-12T00:18:21.886Z"
     },
@@ -16,7 +16,7 @@
       "userNm": "이송",
       "title": "할 일2",
       "contents": "맛나게밥먹기",
-      "status": "1",
+      "status": false,
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-10T23:51:05.763Z"
     },
@@ -26,7 +26,7 @@
       "id": "4",
       "loginId": "ccomo07071",
       "userNm": "김지은",
-      "status": "1",
+      "status": false,
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-16T07:28:11.411Z"
     },
@@ -36,7 +36,7 @@
       "id": "5",
       "loginId": "re2volution",
       "userNm": "김재혁",
-      "status": "1",
+      "status": false,
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-17T06:24:26.015Z"
     },
@@ -46,7 +46,7 @@
       "id": "6",
       "loginId": 4,
       "userNm": "김재혁",
-      "status": 1,
+      "status": false,
       "createdDtm": "2024-04-12T04:57:39.662Z",
       "updatedDtm": "2024-04-16T06:32:28.540Z"
     },
@@ -56,6 +56,7 @@
       "contents": "ㄴㅇㄻㄴㅇㄻㄴㅇㄹ",
       "loginId": 3,
       "userNm": "김지은",
+      "status": true,
       "createdDtm": "2024-04-16T07:28:17.196Z",
       "updatedDtm": "2024-04-16T07:28:17.196Z"
     },
@@ -65,8 +66,29 @@
       "contents": "ㅀㄴㅇㅀㄴㅇㅀㅁㄴㅇㄹ",
       "loginId": 4,
       "userNm": "김재혁",
+      "status": true,
       "createdDtm": "2024-04-17T06:45:12.756Z",
       "updatedDtm": "2024-04-17T06:45:12.756Z"
+    },
+    {
+      "id": "9",
+      "title": "ㄴㅁㅇㄹ",
+      "contents": "ㅁㄴㅇㄻㄴㅇㄹ",
+      "loginId": 4,
+      "userNm": "김재혁",
+      "status": false,
+      "createdDtm": "2024-04-17T23:59:59.266Z",
+      "updatedDtm": "2024-04-17T23:59:59.266Z"
+    },
+    {
+      "title": "퇴근",
+      "contents": "하기",
+      "id": "10",
+      "loginId": 4,
+      "userNm": "김재혁",
+      "status": false,
+      "createdDtm": "2024-04-18T00:17:59.710Z",
+      "updatedDtm": "2024-04-18T00:17:59.710Z"
     }
   ],
   "currentUser": {

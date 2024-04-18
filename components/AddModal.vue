@@ -62,6 +62,7 @@ export default {
           id: nextId.toString(),
           loginId: currentId,
           userNm,
+          status: false,
           createdDtm: currentTime.toISOString(),
           updatedDtm: currentTime.toISOString(),
         };
