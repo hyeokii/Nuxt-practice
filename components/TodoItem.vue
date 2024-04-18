@@ -23,8 +23,9 @@
               type="button"
               class="accordionBtn open"
               @click="toggleAccordion(data.id)"
+              :disabled="data.status === '2'"
             >
-              &#62;
+              &#9661;
             </button>
           </transition>
           <transition name="fade">
@@ -33,8 +34,9 @@
               type="button"
               class="accordionBtn close"
               @click="toggleAccordion(data.id)"
+              :disabled="data.status === '2'"
             >
-              &#62;
+              &#9651;
             </button>
           </transition>
         </div>
@@ -110,7 +112,6 @@ export default {
     },
     toggleAccordion(id) {
       this.$set(this.openedAccordions, id, !this.openedAccordions[id]);
-      console.log(this.isOpen(id));
     },
     isOpen(id) {
       return this.openedAccordions[id];
@@ -135,7 +136,7 @@ export default {
 }
 
 .todoContents {
-  width: 550px;
+  width: 570px;
   flex: 1 1 1;
   display: flex;
   flex-direction: row;
@@ -163,7 +164,7 @@ export default {
   width: 50px;
 }
 
-.completed {
+.todoItemBox .todoContents.completed {
   text-decoration: line-through;
   color: #777777;
 }
@@ -218,19 +219,14 @@ export default {
   display: block;
 }
 
-.accordionBtn {
-  font-size: 1.5rem;
+.todoItemBox .accordionBtn {
+  font-size: 1.3rem;
   font-weight: 300;
-}
-
-.open {
-  transform: rotate(90deg);
   cursor: pointer;
 }
 
-.close {
-  transform: rotate(-90deg);
-  cursor: pointer;
+.todoItemBox .accordionBtn:disabled {
+  cursor: default;
 }
 
 .accordionContent {

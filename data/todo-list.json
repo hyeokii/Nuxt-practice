@@ -36,7 +36,7 @@
       "userNm": "김지은",
       "title": "테스트으으ㅡ으으으응",
       "contents": "ㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
-      "status": "2",
+      "status": "1",
       "createdDtm": "2024. 4. 18. 오전 8:27:36",
       "updatedDtm": "2024-04-18T00:57:23.604Z"
     },
@@ -59,6 +59,16 @@
       "status": "1",
       "createdDtm": "2024. 4. 18. 오전 10:05:24",
       "updatedDtm": "2024. 4. 18. 오전 10:11:24"
+    },
+    {
+      "id": "a755",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "오늘 할일",
+      "contents": "오늘 할 일",
+      "status": "2",
+      "createdDtm": "2024. 4. 18. 오전 10:18:51",
+      "updatedDtm": "2024. 4. 18. 오전 10:18:51"
     }
   ],
   "currentUser": {

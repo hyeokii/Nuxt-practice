@@ -82,6 +82,7 @@ export default {
   flex: 1 1;
   align-items: center;
   margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .pageTitle {
