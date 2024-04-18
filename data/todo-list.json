@@ -8,7 +8,7 @@
       "contents": "맛나게밥먹기",
       "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-17T05:34:03.655Z"
+      "updatedDtm": "2024-04-18T00:44:16.177Z"
     },
     {
       "id": "2",
@@ -16,9 +16,9 @@
       "userNm": "김재혁",
       "title": "할 일5",
       "contents": "안녕하세요",
-      "status": "2",
+      "status": "1",
       "createdDtm": "2024-04-10T23:51:05.763Z",
-      "updatedDtm": "2024-04-17T07:07:14.981Z"
+      "updatedDtm": "2024-04-18T00:44:17.183Z"
     },
     {
       "id": "94c8",
@@ -26,19 +26,39 @@
       "userNm": "김지은",
       "title": "제목",
       "contents": "할일",
-      "status": "2",
+      "status": "1",
       "createdDtm": "2024-04-17T06:35:48.997Z",
-      "updatedDtm": "2024-04-17T23:35:00.447Z"
+      "updatedDtm": "2024-04-18T00:44:16.814Z"
     },
     {
       "id": "6e8a",
       "loginId": "ccomo07071",
       "userNm": "김지은",
       "title": "테스트으으ㅡ으으으응",
-      "contents": "으란ㅇ므라;ㅣ얼;ㅣ만어리ㅏㄴㅇ퇴근퇴근퇴근;",
+      "contents": "ㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ",
       "status": "2",
       "createdDtm": "2024. 4. 18. 오전 8:27:36",
-      "updatedDtm": "2024-04-17T23:33:30.628Z"
+      "updatedDtm": "2024-04-18T00:57:23.604Z"
+    },
+    {
+      "id": "25b2",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "안녕??",
+      "contents": "수정 테스트 왜 수정 시간?????이 이상하게 뜨?지??",
+      "status": "2",
+      "createdDtm": "2024. 4. 18. 오전 10:02:46",
+      "updatedDtm": "2024-04-18T01:04:14.971Z"
+    },
+    {
+      "id": "6183",
+      "loginId": "ccomo07071",
+      "userNm": "김지은",
+      "title": "원인을,,",
+      "contents": ",,찾았",
+      "status": "1",
+      "createdDtm": "2024. 4. 18. 오전 10:05:24",
+      "updatedDtm": "2024. 4. 18. 오전 10:11:24"
     }
   ],
   "currentUser": {

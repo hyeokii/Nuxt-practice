@@ -22,7 +22,6 @@ export default {
   async toggleTodoStatus(todoId, status) {
     return axios.patch(`${API_BASE_URL}/${todoId}`, {
       status: status,
-      updatedDtm: new Date(),
     });
   },
 };

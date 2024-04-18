@@ -135,7 +135,7 @@ export default {
 }
 
 .todoContents {
-  width: 500px;
+  width: 550px;
   flex: 1 1 1;
   display: flex;
   flex-direction: row;
@@ -145,14 +145,14 @@ export default {
 }
 
 .todoTitle {
-  width: 100px;
+  width: 120px;
   display: flex;
   align-items: center;
   margin: 0 1rem;
 }
 
 .todoText {
-  width: 150px;
+  width: 190px;
   display: flex;
   align-items: center;
   margin: 0 1rem;
