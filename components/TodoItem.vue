@@ -62,7 +62,7 @@
         <div v-if="isOpen(data.id)" class="accordionContent">
           <p>작성자 아이디 : {{ data.loginId }}</p>
           <p>생성 일자 : {{ data.createdDtm }}</p>
-          <p>수정 일자 : {{ data.updatedDtm }}</p>
+          <p>마지막 수정 일자 : {{ data.updatedDtm }}</p>
         </div>
       </transition>
     </div>
