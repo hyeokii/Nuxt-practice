@@ -38,12 +38,10 @@ export default {
         contents: inpTodoValue,
         status: "1",
         createdDtm: new Date(),
-        updatedDtm: new Date()
-      }
-      this.$axios.post(
-        "http://localhost:3001/todoList",
-        todoData
-      );
+        updatedDtm: new Date(),
+      };
+      this.$axios.post("http://localhost:3001/todoList", todoData);
+      this.$router.go(this.$router.currentRout);
     },
   },
   // useMemo

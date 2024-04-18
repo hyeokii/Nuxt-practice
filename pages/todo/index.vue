@@ -1,23 +1,22 @@
 <template>
   <div class="pg-todo">
-    <h2 class="pg-tit">{{message}}</h2>
-    <Todo-Add :userData="userData"/>
-    <ul class="list-todo">
+    <h2 class="pg-tit">{{ message }}</h2>
+    <Todo-Add :userData="userData" />
+    <div class="list-todo">
       <Todo
         v-for="(data, index) in dataList"
         :data="data"
         :loginId="loginId"
         v-bind:key="`${index}_${data.id}`"
       />
-    </ul>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   layout: "Todopage",
-  
+
   async asyncData({ $axios }) {
     const data = await $axios.get("http://localhost:3001/todoList");
     const currentData = await $axios.get("http://localhost:3001/currentUser");
@@ -27,8 +26,8 @@ export default {
     return {
       dataList: data.data,
       currentData: currentData.data.id,
-      loginId : userData.data[0].loginId,
-      userData : userData.data[0]
+      loginId: userData.data[0].loginId,
+      userData: userData.data[0],
     };
   },
   data() {
@@ -36,18 +35,14 @@ export default {
       dataList: [],
       message: "TODOLIST",
       id: null,
-      currentData:null,
-      loginId:null,
-      userData:null
+      currentData: null,
+      loginId: null,
+      userData: null,
     };
   },
-  created() {
-   
-  },
+  created() {},
   // client
-  mounted() {
-   
-  },
+  mounted() {},
   // useCallback
   methods: {},
   // useMemo
@@ -60,7 +55,7 @@ export default {
   padding: 0;
   margin-top: 30px;
   width: 100%;
-  li {
+  & > div {
     display: flex;
     align-items: center;
     margin-top: 20px;
