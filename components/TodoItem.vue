@@ -4,9 +4,9 @@
       class="list-check"
       type="checkbox"
       @click="handleChecked"
-      :checked="Todo.status ? true : false"
+      :checked="Todo.status === 0"
     />
-    <div :class="Todo.status ? 'list-item checked' : 'list-item'">
+    <div :class="{ 'list-item': true, checked: Todo.status === 0 }">
       <span class="list-span">{{ Todo.userNm }}</span>
       <span class="list-span">{{ Todo.title }}</span>
       <span class="list-span">{{ Todo.contents }}</span>
@@ -24,7 +24,10 @@ export default {
   },
   methods: {
     handleItemClick(event) {
-      if (event.target.tagName.toLowerCase() === "input" || this.Todo.status) {
+      if (
+        event.target.tagName.toLowerCase() === "input" ||
+        this.Todo.status === 0
+      ) {
         event.stopPropagation();
       } else {
         this.moveTodo(this.Todo.id);
@@ -38,7 +41,7 @@ export default {
       }
     },
     async handleChecked() {
-      this.Todo.status = !this.Todo.status;
+      this.Todo.status ^= 1;
       await this.$axios.put(`http://localhost:3001/todoList/${this.Todo.id}`, {
         ...this.Todo,
         status: this.Todo.status,
@@ -57,16 +60,16 @@ export default {
   display: flex;
   gap: 40px;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
   }
 
   .list-check {
-    /* checkbox 스타일 */
     width: 24px;
     height: 24px;
-    margin-right: 10px; /* checkbox와의 간격 조정 */
+    margin-right: 10px;
   }
 
   .checked {
