@@ -8,14 +8,16 @@
       }"
       type="main"
       perView="1"
+      :slideItem="swiperData"
     />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {};
+  computed: {
+    ...mapState(["swiperData"]),
   },
 };
 </script>

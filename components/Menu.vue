@@ -1,7 +1,12 @@
 <template>
   <div class="menuContainer">
     <ul class="menuList">
-      <li class="menuItem" v-for="(menu, idx) in menuData" :key="idx">
+      <li
+        class="menuItem"
+        v-for="(menu, idx) in menuData"
+        :key="idx"
+        @click="routeToUrl(menu.contentInfoList[1].textList[0].linkUrlAddr)"
+      >
         <span class="menuIcon"></span>
         <span class="menuText">{{
           menu.contentInfoList[1].textList[0].contTitleNm
@@ -16,6 +21,11 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState(["menuData"]),
+  },
+  methods: {
+    routeToUrl(url) {
+      alert(`${url}로 이동`);
+    },
   },
 };
 </script>
