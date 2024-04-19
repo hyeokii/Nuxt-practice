@@ -30,7 +30,7 @@ export default {
   props: {},
   data() {
     return {
-      todoData: "",
+      todoData: {},
       isMyTodo: false,
     };
   },

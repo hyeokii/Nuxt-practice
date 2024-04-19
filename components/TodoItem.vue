@@ -1,9 +1,9 @@
 <template>
-  <div class="list-wrapper" @click="handleItemClick">
+  <div class="list-wrapper" @click="moveTodo(Todo.id)">
     <input
       class="list-check"
       type="checkbox"
-      @click="handleChecked"
+      @click.stop="handleChecked"
       :checked="Todo.status === 0"
     />
     <div :class="{ 'list-item': true, checked: Todo.status === 0 }">
@@ -23,16 +23,16 @@ export default {
     },
   },
   methods: {
-    handleItemClick(event) {
-      if (
-        event.target.tagName.toLowerCase() === "input" ||
-        this.Todo.status === 0
-      ) {
-        event.stopPropagation();
-      } else {
-        this.moveTodo(this.Todo.id);
-      }
-    },
+    // handleItemClick(event) {
+    //   if (
+    //     event.target.tagName.toLowerCase() === "input" ||
+    //     this.Todo.status === 0
+    //   ) {
+    //     event.stopPropagation();
+    //   } else {
+    //     this.moveTodo(this.Todo.id);
+    //   }
+    // },
     moveTodo(id) {
       try {
         this.$router.push(`todo/${id}`);
