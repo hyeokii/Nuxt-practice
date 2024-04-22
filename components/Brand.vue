@@ -1,12 +1,23 @@
 <template>
-  <div class="brandContainer">
+  <div v-if="brandData" class="brandContainer">
     <div class="brandTitle">주목해야 할 브랜드</div>
-    <Swiper :pagination="{}" type="brand" perView="3" />
+    <Swiper
+      :pagination="{}"
+      type="brand"
+      perView="3"
+      :slideItem="brandData[0]?.contentInfoList[0]?.imageList"
+      :loop="false"
+    />
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["brandData"]),
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="swiperData.length">
     <Swiper
       :pagination="{
         el: '.swiper-pagination',
@@ -9,6 +9,7 @@
       type="main"
       perView="1"
       :slideItem="swiperData"
+      :loop="true"
     />
   </div>
 </template>

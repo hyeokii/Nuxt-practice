@@ -1,5 +1,5 @@
 <template>
-  <div class="menuContainer">
+  <div v-if="menuData.length" class="menuContainer">
     <ul class="menuList">
       <li
         class="menuItem"
@@ -32,7 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .menuContainer {
-  border: 1px solid black;
   margin-bottom: 5rem;
   width: 100%;
 }

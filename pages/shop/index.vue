@@ -3,15 +3,19 @@
     <div class="mainContainer">
       <MainSlide />
       <Menu />
+      <MdPick />
       <Brand />
+      <Tab />
+      <ItemCard />
     </div>
   </div>
 </template>
 <script>
+import MdPick from "../../components/MdPick.vue";
 export default {
+  components: { MdPick },
   computed: {},
   async created() {
-    // created 훅에서 비동기로 데이터를 가져오도록 합니다.
     await this.$store.dispatch("getData");
   },
 };

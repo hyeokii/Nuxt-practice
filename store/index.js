@@ -5,27 +5,43 @@ export const state = () => ({
   swiperData: [],
   menuData: [],
   planShopData: [],
-  eventData: [],
+  goodsListData: [],
   brandData: [],
-  mdPickData: [],
 });
 
 export const mutations = {
   SET_TOTAL_DATA(state, totalData) {
-    state.totalData = totalData;
-    state.swiperData = totalData.conrList[0].setList;
-    state.menuData = totalData.conrList[1].setList;
-    state.planShopData = totalData.conrList[2].setList;
-    state.eventData = totalData.conrList[3].setList;
-    state.brandData = totalData.conrList[4].setList;
-    state.mdPickData = totalData.conrList[5].setList;
+    totalData.forEach((data, idx) => {
+      switch (data.vueCmptId) {
+        case "main_swiper":
+          state.swiperData = data.setList || [];
+          break;
+        case "menu":
+          state.menuData = data.setList || [];
+          break;
+        case "planshop_01":
+          state.planShopData = data.setList || [];
+          break;
+        case "event":
+          state.eventData = data.setList || [];
+          break;
+        case "image_banner_11":
+          state.brandData = data.setList || [];
+
+          break;
+        case "goods_list_02":
+          state.goodsListData = data.setList || [];
+          break;
+        default:
+          break;
+      }
+    });
   },
 };
 
 export const actions = {
   async getData({ commit }) {
     const res = await apiData.fetchData();
-    commit("SET_TOTAL_DATA", res.data);
-    console.log(res.data.conrList);
+    commit("SET_TOTAL_DATA", res.data.conrList);
   },
 };

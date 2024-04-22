@@ -1,9 +1,34 @@
 <template>
   <div class="swiperContainer">
     <swiper :class="['swiper', type]" :options="swiperOption">
-      <swiper-slide v-for="(item, idx) in slideItem" :key="idx">{{
-        item.setNm
-      }}</swiper-slide>
+      <swiper-slide v-for="(item, idx) in slideItem" :key="idx"
+        ><div
+          v-if="type === 'main'"
+          @click="routeToUrl(item.contentInfoList[0].imageList[0].linkUrlAddr)"
+        >
+          <img
+            class="swiperImg"
+            :src="`https://img-stg.x2bee.com/${item.contentInfoList[0].imageList[0].pcContPathNm}`"
+          />
+
+          <p class="swiperText">{{ item.setNm }}</p>
+        </div>
+
+        <div class="mdPickContainer" v-else-if="type === 'mdPick'">
+          <img
+            class="mdPickImg"
+            :src="`https://img-stg.x2bee.com/${item.imageList[0].bnrImgPathNm}`"
+          />
+
+          <p class="mdPickText">{{ item.mkdpNm }}</p>
+        </div>
+        <div v-else @click="routeToUrl(item.linkUrlAddr)">
+          <img
+            class="brandImg"
+            :src="`https://img-stg.x2bee.com/${item.pcContPathNm}`"
+          />
+        </div>
+      </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -27,13 +52,14 @@ export default {
     type: String,
     perView: String,
     slideItem: Array,
+    loop: Boolean,
   },
   data() {
     return {
       swiperOption: {
         slidesPerView: this.perView,
         spaceBetween: 30,
-        loop: true,
+        loop: this.loop,
         pagination: this.pagination,
         navigation: {
           nextEl: ".swiper-button-next",
@@ -45,57 +71,23 @@ export default {
   computed: {
     ...mapState(["swiperData"]),
   },
+  methods: {
+    routeToUrl(url) {
+      alert(`${url}로 이동`);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .swiperContainer {
-  border: 1px solid black;
   margin-bottom: 5rem;
-}
-.slider-content {
-  padding-bottom: 170px;
-}
-.slider-wrap {
-  h6 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  & + .slider-wrap {
-    margin-top: 40px;
-  }
-  &.thumb-example {
-    height: 480px;
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      background-size: cover;
-      background-position: center;
-    }
-    .gallery-top {
-      height: 80%;
-      width: 100%;
-    }
-    .gallery-thumbs {
-      height: 20%;
-      margin-top: 20px;
-    }
-    .gallery-thumbs .swiper-slide {
-      width: 25%;
-      height: 100%;
-      opacity: 0.4;
-    }
-    .gallery-thumbs .swiper-slide-active {
-      opacity: 1;
-    }
-  }
 }
 .swiper {
   width: 100%;
   height: 300px;
+  position: relative;
+  z-index: 10;
   .swiper-slide {
     display: flex;
     justify-content: center;
@@ -111,50 +103,17 @@ export default {
       opacity: 1;
     }
   }
-  /* .swiper-pagination {
-    bottom: 20px;
-    &.num {
-      display: inline-block;
-      width: auto;
-      left: 20px;
-      padding: 7px 15px;
-      background: #fff;
-      border-radius: 20px;
-      color: #666;
-      .swiper-pagination-current {
-        font-weight: 900;
-        color: #ff7600;
-      }
-      .swiper-pagination-total {
-        color: #666;
-      }
-    }
-  } */
-  .swiper-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    background: #333;
-    .bar {
-      width: 100%;
-      height: 4px;
-      transform: translateX(-100%);
-      background: #ff7600;
-    }
-    &.start {
-      .bar {
-        animation-duration: 5s;
-        animation-iteration-count: infinite;
-        animation-name: progress;
-      }
-    }
-  }
 }
 .main {
   .swiper-pagination {
-    background-color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3px 10px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60px;
+    font-size: 0.8rem;
     color: white;
     .swiper-pagination-current {
       color: white;
@@ -163,11 +122,10 @@ export default {
 
   .swiper-button-prev,
   .swiper-button-next {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     width: 40px;
     height: 40px;
-    opacity: 80%;
     border-radius: 50%;
   }
 
@@ -175,6 +133,69 @@ export default {
   .swiper-button-next::after {
     font-size: 16px;
   }
+}
+
+.brand,
+.mdPick {
+  .swiper-slide {
+    opacity: 1;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 25;
+  }
+
+  .swiper-button-prev {
+    left: -20px;
+  }
+
+  .swiper-button-next {
+    right: -20px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 16px;
+    color: black;
+  }
+}
+
+.swiperImg,
+.brandImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiperText {
+  position: relative;
+  z-index: 20;
+  font-size: 2rem;
+}
+
+.mdPickContainer {
+  padding: 1rem;
+}
+
+.mdPickContainer .mdPickImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.mdPickContainer .mdPickText {
+  position: relative;
+  z-index: 20;
+  color: white;
 }
 
 @keyframes progress {
