@@ -6,9 +6,8 @@ li {
   list-style: none;
 }
 .v-application--wrap {
-  padding: 10px;
   height: 100%;
-  & > div:first-child {
+  & > div:first-child:not(.pg-main) {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -23,15 +22,26 @@ h2 {
 .btn {
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 1px solid black;
 }
 .inp-text {
   width: 300px;
   height: 35px;
   padding: 5px;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid black;
+  color: black;
   &::placeholder {
-    color: white;
+    color: black;
+  }
+}
+.box-slide {
+  position: relative;
+  .swiper {
+    width: 100%;
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
