@@ -1,5 +1,5 @@
 <template>
-  <div v-if="swiperData.length">
+  <div v-if="data.length">
     <Swiper
       :pagination="{
         el: '.swiper-pagination',
@@ -8,17 +8,16 @@
       }"
       type="main"
       perView="1"
-      :slideItem="swiperData"
+      :slideItem="data"
       :loop="true"
     />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["swiperData"]),
+  props: {
+    data: Array,
   },
 };
 </script>

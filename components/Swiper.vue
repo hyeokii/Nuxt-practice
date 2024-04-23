@@ -1,6 +1,10 @@
 <template>
   <div class="swiperContainer">
-    <swiper :class="['swiper', type]" :options="swiperOption">
+    <swiper
+      :class="['swiper', type]"
+      :options="swiperOption"
+      :autoplay="autoplay"
+    >
       <swiper-slide v-for="(item, idx) in slideItem" :key="idx"
         ><div
           v-if="type === 'main'"
@@ -11,7 +15,7 @@
             :src="`https://img-stg.x2bee.com/${item.contentInfoList[0].imageList[0].pcContPathNm}`"
           />
 
-          <p class="swiperText">{{ item.setNm }}</p>
+          <p class="swiperText">{{ item.setNm }} {{ autoplay }}</p>
         </div>
 
         <div class="mdPickContainer" v-else-if="type === 'mdPick'">
@@ -33,12 +37,18 @@
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
+    <button
+      @click="togglePlay"
+      class="swiper-play-pause"
+      v-if="type === 'main'"
+    >
+      {{ isPlaying ? "||" : "&#9654;" }}
+    </button>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import { mapState } from "vuex";
 import "swiper/css/swiper.css";
 
 export default {
@@ -66,14 +76,22 @@ export default {
           prevEl: ".swiper-button-prev",
         },
       },
+      isPlaying: true,
+      autoplay:
+        this.type === "main"
+          ? { delay: 1000, disableOnInteraction: false }
+          : {},
     };
   },
-  computed: {
-    ...mapState(["swiperData"]),
-  },
+
   methods: {
     routeToUrl(url) {
       alert(`${url}로 이동`);
+    },
+    togglePlay() {
+      this.isPlaying = !this.isPlaying;
+      if (this.isPlaying) {
+      }
     },
   },
 };
@@ -82,20 +100,24 @@ export default {
 <style lang="scss" scoped>
 .swiperContainer {
   margin-bottom: 5rem;
+  position: relative;
 }
 .swiper {
-  width: 100%;
-  height: 300px;
+  height: 330px;
+  width: 1245px;
+  padding: 0 25px;
   position: relative;
-  z-index: 10;
   .swiper-slide {
     display: flex;
+    position: relative;
+    z-index: 10;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-weight: bold;
-    background: #fdde88;
     opacity: 0.7;
+    overflow: hidden;
+    cursor: pointer;
     img {
       width: 100%;
     }
@@ -104,6 +126,16 @@ export default {
     }
   }
 }
+
+.main.swiper {
+  width: 1245px;
+  padding: 0;
+
+  .swiper-slide {
+    width: 100%;
+  }
+}
+
 .main {
   .swiper-pagination {
     position: absolute;
@@ -115,23 +147,32 @@ export default {
     width: 60px;
     font-size: 0.8rem;
     color: white;
-    .swiper-pagination-current {
-      color: white;
-    }
   }
 
   .swiper-button-prev,
   .swiper-button-next {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
 
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
   .swiper-button-prev::after,
   .swiper-button-next::after {
     font-size: 16px;
+  }
+
+  .swiper-button-play,
+  .swiper-button-pause {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -148,6 +189,11 @@ export default {
     border-radius: 50%;
     position: absolute;
     z-index: 25;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: 0 25px;
   }
 
   .swiper-button-prev {
@@ -196,6 +242,21 @@ export default {
   position: relative;
   z-index: 20;
   color: white;
+}
+
+.swiper-play-pause {
+  z-index: 30;
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 @keyframes progress {
