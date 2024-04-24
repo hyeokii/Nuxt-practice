@@ -1,18 +1,19 @@
 <template>
-  <section></section>
+  <section>
+    <slot></slot>
+  </section>
 </template>
 <script>
 export default {
   layoute: "section",
   props: {
-    secTitle: {
-      type: Object,
+    type: {
+      type: String,
       defaultValue: undefined,
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-.cont {
-}
+
 </style>

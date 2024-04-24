@@ -6,7 +6,7 @@ export default {
   layoute: "sectionTitle",
   props: {
     secTitle: {
-      type: Object,
+      type: String,
       defaultValue: undefined,
     },
   },

@@ -2,6 +2,17 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+section {
+  margin: 0 auto;
+  width: 1280px;
+  & + section {
+    margin-top: 80px;
+  }
+  &.full {
+    width: 100%;
+  }
+}
+
 li {
   list-style: none;
 }
@@ -15,6 +26,12 @@ li {
     margin: 100px auto 0;
     width: 800px;
   }
+}
+p {
+  margin-bottom:0;
+}
+a {
+  text-decoration: none;
 }
 h2 {
   font-size: 20px;
@@ -32,16 +49,5 @@ h2 {
   color: black;
   &::placeholder {
     color: black;
-  }
-}
-.box-slide {
-  position: relative;
-  .swiper {
-    width: 100%;
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
 }

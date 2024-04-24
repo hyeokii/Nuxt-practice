@@ -1,8 +1,8 @@
 <template>
-  <section class="box-slide full">
+  <section class="box-slide full" v-if="isView">
     <swiper class="swiper" :options="kvSwiperOptions">
       <swiper-slide
-        v-for="(data, index) in kvData.setList"
+        v-for="(data, index) in cornerData.setList"
         v-bind:key="`${index}_${data.id}`"
       >
         <a :href="`https://img-stg.x2bee.com/${data.contentInfoList[0].imageList[0].linkUrlAddr}`">
@@ -11,31 +11,34 @@
             alt="img"
           />
           <div class="text-box">
-            <p class="title">{{ data.contentInfoList[1].textList[0].contTitleNm }}</p>
-            <p class="desc">{{ data.contentInfoList[1].textList[1].contTitleNm }}</p>
+            <p class="title">{{ data.contentInfoList[1].textList.at(0)?.contTitleNm }}</p>
+            <p class="desc">{{ data.contentInfoList[1].textList.at(1)?.contTitleNm }}</p>
           </div>
         </a>
       </swiper-slide>
     </swiper>
     <div class="swiper-pagination" slot="pagination"></div>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
+    <div class="swiper-button-prev type01" slot="button-prev"></div>
+    <div class="swiper-button-next type01" slot="button-next"></div>
   </section>
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
-  name: "keyvisualComponent",
+  name: "MainSwiper",
   components: {
     Swiper,
     SwiperSlide,
   },
   props: {
-    kvData: {
+    cornerData: {
       type: Object,
       defaultValue: undefined,
     },
+  },
+  created() {
+    // console.log('data', this.cornerData.setList[0].contentInfoList[1].textList[1].contTitleNm)
   },
   data() {
     return {
@@ -55,6 +58,11 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    isView() {
+      return (this.cornerData?.setList ?? []).length > 0 && this.cornerData.setList[0].contentInfoList.at(1).textList.length >=2
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -86,17 +94,6 @@ export default {
   }
   .swiper-button-next {
     right:40px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    width:50px;
-    height:50px;
-    border-radius: 50%;
-    background:rgba(0,0,0,0.2);
-    &::after {
-      color:white; 
-      font-size:20px;
-    }
   }
   .text-box {
     position:absolute;
