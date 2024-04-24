@@ -1,7 +1,7 @@
 <template>
   <div class="tab3Container">
     <ItemCard
-      v-for="(product, idx) in data[2]?.contentInfoList[1]?.productList"
+      v-for="(product, idx) in data[0]?.contentInfoList[1]?.productList"
       :key="idx"
       :product="product"
     />

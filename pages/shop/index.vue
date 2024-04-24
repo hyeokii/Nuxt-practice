@@ -1,11 +1,6 @@
 <template>
   <div class="flex">
     <div class="mainContainer flex">
-      <!-- <MainSlide />
-      <Menu />
-      <MdPick />
-      <Brand />
-      <Tab /> -->
       <component
         v-for="(shop, index) in shopData.conrList"
         :is="shop.vueCmptId"

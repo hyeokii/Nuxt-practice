@@ -11,7 +11,10 @@
         {{ goods.contentInfoList[0].textList[0].contTitleNm }}
       </button>
       <div class="tabContent">
-        <component :is="currentTab" :data="data"></component>
+        <component
+          :is="currentTab"
+          :data="data.filter((tab) => tab.setNm === curTabNm)"
+        ></component>
       </div>
     </div>
   </div>
@@ -33,9 +36,21 @@ export default {
   },
   data() {
     return {
-      currentTab: "Tab1", // 초기에는 Tab1을 선택
+      currentTab: "Tab1",
     };
   },
+  computed: {
+    curTabNm() {
+      if (this.currentTab === "Tab1") {
+        return "탭1";
+      } else if (this.currentTab === "Tab2") {
+        return "탭2";
+      } else if (this.currentTab === "Tab3") {
+        return "탭3";
+      }
+    },
+  },
+  methods: {},
 };
 </script>
 
