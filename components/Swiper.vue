@@ -1,9 +1,10 @@
 <template>
   <div class="swiperContainer">
     <swiper
+      ref="mySwiper"
       :class="['swiper', type]"
-      :options="swiperOption"
-      :autoplay="autoplay"
+      :options="{ ...swiperOption, autoplay: this.autoplay }"
+      :isPlaying="isPlaying"
     >
       <swiper-slide v-for="(item, idx) in slideItem" :key="idx"
         ><div
@@ -15,7 +16,7 @@
             :src="`https://img-stg.x2bee.com/${item.contentInfoList[0].imageList[0].pcContPathNm}`"
           />
 
-          <p class="swiperText">{{ item.setNm }} {{ autoplay }}</p>
+          <p class="swiperText">{{ item.setNm }}</p>
         </div>
 
         <div class="mdPickContainer" v-else-if="type === 'mdPick'">
@@ -28,7 +29,7 @@
         </div>
         <div v-else @click="routeToUrl(item.linkUrlAddr)">
           <img
-            class="brandImg"
+            :class="`${type}Img`"
             :src="`https://img-stg.x2bee.com/${item.pcContPathNm}`"
           />
         </div>
@@ -64,6 +65,17 @@ export default {
     slideItem: Array,
     loop: Boolean,
   },
+  computed: {
+    autoplay() {
+      if (this.type === "main") {
+        if (this.isPlaying) {
+          return { delay: 2000, disableOnInteraction: false };
+        } else {
+          return { delay: 500 };
+        }
+      }
+    },
+  },
   data() {
     return {
       swiperOption: {
@@ -77,13 +89,8 @@ export default {
         },
       },
       isPlaying: true,
-      autoplay:
-        this.type === "main"
-          ? { delay: 1000, disableOnInteraction: false }
-          : {},
     };
   },
-
   methods: {
     routeToUrl(url) {
       alert(`${url}로 이동`);
@@ -91,6 +98,11 @@ export default {
     togglePlay() {
       this.isPlaying = !this.isPlaying;
       if (this.isPlaying) {
+        // 멈춘 상태
+        this.$refs.mySwiper.$swiper.autoplay.start();
+      } else {
+        // 재생 상태
+        this.$refs.mySwiper.$swiper.autoplay.stop();
       }
     },
   },
@@ -136,6 +148,10 @@ export default {
   }
 }
 
+.event.swiper {
+  height: 150px;
+}
+
 .main {
   .swiper-pagination {
     position: absolute;
@@ -177,7 +193,8 @@ export default {
 }
 
 .brand,
-.mdPick {
+.mdPick,
+.event {
   .swiper-slide {
     opacity: 1;
   }
