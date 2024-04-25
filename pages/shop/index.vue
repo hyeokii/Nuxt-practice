@@ -43,7 +43,7 @@ export default {
   flex-direction: column;
 }
 .mainContainer {
-  width: 1285px;
-  padding: 3rem 5rem;
+  width: 100%;
+  padding: 0 5rem;
 }
 </style>

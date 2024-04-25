@@ -6,8 +6,9 @@
       :options="{ ...swiperOption, autoplay: this.autoplay }"
       :isPlaying="isPlaying"
     >
-      <swiper-slide v-for="(item, idx) in slideItem" :key="idx"
-        ><div
+      <swiper-slide v-for="(item, idx) in slideItem" :key="idx">
+        <!-- main -->
+        <div
           v-if="type === 'main'"
           @click="routeToUrl(item.contentInfoList[0].imageList[0].linkUrlAddr)"
         >
@@ -25,6 +26,7 @@
           </p>
         </div>
 
+        <!-- mdPick -->
         <div class="mdPickContainer" v-else-if="type === 'mdPick'">
           <img
             class="mdPickImg"
@@ -33,6 +35,8 @@
 
           <p class="mdPickText">{{ item.mkdpNm }}</p>
         </div>
+
+        <!-- brand, event -->
         <div v-else @click="routeToUrl(item.linkUrlAddr)">
           <img
             :class="`${type}Img`"
@@ -146,12 +150,21 @@ export default {
 }
 
 .main.swiper {
-  width: 1245px;
+  /* width: 1245px; */
+  width: 100vw;
   padding: 0;
+
+  @media (min-width: 1900px) {
+    width: 1900px;
+  }
 
   .swiper-slide {
     width: 100%;
   }
+}
+
+.mdPick.swiper {
+  height: 420px;
 }
 
 .event.swiper {
@@ -165,7 +178,7 @@ export default {
     transform: translateX(-50%);
     padding: 3px 10px;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 60px;
     font-size: 0.8rem;
     color: white;
@@ -173,28 +186,25 @@ export default {
 
   .swiper-button-prev,
   .swiper-button-next {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    margin: 0 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .swiper-button-prev:hover,
   .swiper-button-next:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .swiper-button-prev::after,
   .swiper-button-next::after {
     font-size: 16px;
-  }
-
-  .swiper-button-play,
-  .swiper-button-pause {
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -252,31 +262,31 @@ export default {
 }
 
 .mdPickContainer {
-  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .mdPickContainer .mdPickImg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
+  margin-bottom: 1rem;
 }
 
 .mdPickContainer .mdPickText {
-  position: relative;
-  z-index: 20;
-  color: white;
+  font-weight: 500;
 }
 
 .swiper-play-pause {
   z-index: 30;
-  position: absolute;
-  bottom: 10px;
-  left: 45%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border: none;
   border-radius: 50%;
+  position: absolute;
+  left: calc(50% - 60px);
+  bottom: 10px;
   width: 25px;
   height: 25px;
   font-size: 12px;
