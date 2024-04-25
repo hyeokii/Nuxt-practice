@@ -34,7 +34,8 @@ export default {
   },
   props: {
     res: {
-      Object,
+      type: Object,
+      required: true,
     },
   },
   data() {

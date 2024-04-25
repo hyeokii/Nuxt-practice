@@ -16,7 +16,8 @@
 export default {
   props: {
     item: {
-      Object,
+      type: Object,
+      required: true,
     },
   },
   methods: {

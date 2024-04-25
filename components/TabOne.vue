@@ -16,7 +16,8 @@ export default {
   },
   props: {
     list: {
-      Object,
+      type: Object,
+      required: true,
     },
   },
   computed: {
