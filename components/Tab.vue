@@ -7,7 +7,7 @@
       :class="{ on: key === currentTab }"
       @click="$emit('tabClicked', key)"
     >
-      {{ item.name }}
+      {{ item.contentInfoList[0].textList[0].contTitleNm }}
     </button>
   </div>
 </template>

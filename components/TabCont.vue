@@ -1,15 +1,21 @@
 <template>
-  <div class="tab-cont" v-for="(item,key) in tabCont" :key="`tab-${key}`" v-bind:key="`${item}_${data.id}`"> 
-    {{ list.item }}
+  <div>
+  <div class="tab-cont" v-if="tabNumber===currentTab">
+    <slot ></slot>
+  </div>
   </div>
 </template>
 <script>
 export default {
   name: "TabCont",
   props: {
-    tabcont: {
+    tabCont: {
       type: Array,
-      required: true,
+      required: false,
+    },
+    tabNumber: {
+      type: Number,
+      default: 0,
     },
     currentTab: {
       type: Number,
@@ -22,11 +28,11 @@ export default {
   created() {},
   mounted() {},
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 <style scoped lang="scss">
-.tabs-cont {
+.tab-cont {
   padding-top:40px;
 }
 </style>
