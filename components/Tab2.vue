@@ -16,11 +16,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .tab2Container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+  }
 }
 
 .tab2Container > *:not(:last-child) {

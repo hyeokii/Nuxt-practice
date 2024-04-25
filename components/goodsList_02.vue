@@ -89,5 +89,11 @@ export default {
 
 .tabContent {
   margin-top: 20px;
+  display: flex;
+  align-content: center;
+
+  @media (max-width: 1200px) {
+    width: 1200px;
+  }
 }
 </style>

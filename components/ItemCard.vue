@@ -39,6 +39,10 @@ export default {
   width: 280px;
   margin-bottom: 2rem;
   cursor: pointer;
+
+  @media (max-width: 1200px) {
+    width: 350px;
+  }
 }
 
 .productImg {
@@ -47,6 +51,11 @@ export default {
   object-fit: cover;
   margin-bottom: 0.5rem;
   top: 0;
+
+  @media (max-width: 1200px) {
+    width: 350px;
+    height: 350px;
+  }
 }
 
 .productTitle {
