@@ -222,8 +222,8 @@ export default {
     border-radius: 50%;
     position: absolute;
     z-index: 25;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 45%;
+    transform: translateY(-45%);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
       rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     margin: 0 25px;

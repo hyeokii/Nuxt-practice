@@ -20,9 +20,7 @@ export default {
 .tab2Container {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .tab2Container > *:not(:last-child) {

@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   span {
     font-size: 28px;
     font-weight: 800;

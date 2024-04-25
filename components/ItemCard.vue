@@ -36,17 +36,17 @@ export default {
 
 <style lang="scss" scoped>
 .itemCardContainer {
-  width: 350px;
-  height: 480px;
+  width: 280px;
   margin-bottom: 2rem;
   cursor: pointer;
 }
 
 .productImg {
-  width: 350px;
+  width: 280px;
+  height: 280px;
   object-fit: cover;
-  height: 380px;
   margin-bottom: 0.5rem;
+  top: 0;
 }
 
 .productTitle {
