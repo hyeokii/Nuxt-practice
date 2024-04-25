@@ -29,14 +29,7 @@ export default {
   },
   methods: {
     toCamel(fileNm) {
-      return upperFirst(
-        camelCase(
-          fileNm
-            .split("/")
-            .pop()
-            .replace(/\.\w+$/, "")
-        )
-      );
+      return upperFirst(camelCase(fileNm));
     },
   },
 };

@@ -16,7 +16,13 @@
             :src="`https://img-stg.x2bee.com/${item.contentInfoList[0].imageList[0].pcContPathNm}`"
           />
 
-          <p class="swiperText">{{ item.setNm }}</p>
+          <p
+            class="swiperText"
+            v-for="(text, idx) in item.contentInfoList[1].textList"
+            :key="idx"
+          >
+            {{ text.contTitleNm }}
+          </p>
         </div>
 
         <div class="mdPickContainer" v-else-if="type === 'mdPick'">
@@ -242,6 +248,7 @@ export default {
   position: relative;
   z-index: 20;
   font-size: 2rem;
+  color: white;
 }
 
 .mdPickContainer {
