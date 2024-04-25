@@ -1,10 +1,10 @@
 <template>
   <section class="box-slide" v-if="isView">
-    <SectionTitle secTitle="추천 상품 리스트" />
+    <SectionTitle :secTitle="`${cornerData.mappTtl}`" />
     <Tab :tab="tab" :currentTab="currentTab" @tabClicked="changeTab" />
-    <div class="tab-content" v-for="(corner,index) in recommendGoods.setList" :key="index" :cornerData="corner">
+    <!-- <div class="tab-content" v-for="(corner,index) in recommendGoods.setList" :key="index" :cornerData="corner">
 
-    </div>
+    </div> -->
   </section>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
         currentTab: 0,
-        tab: [{ name: "tab1" }, { name: "tab2" }, { name: "tab3" }],
+        tab: [],
     };
   },
   methods: {},

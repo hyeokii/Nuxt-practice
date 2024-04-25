@@ -1,20 +1,17 @@
 <template>
   <div class="pg-main">
-    <component v-for="(corner, index) in cornerList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/>
+    <component v-for="(corner, index) in list" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/>
+    <!-- <component v-for="(corner, index) in cornerList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/>
     <component v-for="(corner, index) in goodsList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/>
-    <!-- <Keyvisual :kvData="kvData" /> -->    
-    <section>
-      <SectionTitle secTitle="주목해야 할 브랜드" />    
-    </section>
-    <section>
+    <component v-for="(corner, index) in bannerList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/>
+    <component v-for="(corner, index) in brandList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/> -->
+    <!-- <component v-for="(corner, index) in recommendList" :is="toCamelCase(corner.vueCmptId)" :key="index" :cornerData="corner"/> -->
+    <!-- <section>
       <Tab :tab="tab" :currentTab="currentTab" @tabClicked="changeTab" />
       <div class="tab-content" v-for="(setItem,index) in recommendGoods.setList" :key="index" :cornerData="corner">
         {{ contentInfoList[0].textList[0].contTitleNm }}
-      </div>
-      <!-- <div class="tab-content" v-if="currentTab === 0">탭1</div>
-      <div class="tab-content" v-if="currentTab === 1">탭2</div>
-      <div class="tab-content" v-if="currentTab === 2">탭3</div> -->
-    </section>
+      </div>      
+    </section> -->
   </div>
 </template>
 <script>
@@ -25,25 +22,29 @@ export default {
     const mainData = await $axios.get(
       "https://gw.x2bee.com/api/display/v1/shop/1"
     );
+
     console.log(mainData);
-    const mainSwiper = mainData.data.conrList[0]
-    const goodsSwiper = mainData.data.conrList[1]
-    const recommendTab = mainData.data.conrList[4]
+    console.log('11111');
+    // const mainSwiper = mainData.data.conrList[0]
+    // const goodsSwiper = mainData.data.conrList[1]
+    // const bannerSwiper = mainData.data.conrList[2]
+    // const brandSwiper = mainData.data.conrList[3]
+    // const recommendList = mainData.data.conrList[4]
 
-    let tabData = [];
-
-    recommendTab.setList.forEach(tabData => {
-      const tabName = tabData.contentInfoList[0].textList[0].contTitleNm
-      console.log(tabName)
-      // tabData.push({'name' : tabName});
-    })
-    console.log('111')
+    // let tabData = [];
+    // recommendList.setList.forEach(tabItem => {
+    //   const tabName = tabItem.contentInfoList[0].textList[0].contTitleNm
+    //   tabData.push({'name' : tabName});
+    // })
   
     return {
-      cornerList: [mainSwiper], 
-      goodsList:[goodsSwiper],
-      recommendTab : [recommendTab],
-      tab : [tabData]
+      list: mainData?.data?.conrList ?? [],
+      // cornerList: [mainSwiper], 
+      // goodsList:[goodsSwiper],
+      // bannerList:[bannerSwiper],
+      // brandList:[brandSwiper],
+      // recommendTab : [recommendList],
+      // tab : [tabData]
     };
   },
   created() {
@@ -57,9 +58,11 @@ export default {
     return {
       title: null,
       kvData: null,
-      cornerList: [],
-      goodsList: [],
-      recommendGoods: [],
+      // cornerList: [],
+      // goodsList: [],
+      // brandList: [],
+      // bannerList: [],
+      // recommenList: [],
       currentTab: 0,
       tab: [],
     };
@@ -75,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tab-content {
-  padding-top: 40px;
+.pg-main {
+  padding-bottom:120px;
 }
 </style>

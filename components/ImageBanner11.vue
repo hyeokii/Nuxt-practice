@@ -2,26 +2,23 @@
   <section v-if="isView">
     <SectionTitle :secTitle="`${cornerData.mappTtl}`" />
     <div class="box-slide type-card">
-      <swiper class="swiper" :options="cardSwiperOptions">
+      <swiper class="swiper" :options="brandSwiperOptions">
         <swiper-slide
-        v-for="(data, index) in cornerData.setList[0].contentInfoList[0].planShopList"
+        v-for="(data, index) in cornerData.setList[0].contentInfoList[0].imageList"
           v-bind:key="`${index}_${data.id}`"
         >
           <a :href="`javascript:void(0)`">
             <img
               :src="
-                `https://img-stg.x2bee.com/${data.imageList[0].bnrImgPathNm}`
+                `https://img-stg.x2bee.com/${data.contPathNm}`
               "
               alt="img"
             />
-            <div class="text-box">
-              <p class="text">{{ data.mkdpNm }}</p>
-            </div>
           </a>
         </swiper-slide>
       </swiper>
-      <div class="swiper-button-prev type02 md" slot="button-prev02"></div>
-      <div class="swiper-button-next type02 md" slot="button-next02"></div>
+      <div class="swiper-button-prev brand type02" slot="button-prev02"></div>
+      <div class="swiper-button-next brand type02" slot="button-next02"></div>
     </div>
   </section>
 </template>
@@ -29,7 +26,7 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
-  name: "goodsSwiper",
+  name: "brandSwiper",
   components: {
     Swiper,
     SwiperSlide,
@@ -42,13 +39,13 @@ export default {
   },
   data() {
     return {
-      cardSwiperOptions: {
+      brandSwiperOptions: {
         slidesPerView: 3,
         spaceBetween: 24,
         loop: true,
         navigation: {
-          prevEl: ".swiper-button-prev.md",
-          nextEl: ".swiper-button-next.md",
+          prevEl: ".swiper-button-prev.brand",
+          nextEl: ".swiper-button-next.brand",
         },
       },
     };

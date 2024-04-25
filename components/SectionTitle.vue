@@ -16,5 +16,8 @@ export default {
 .section-title {
   font-size: 30px;
   font-weight: 700;
+  .box-slide.type-card & {
+    margin:0 -30px;
+  }
 }
 </style>

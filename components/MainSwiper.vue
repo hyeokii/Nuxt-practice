@@ -1,25 +1,27 @@
 <template>
-  <section class="box-slide full" v-if="isView">
-    <swiper class="swiper" :options="kvSwiperOptions">
-      <swiper-slide
-        v-for="(data, index) in cornerData.setList"
-        v-bind:key="`${index}_${data.id}`"
-      >
-        <a :href="`https://img-stg.x2bee.com/${data.contentInfoList[0].imageList[0].linkUrlAddr}`">
-          <img
-            :src="`https://img-stg.x2bee.com/${data.contentInfoList[0].imageList[0].pcContPathNm}`"
-            alt="img"
-          />
-          <div class="text-box">
-            <p class="title">{{ data.contentInfoList[1].textList.at(0)?.contTitleNm }}</p>
-            <p class="desc">{{ data.contentInfoList[1].textList.at(1)?.contTitleNm }}</p>
-          </div>
-        </a>
-      </swiper-slide>
-    </swiper>
-    <div class="swiper-pagination" slot="pagination"></div>
-    <div class="swiper-button-prev type01" slot="button-prev"></div>
-    <div class="swiper-button-next type01" slot="button-next"></div>
+  <section class="full" v-if="isView">
+    <div class="box-slide">
+      <swiper class="swiper" :options="kvSwiperOptions">
+        <swiper-slide
+          v-for="(data, index) in cornerData.setList"
+          v-bind:key="`${index}_${data.id}`"
+        >
+          <a :href="`javascript:void(0)`">
+            <img
+              :src="`https://img-stg.x2bee.com/${data.contentInfoList[0].imageList[0].pcContPathNm}`"
+              alt="img"
+            />
+            <div class="text-box">
+              <p class="title">{{ data.contentInfoList[1].textList.at(0)?.contTitleNm }}</p>
+              <p class="desc">{{ data.contentInfoList[1].textList.at(1)?.contTitleNm }}</p>
+            </div>
+          </a>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-button-prev main type01" slot="button-prev"></div>
+      <div class="swiper-button-next main type01" slot="button-next"></div>
+    </div>
   </section>
 </template>
 <script>
@@ -47,8 +49,8 @@ export default {
         spaceBetween: 0,
         loop: true,
         navigation: {
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev.main",
+          nextEl: ".swiper-button-next.main",
         },
         pagination: {
           el: ".swiper-pagination",
@@ -89,10 +91,10 @@ export default {
     font-size: 12px;
     color: white;
   }
-  .swiper-button-prev {
+  .swiper-btn-prev {
     left:40px;
   }
-  .swiper-button-next {
+  .swiper-btn-next {
     right:40px;
   }
   .text-box {
