@@ -21,6 +21,7 @@
 
 <script>
 import MyTodoBtn from "../../components/MyTodoBtn.vue";
+import dayjs from "dayjs";
 
 export default {
   name: "todoDetail",
@@ -36,16 +37,20 @@ export default {
   },
   computed: {
     formattedDate() {
-      const date = new Date(this.todoData.updatedDtm);
-      return `${date.getFullYear()}-${(date.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")} ${date
-        .getHours()
-        .toString()
-        .padStart(2, "0")}:${date
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
+      const date = dayjs(this.todoData.updatedDtm).format(
+        "YYYY-MM-DD HH:mm:ss"
+      );
+      return date;
+      // const date = new Date(this.todoData.updatedDtm);
+      // return `${date.getFullYear()}-${(date.getMonth() + 1)
+      //   .toString()
+      //   .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")} ${date
+      //   .getHours()
+      //   .toString()
+      //   .padStart(2, "0")}:${date
+      //   .getMinutes()
+      //   .toString()
+      //   .padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
     },
   },
   async asyncData({ $axios, params }) {
