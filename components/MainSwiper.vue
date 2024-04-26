@@ -47,7 +47,7 @@ export default {
       kvSwiperOptions: {
         slidesPerView: 1,
         spaceBetween: 0,
-        loop: true,
+        loop: false,
         navigation: {
           prevEl: ".swiper-button-prev.main",
           nextEl: ".swiper-button-next.main",

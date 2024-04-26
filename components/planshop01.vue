@@ -45,7 +45,7 @@ export default {
       cardSwiperOptions: {
         slidesPerView: 3,
         spaceBetween: 24,
-        loop: true,
+        loop: false,
         navigation: {
           prevEl: ".swiper-button-prev.md",
           nextEl: ".swiper-button-next.md",
@@ -56,7 +56,7 @@ export default {
   methods: {},
   computed: {
     isView() {
-      return (this.cornerData?.setList ?? []).length > 0 
+      return (this.cornerData?.setList[0]?.contentInfoList[0]?.planShopList ?? []).length > 0 
     }
   }
 };

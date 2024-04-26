@@ -1,23 +1,20 @@
 <template>
   <div class="product-list">
-	<div class="product" v-for="(data,item) in productList.contentInfoList[1].productList">
-        <a href="">
-            <div class="img-box">
-                <img :src="
-                `https://img-stg.x2bee.com/${data.goodsRepImgPathNm}`
-            "
-            alt="img"/>
-            </div>
-            <div class="text-box">
-                <p class="name">{{ data.goodsNm }}</p>
-                <p class="sale">{{ data.rcntSalePrc }}</p>
-                <div class="discount">
-                    <span class="percent"><em>{{ data.dcRate }}</em>%</span>
-                    <span class="price"><em>{{ data.salePrc }}</em>원</span>
-                </div>
-            </div>
-        </a>
-    </div>
+		<div class="product" v-for="(data,index) in productList.contentInfoList[1].productList" v-bind:key="index">
+			<a href="">
+				<div class="img-box">
+					<img :src="`https://img-stg.x2bee.com/${data.goodsRepImgPathNm}`" alt="img"/>
+				</div>
+				<div class="text-box">
+					<p class="name">{{ data.goodsNm }}</p>
+					<p class="sale">{{ data.rcntSalePrc }}</p>
+					<div class="discount">
+						<span class="percent"><em>{{ data.dcRate }}</em>%</span>
+						<span class="price"><em>{{ data.salePrc }}</em>원</span>
+					</div>
+				</div>
+			</a>
+		</div>
   </div>
 </template>
 <script>
@@ -25,12 +22,11 @@ export default {
   name: "ProductList",
   props: {
 	productList: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
   data() {
-	console.log(222222222)
 	return {};
   },
   created() {},
@@ -50,11 +46,20 @@ export default {
 		display: block;
 	}
 	.img-box {
+		position:relative;
 		width:282px;
 		height:282px;
+		&::after {
+			content: '';
+			display: block;
+			padding-bottom:100%;
+		}
 		img {
+			position:absolute;
+			top:0; left:0;
 			display: block;
 			width:100%;
+			height:100%;
 			object-fit: cover;
 		}
 	}

@@ -1,20 +1,20 @@
 <template>
   <section class="box-slide" v-if="isView">
     <SectionTitle :secTitle="`${cornerData.mappTtl}`" />
-    <Tab :tab="cornerData.setList" :currentTab="currentTab" @tabClicked="changeTab" />
-    <TabCont v-for="(item,index) in cornerData.setList" :tabNumber="index" :currentTab="currentTab">
+    <div class="tabs">
+      <Tab v-for="(item, index) in cornerData.setList" :currentTab="currentTab" @tabClicked="changeTab" v-bind:key="index" :index="index">
+        {{ item.contentInfoList[0].textList[0].contTitleNm }}
+      </Tab>
+    </div>
+    <TabCont v-for="(item,index) in cornerData.setList" :tabNumber="index" :currentTab="currentTab" v-bind:key="index">
       <ProductList :productList="item"/>
     </TabCont>
-    <!-- <div class="tab-content" v-for="(corner,index) in recommendGoods.setList" :key="index" :cornerData="corner">
-
-    </div> -->
   </section>
 </template>
 <script>
-import TabCont from './TabCont.vue';
 
 export default {
-  name: "goodsList",
+  name: "goodsList02",
 
   props: {
     cornerData: {
@@ -32,12 +32,12 @@ export default {
   computed: {
     isView() {
       return (this.cornerData?.setList ?? []).length > 0 
-    }
+    },    
   },
   methods: {
-    changeTab(key) {
-      console.log(key)
-      this.currentTab = key;
+    changeTab(index) {
+      this.currentTab = index;
+      console.log(index)
     },
   }
 };

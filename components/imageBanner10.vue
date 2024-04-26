@@ -41,7 +41,7 @@ export default {
       bannerSwiperOptions: {
         slidesPerView: 2,
         spaceBetween: 24,
-        loop: true,
+        loop: false,
         navigation: {
           prevEl: ".swiper-button-prev.banner",
           nextEl: ".swiper-button-next.banner",
@@ -52,7 +52,7 @@ export default {
   methods: {},
   computed: {
     isView() {
-      return (this.cornerData?.setList ?? []).length > 0 
+      return (this.cornerData?.setList[0]?.contentInfoList[0]?.imageList ?? []).length > 0 
     }
   }
 };

@@ -5,7 +5,7 @@
 section {
   margin: 0 auto;
   width: 1280px;
-  & + section {
+  &:not(:first-of-type) {
     margin-top: 80px;
   }
   &.full {
@@ -50,5 +50,35 @@ h2 {
   color: black;
   &::placeholder {
     color: black;
+  }
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  button {
+    flex: 1;
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    &.on {
+      font-weight: bold;
+      &::after {
+        content: '';
+        width: 100%;
+        height:100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 1px solid black;
+      }
+    }
+  }
+  .section-title + & {
+    margin-top: 40px;
   }
 }

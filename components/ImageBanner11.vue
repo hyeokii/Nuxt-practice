@@ -42,7 +42,7 @@ export default {
       brandSwiperOptions: {
         slidesPerView: 3,
         spaceBetween: 24,
-        loop: true,
+        loop: false,
         navigation: {
           prevEl: ".swiper-button-prev.brand",
           nextEl: ".swiper-button-next.brand",
@@ -53,7 +53,7 @@ export default {
   methods: {},
   computed: {
     isView() {
-      return (this.cornerData?.setList ?? []).length > 0 
+      return (this.cornerData?.setList[0]?.contentInfoList[0]?.imageList ?? []).length > 0 
     }
   }
 };
