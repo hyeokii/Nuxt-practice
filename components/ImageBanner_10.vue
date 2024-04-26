@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div v-if="data[0].contentInfoList[0].imageList">
     <Swiper
       :pagination="{}"
       type="event"
       perView="2"
-      :slideItem="data[0]?.contentInfoList[0]?.imageList"
+      :slideItem="data[0].contentInfoList[0].imageList"
       :loop="false"
     />
   </div>

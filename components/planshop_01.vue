@@ -1,11 +1,11 @@
 <template>
-  <div v-if="data.length" class="mdPickContainer">
+  <div v-if="data[0].contentInfoList.planShopList" class="mdPickContainer">
     <Title :title="`MD's PICK`" />
     <Swiper
       :pagination="{}"
       type="mdPick"
       perView="3"
-      :slideItem="data[0]?.contentInfoList[0]?.planShopList"
+      :slideItem="data[0].contentInfoList.planShopList"
       :loop="false"
     />
   </div>

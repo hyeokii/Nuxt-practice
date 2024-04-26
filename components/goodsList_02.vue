@@ -1,55 +1,33 @@
 <template>
-  <div class="mdPickContainer">
+  <div class="mdPickContainer" v-if="data">
     <Title :title="'추천 상품 리스트'" />
     <div class="tabButtons">
       <button
         v-for="(goods, idx) in data"
         :key="idx"
-        @click="currentTab = `Tab${idx + 1}`"
-        :class="{ 'active-tab': currentTab === `Tab${idx + 1}` }"
+        @click="currentTab = `${idx}`"
+        :class="{ 'active-tab': currentTab === `${idx}` }"
       >
         {{ goods.contentInfoList[0].textList[0].contTitleNm }}
       </button>
       <div class="tabContent">
-        <component
-          :is="currentTab"
-          :data="data.filter((tab) => tab.setNm === curTabNm)"
-        ></component>
+        <Tab :key="idx" :data="data[currentTab]" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Tab1 from "./Tab1.vue";
-import Tab2 from "./Tab2.vue";
-import Tab3 from "./Tab3.vue";
-
 export default {
-  components: {
-    Tab1,
-    Tab2,
-    Tab3,
-  },
   props: {
     data: Array,
   },
   data() {
     return {
-      currentTab: "Tab1",
+      currentTab: "0",
     };
   },
-  computed: {
-    curTabNm() {
-      if (this.currentTab === "Tab1") {
-        return "탭1";
-      } else if (this.currentTab === "Tab2") {
-        return "탭2";
-      } else if (this.currentTab === "Tab3") {
-        return "탭3";
-      }
-    },
-  },
+  computed: {},
   methods: {},
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="mainContainer flex">
       <component
-        v-for="(shop, index) in shopData.conrList"
+        v-for="(shop, index) in totalData.conrList"
         :is="toCamel(shop.vueCmptId)"
         :key="`${shop.conrNo}_${index}`"
         :data="shop.setList"
@@ -18,13 +18,21 @@ import upperFirst from "lodash/upperFirst";
 export default {
   data() {
     return {
-      shopData: [],
+      totalData: [],
     };
+  },
+  computed: {
+    shopData() {
+      if (this.totalData.length) {
+        return this.totalData.cornList;
+      }
+      return []; // 데이터가 없을 경우 빈 배열 반환
+    },
   },
   async asyncData() {
     const res = await apiData.fetchData();
     return {
-      shopData: res.data,
+      totalData: res.data,
     };
   },
   methods: {

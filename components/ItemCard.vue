@@ -1,20 +1,20 @@
 <template>
-  <div class="itemCardContainer" @click="routeToUrl(product?.goodsNo)">
+  <div class="itemCardContainer" @click="routeToUrl(product.goodsNo)">
     <img
-      :src="`https://img-stg.x2bee.com/${product?.goodsRepImgPathNm}`"
+      :src="`https://img-stg.x2bee.com/${product.goodsRepImgPathNm}`"
       alt="productImg"
       class="productImg"
     />
-    <p class="productTitle">{{ product?.goodsNm }}</p>
-    <span v-if="product?.dcRate !== 0" class="originPrice">{{
-      product?.rcntSalePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
+    <p class="productTitle">{{ product.goodsNm }}</p>
+    <span v-if="product.dcRate !== 0" class="originPrice">{{
+      product.rcntSalePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
     }}</span>
     <div>
-      <span v-if="product?.dcRate !== 0" class="salePer"
-        >{{ product?.dcRate }}%</span
+      <span v-if="product.dcRate !== 0" class="salePer"
+        >{{ product.dcRate }}%</span
       >
       <span class="salePrice">{{
-        product?.salePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
+        product.salePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
       }}</span
       ><span class="priceUnit">원</span>
     </div>

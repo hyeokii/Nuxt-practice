@@ -1,5 +1,5 @@
 <template>
-  <div v-if="menuData.length" class="menuContainer">
+  <div v-if="data.contentInfoList" class="menuContainer">
     <ul class="menuList">
       <li
         class="menuItem"

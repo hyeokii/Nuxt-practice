@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.length">
+  <div v-if="data">
     <Swiper
       :pagination="{
         el: '.swiper-pagination',
