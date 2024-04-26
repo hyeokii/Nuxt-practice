@@ -74,7 +74,7 @@ export default {
               ...todo,
               contents: this.editContents,
               title: this.editTitle,
-              updatedDtm: new Date().toLocaleString("ko-KR"),
+              updatedDtm: new Date(),
             })
             .then(() => {
               this.$router.push("/todo");

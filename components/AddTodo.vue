@@ -22,6 +22,7 @@
 
 <script>
 import apiData from "@/api/apiData.js";
+import dayjs from "dayjs";
 export default {
   props: {
     dataList: Array,
@@ -41,8 +42,8 @@ export default {
         title: this.titleValue,
         contents: this.inputValue,
         status: "1",
-        createdDtm: new Date().toLocaleString("ko-KR"),
-        updatedDtm: new Date().toLocaleString("ko-KR"),
+        createdDtm: dayjs().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        updatedDtm: dayjs().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
       };
       try {
         if (this.inputValue.length !== 0 && this.titleValue.length !== 0) {
