@@ -11,7 +11,7 @@
         {{ goods.contentInfoList[0].textList[0].contTitleNm }}
       </button>
       <div class="tabContent">
-        <Tab :key="idx" :data="data[currentTab]" />
+        <TabMenu :key="idx" :data="data[currentTab]" />
       </div>
     </div>
   </div>
