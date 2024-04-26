@@ -4,7 +4,6 @@
     <AddModal
       v-if="isAddModal"
       :dataList="dataList"
-      @add-todo="addTodoList"
       @handle-modal="handleAddModal"
     ></AddModal>
   </div>
@@ -27,9 +26,6 @@ export default {
     return { isAddModal: false };
   },
   methods: {
-    addTodoList(data) {
-      this.dataList.push(data);
-    },
     handleAddModal() {
       this.isAddModal = !this.isAddModal;
     },

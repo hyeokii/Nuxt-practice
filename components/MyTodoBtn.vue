@@ -10,12 +10,12 @@
       v-if="isEdit"
       :todo="todoData"
       @handle-modal="handleEditModal"
-      @edit-todo="editTodoList"
     ></EditModal>
   </div>
 </template>
 
 <script>
+import { deleteTodoList } from "../api";
 import EditModal from "./EditModal.vue";
 
 export default {
@@ -40,16 +40,13 @@ export default {
     async deleteTodo(id) {
       try {
         if (confirm("삭제하시겠습니까?")) {
-          await this.$axios.delete(`http://localhost:3001/todoList/${id}`);
+          await deleteTodoList(id);
           alert("삭제 완료하였습니다.");
           this.$router.push("/todo");
         }
       } catch (error) {
         alert("삭제 중 오류가 발생했습니다.");
       }
-    },
-    editTodoList(data) {
-      this.$emit("mytodo-btn", data);
     },
   },
 };

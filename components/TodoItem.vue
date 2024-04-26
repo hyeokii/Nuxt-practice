@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper" @click="moveTodo(Todo.id)">
+  <div class="list-wrapper" @click="Todo.status ? moveTodo(Todo.id) : ''">
     <input
       class="list-check"
       type="checkbox"
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { putTodoList } from "../api";
 export default {
   props: {
     Todo: {
@@ -23,16 +24,6 @@ export default {
     },
   },
   methods: {
-    // handleItemClick(event) {
-    //   if (
-    //     event.target.tagName.toLowerCase() === "input" ||
-    //     this.Todo.status === 0
-    //   ) {
-    //     event.stopPropagation();
-    //   } else {
-    //     this.moveTodo(this.Todo.id);
-    //   }
-    // },
     moveTodo(id) {
       try {
         this.$router.push(`todo/${id}`);
@@ -42,10 +33,11 @@ export default {
     },
     async handleChecked() {
       this.Todo.status ^= 1;
-      await this.$axios.put(`http://localhost:3001/todoList/${this.Todo.id}`, {
+      const newTodo = {
         ...this.Todo,
         status: this.Todo.status,
-      });
+      };
+      await putTodoList(this.Todo.id, newTodo);
     },
   },
 };

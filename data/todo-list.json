@@ -6,7 +6,7 @@
       "id": "1",
       "loginId": "yj.shin",
       "userNm": "신예진",
-      "status": 1,
+      "status": 0,
       "createdDtm": "2024-04-10T23:51:05.763Z",
       "updatedDtm": "2024-04-12T00:18:21.886Z"
     },
@@ -46,7 +46,7 @@
       "id": "8",
       "loginId": 4,
       "userNm": "김재혁",
-      "status": 1,
+      "status": 0,
       "createdDtm": "2024-04-17T06:45:12.756Z",
       "updatedDtm": "2024-04-19T00:56:37.340Z"
     },
@@ -56,7 +56,7 @@
       "contents": "ㅁㄴㅇㄻㄴㅇㄹ",
       "loginId": 4,
       "userNm": "김재혁",
-      "status": 1,
+      "status": 0,
       "createdDtm": "2024-04-17T23:59:59.266Z",
       "updatedDtm": "2024-04-17T23:59:59.266Z"
     },
@@ -71,24 +71,64 @@
       "updatedDtm": "2024-04-18T00:17:59.710Z"
     },
     {
+      "title": "불금fasdfasdf",
+      "contents": "집가기asdfasd",
       "id": "11",
-      "title": "불금",
-      "contents": "집가기",
       "loginId": 4,
       "userNm": "김재혁",
       "status": 1,
       "createdDtm": "2024-04-18T23:34:27.851Z",
-      "updatedDtm": "2024-04-18T23:34:27.851Z"
+      "updatedDtm": "2024-04-26T02:09:58.651Z"
     },
     {
-      "id": "12",
-      "title": "ㄴㅇㄻㅇㄴㄹㅇㄴㅁ",
-      "contents": "ㄹㅇㄴㅁㄹㄴㅁㅇㄻㄴㅇㄹㅇㄴㅁㄹ",
-      "loginId": 4,
+      "title": "zz",
+      "contents": "zz",
+      "id": "13",
+      "loginId": "re2volution",
       "userNm": "김재혁",
       "status": 1,
-      "createdDtm": "2024-04-19T00:56:49.450Z",
-      "updatedDtm": "2024-04-19T00:56:49.450Z"
+      "createdDtm": "2024-04-26T02:06:20.231Z",
+      "updatedDtm": "2024-04-26T02:06:20.231Z"
+    },
+    {
+      "title": "asdfㅁㄴㅇㄻㄴㅇㄹ",
+      "contents": "asdfㅁㄴㅇㄻㄴㅇㄹ",
+      "id": "14",
+      "loginId": "re2volution",
+      "userNm": "김재혁",
+      "status": 1,
+      "createdDtm": "2024-04-26T02:06:34.748Z",
+      "updatedDtm": "2024-04-26T02:16:42.523Z"
+    },
+    {
+      "title": "ㄻㄴㅇㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ",
+      "contents": "ㅁㄴㅇㄻㄴㅇㅁㄴㅇㄻㄴㅇㄹ",
+      "id": "15",
+      "loginId": "re2volution",
+      "userNm": "김재혁",
+      "status": 1,
+      "createdDtm": "2024-04-26T02:14:21.114Z",
+      "updatedDtm": "2024-04-26T02:14:39.770Z"
+    },
+    {
+      "id": "16",
+      "title": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "contents": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "loginId": "re2volution",
+      "userNm": "김재혁",
+      "status": 1,
+      "createdDtm": "2024-04-26T02:15:46.912Z",
+      "updatedDtm": "2024-04-26T02:15:46.912Z"
+    },
+    {
+      "id": "17",
+      "title": "adfgs",
+      "contents": "dfgsdfgsdf",
+      "loginId": "re2volution",
+      "userNm": "김재혁",
+      "status": 0,
+      "createdDtm": "2024-04-26T02:22:44.503Z",
+      "updatedDtm": "2024-04-26T02:22:44.503Z"
     }
   ],
   "currentUser": {

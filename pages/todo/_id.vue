@@ -7,11 +7,7 @@
       <div><strong>수정날짜:</strong> {{ formattedDate }}</div>
     </div>
     <div class="btn-wrapper">
-      <MyTodoBtn
-        v-if="isMyTodo"
-        :todoData="todoData"
-        @mytodo-btn="updateTodoData"
-      ></MyTodoBtn>
+      <MyTodoBtn v-if="isMyTodo" :todoData="todoData"></MyTodoBtn>
       <button class="back-button" @click="$router.push('/todo')">
         뒤로가기
       </button>
@@ -20,6 +16,7 @@
 </template>
 
 <script>
+import { fetchCurrentId, fetchUserName, getTodoItem } from "../../api";
 import MyTodoBtn from "../../components/MyTodoBtn.vue";
 import dayjs from "dayjs";
 
@@ -41,23 +38,14 @@ export default {
         "YYYY-MM-DD HH:mm:ss"
       );
       return date;
-      // const date = new Date(this.todoData.updatedDtm);
-      // return `${date.getFullYear()}-${(date.getMonth() + 1)
-      //   .toString()
-      //   .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")} ${date
-      //   .getHours()
-      //   .toString()
-      //   .padStart(2, "0")}:${date
-      //   .getMinutes()
-      //   .toString()
-      //   .padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
     },
   },
-  async asyncData({ $axios, params }) {
+  async asyncData({ params }) {
     try {
       const id = params.id;
-      const res = await $axios.get(`http://localhost:3001/todoList?id=${id}`);
-      return { todoData: res.data[0] };
+      const res = await getTodoItem(id);
+      console.log(res.data);
+      return { todoData: res.data };
     } catch (error) {
       console.error("데이터 불러오기 실패", error);
     }
@@ -65,12 +53,11 @@ export default {
   methods: {
     async handleMy() {
       try {
-        const res = await this.$axios.get(`http://localhost:3001/currentUser`);
+        const res = await fetchCurrentId();
         const currentId = res.data.id;
-        const user = await this.$axios.get(
-          `http://localhost:3001/users?id=${currentId}`
-        );
-        const userName = user.data[0].userNm;
+        const user = await fetchUserName(currentId);
+        console.log(user);
+        const userName = user.data.userNm;
         this.isMyTodo = userName === this.todoData.userNm ? true : false;
       } catch (error) {
         console.error("정보 불러오기 실패", error);
@@ -83,7 +70,6 @@ export default {
   created() {
     this.handleMy();
   },
-  mounted() {},
 };
 </script>
 

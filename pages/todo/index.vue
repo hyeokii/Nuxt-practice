@@ -11,6 +11,7 @@
 <script>
 import AddBtn from "../../components/AddBtn.vue";
 import TodoList from "../../components/TodoList.vue";
+import { fetchTodoList } from "../../api";
 
 export default {
   name: "MainPage",
@@ -25,9 +26,9 @@ export default {
     };
   },
 
-  async asyncData({ $axios }) {
+  async asyncData() {
     try {
-      const res = await $axios.get("http://localhost:3001/todoList");
+      const res = await fetchTodoList();
       return { dataList: res.data };
     } catch (error) {
       return { errorMessage: "데이터를 불러오는 도중 오류가 발생했습니다." };

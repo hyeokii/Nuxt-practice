@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { putTodoList } from "../api";
+
 export default {
   props: {
     todo: {
@@ -36,13 +38,10 @@ export default {
       try {
         const currentTime = new Date();
         this.newData.updatedDtm = currentTime.toISOString();
-        await this.$axios.put(
-          `http://localhost:3001/todoList/${this.todo.id}`,
-          this.newData
-        );
+        await putTodoList(this.todo.id, this.newData);
         alert("수정완료하였습니다.");
-        this.$emit("edit-todo", this.newData);
         this.$emit("handle-modal");
+        this.$router.go(this.$router.currentRout);
       } catch (error) {
         alert("수정 중 오류가 발생했습니다.");
       }

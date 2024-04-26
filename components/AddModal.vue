@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { addTodoList, fetchCurrentId, fetchUserName } from "../api";
+
 export default {
   props: {
     dataList: {
@@ -39,40 +41,38 @@ export default {
   },
   methods: {
     async addTodo() {
-      const { newTitle, newContents, dataList, $axios } = this;
       try {
-        if (!newTitle || !newContents) {
+        if (!this.newTitle || !this.newContents) {
           throw new Error("제목과 내용을 입력해주세요.");
         }
         const currentTime = new Date();
-        const nextId = dataList.length
-          ? Math.max(...dataList.map((todo) => parseInt(todo.id))) + 1
+        const nextId = this.dataList.length
+          ? Math.max(...this.dataList.map((todo) => parseInt(todo.id))) + 1
           : 1;
 
         const {
           data: { id: currentId },
-        } = await $axios.get("http://localhost:3001/currentUser");
+        } = await fetchCurrentId();
         const {
-          data: [{ userNm }],
-        } = await $axios.get(`http://localhost:3001/users?id=${currentId}`);
+          data: { userNm, loginId },
+        } = await fetchUserName(currentId);
 
         const newData = {
-          title: newTitle,
-          contents: newContents,
+          title: this.newTitle,
+          contents: this.newContents,
           id: nextId.toString(),
-          loginId: currentId,
+          loginId,
           userNm,
           status: 1,
           createdDtm: currentTime.toISOString(),
           updatedDtm: currentTime.toISOString(),
         };
 
-        await $axios.post("http://localhost:3001/todoList", newData);
-        this.$emit("add-todo", newData);
-        this.$emit("handle-modal");
+        await addTodoList(newData);
         this.newTitle = "";
         this.newContents = "";
         alert("추가 완료하였습니다.");
+        this.$router.go(this.$router.currentRout);
       } catch (error) {
         alert(error.message);
       }
