@@ -13,7 +13,6 @@
 <script>
 import apiData from "@/api/apiData.js";
 import camelCase from "lodash/camelCase";
-import upperFirst from "lodash/upperFirst";
 
 export default {
   data() {
@@ -26,7 +25,7 @@ export default {
       if (this.totalData.length) {
         return this.totalData.cornList;
       }
-      return []; // 데이터가 없을 경우 빈 배열 반환
+      return [];
     },
   },
   async asyncData() {
@@ -37,7 +36,7 @@ export default {
   },
   methods: {
     toCamel(fileNm) {
-      return upperFirst(camelCase(fileNm));
+      return camelCase(fileNm);
     },
   },
 };

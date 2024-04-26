@@ -11,7 +11,7 @@
         {{ goods.contentInfoList[0].textList[0].contTitleNm }}
       </button>
       <div class="tabContent">
-        <TabMenu :key="idx" :data="data[currentTab]" />
+        <TabMenu :data="data[currentTab]" />
       </div>
     </div>
   </div>
@@ -27,14 +27,13 @@ export default {
       currentTab: "0",
     };
   },
-  computed: {},
-  methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
 .mdPickContainer {
   width: 1240px;
+  margin-bottom: 3rem;
 }
 
 .tabButtons {
