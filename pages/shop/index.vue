@@ -20,14 +20,6 @@ export default {
       totalData: [],
     };
   },
-  computed: {
-    shopData() {
-      if (this.totalData.length) {
-        return this.totalData.cornList;
-      }
-      return [];
-    },
-  },
   async asyncData() {
     const res = await apiData.fetchData();
     return {
