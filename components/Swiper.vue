@@ -75,6 +75,15 @@ export default {
     slideItem: Array,
     loop: Boolean,
   },
+  computed: {
+    autoplay() {
+      if (this.type === "main") {
+        if (this.isPlaying) {
+          return { delay: 2000, disableOnInteraction: false };
+        }
+      }
+    },
+  },
   data() {
     return {
       swiperOption: {
