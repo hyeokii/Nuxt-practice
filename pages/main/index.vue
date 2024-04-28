@@ -10,7 +10,8 @@ export default {
 
   async asyncData({ $axios }) {
     const mainData = await $axios.get(
-      "http://192.168.0.156:8094/api/display/v1/shop/1"
+      // "http://192.168.0.156:8094/api/display/v1/shop/1"
+      "https://gw.x2bee.com/api/display/v1/shop/1"
     );
 
     console.log(mainData);

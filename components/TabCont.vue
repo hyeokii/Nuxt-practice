@@ -1,8 +1,6 @@
 <template>
-  <div>
   <div class="tab-cont" v-if="tabNumber===currentTab">
     <slot ></slot>
-  </div>
   </div>
 </template>
 <script>
@@ -28,7 +26,8 @@ export default {
   created() {},
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {    
+  }
 };
 </script>
 <style scoped lang="scss">

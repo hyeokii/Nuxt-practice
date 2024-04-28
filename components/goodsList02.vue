@@ -37,7 +37,7 @@ export default {
   methods: {
     changeTab(index) {
       this.currentTab = index;
-      console.log(index)
+      // console.log(index)
     },
   }
 };
