@@ -1,7 +1,7 @@
 <template>
   <div class="product-list">
 		<div class="product" v-for="(data,index) in productList.contentInfoList[1].productList" v-bind:key="index">
-			<a href="">
+			<a :href="`javascript:void(0)`" @click="pdLink(data.goodsNm)">
 				<div class="img-box">
 					<img :src="`https://img-stg.x2bee.com/${data.goodsRepImgPathNm}`" alt="img"/>
 				</div>
@@ -31,7 +31,11 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+	pdLink(data) {
+		alert(`${data}으로 이동`)
+	},
+  },
   computed: {},
 };
 </script>

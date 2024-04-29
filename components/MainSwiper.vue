@@ -6,7 +6,7 @@
           v-for="(data, index) in cornerData.setList"
           v-bind:key="`${index}_${data.id}`"
         >
-          <a :href="`javascript:void(0)`">
+          <a :href="`javascript:void(0)`" @click="pdLink(data.contentInfoList[1].textList.at(0)?.contTitleNm + data.contentInfoList[1].textList.at(1)?.contTitleNm)">
             <img
               :src="`https://img-stg.x2bee.com/${data.contentInfoList[0].imageList[0].pcContPathNm}`"
               alt="img"
@@ -20,7 +20,7 @@
       </swiper>
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev main type01" slot="button-prev"></div>
-      <div class="swiper-button-next main type01" slot="button-next"></div>
+      <div class="swiper-button-next main type01" slot="button-next"></div> 
     </div>
   </section>
 </template>
@@ -55,9 +55,6 @@ export default {
           prevEl: ".swiper-button-prev.main",
           nextEl: ".swiper-button-next.main",
         },
-        autoplayPause: {
-          
-        },
         pagination: {
           el: ".swiper-pagination",
           type: "fraction",
@@ -65,7 +62,11 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    pdLink(data) {
+		alert(`${data}로 이동`)
+	  },
+  },
   computed: {
     isView() {
       return (this.cornerData?.setList ?? []).length > 0 && this.cornerData.setList[0].contentInfoList.at(1).textList.length >=2

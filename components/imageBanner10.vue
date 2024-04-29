@@ -6,7 +6,7 @@
 				v-for="(data, index) in cornerData.setList[0].contentInfoList[0].imageList"
 					v-bind:key="`${index}_${data.id}`"
 				>
-					<a :href="`javascript:void(0)`">
+					<a :href="`javascript:void(0)`" @click="pdLink(data.contTitleNm)">
 						<img
 							:src="
 								`https://img-stg.x2bee.com/${data.contPathNm}`
@@ -49,7 +49,11 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    pdLink(data) {
+		alert(`${data}로 이동`)
+	},
+  },
   computed: {
     isView() {
       return (this.cornerData?.setList[0]?.contentInfoList[0]?.imageList ?? []).length > 0 
