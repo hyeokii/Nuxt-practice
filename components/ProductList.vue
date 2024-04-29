@@ -47,8 +47,8 @@ export default {
 	}
 	.img-box {
 		position:relative;
-		width:282px;
-		height:282px;
+		width:302px;
+		height:302px;
 		&::after {
 			content: '';
 			display: block;

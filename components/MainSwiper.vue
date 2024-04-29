@@ -47,10 +47,16 @@ export default {
       kvSwiperOptions: {
         slidesPerView: 1,
         spaceBetween: 0,
-        loop: false,
+        loop: true,
+        autoplay: {
+          delay:5000
+        },
         navigation: {
           prevEl: ".swiper-button-prev.main",
           nextEl: ".swiper-button-next.main",
+        },
+        autoplayPause: {
+          
         },
         pagination: {
           el: ".swiper-pagination",

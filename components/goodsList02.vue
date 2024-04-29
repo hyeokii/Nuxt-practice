@@ -1,5 +1,5 @@
 <template>
-  <section class="box-slide" v-if="isView">
+  <section v-if="isView">
     <SectionTitle :secTitle="`${cornerData.mappTtl}`" />
     <div class="tabs">
       <Tab v-for="(item, index) in cornerData.setList" :currentTab="currentTab" @tabClicked="changeTab" v-bind:key="index" :index="index">
@@ -43,23 +43,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import url('~@/assets/slider.scss');
-.box-slide {
-  .swiper {
-    .swiper-slide {
-      img {
-        width: 100%;
-        height:384px;
-        object-fit: cover;
-      }
-    }
-  }
-  .text-box {
-    margin-top:20px;
-    .text {
-      font-size:16px;
-      line-height:24px;
-    }
-  }
-}
+
 </style>
