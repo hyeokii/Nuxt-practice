@@ -27,7 +27,11 @@
         </div>
 
         <!-- mdPick -->
-        <div class="mdPickContainer" v-else-if="type === 'mdPick'">
+        <div
+          class="mdPickContainer"
+          v-else-if="type === 'mdPick'"
+          @click="routeToUrl(`display/plan/${item.mkdpNo}`)"
+        >
           <img
             class="mdPickImg"
             :src="`https://img-stg.x2bee.com/${item.imageList[0].bnrImgPathNm}`"
@@ -79,7 +83,7 @@ export default {
     autoplay() {
       if (this.type === "main") {
         if (this.isPlaying) {
-          return { delay: 2000, disableOnInteraction: false };
+          return { delay: 3000, disableOnInteraction: false };
         }
       }
     },
