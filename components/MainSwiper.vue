@@ -84,9 +84,16 @@ export default {
 <style lang="scss" scoped>
 .main-swiper {
   position: relative;
-  width: 100%;
   margin: 0 auto 80px;
+  width: 100%;
+  height: 380px;
   .swiper-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     .swiper-slide {
       color: white;
       display: flex;
@@ -122,8 +129,8 @@ export default {
   .swiper-pagination {
     position: absolute;
     left: 50%;
-    bottom: 20px;
     transform: translate(-50%);
+    bottom: 10px;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0.376rem;
@@ -143,9 +150,8 @@ export default {
   .control-play {
     position: absolute;
     left: 50%;
-    bottom: 20px;
-    transform: translate(-270%);
-    z-index: 1;
+    transform: translate(-300%);
+    bottom: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     width: 1.25rem;
@@ -154,6 +160,12 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    z-index: 10;
+  }
+}
+@media ($desktop) {
+  .main-swiper {
+    width: 1900px;
   }
 }
 </style>

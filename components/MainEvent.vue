@@ -1,5 +1,5 @@
 <template>
-  <div class="event-wrapper">
+  <div v-if="res.setList" class="event-wrapper">
     <div class="event-title">이벤트</div>
     <div class="event-swiper">
       <Swiper :options="SwiperOptions">

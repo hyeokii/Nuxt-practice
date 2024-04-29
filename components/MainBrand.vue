@@ -1,5 +1,5 @@
 <template>
-  <div class="brand-wrapper">
+  <div v-if="res.setList.length" class="brand-wrapper">
     <div class="brand-title">주목해야 할 브랜드</div>
     <div class="brand-swiper">
       <Swiper :options="SwiperOptions">
@@ -20,6 +20,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
   components: {
     Swiper,
@@ -81,7 +82,8 @@ export default {
         align-items: center;
         .swiper-link {
           cursor: pointer;
-          width: 480px;
+          width: 384px;
+          height: 384px;
           .swiper-image {
             width: 100%;
             height: 100%;

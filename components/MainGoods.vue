@@ -1,36 +1,26 @@
 <template>
-  <div class="goods-wrapper">
+  <div v-if="res.setList.length" class="goods-wrapper">
     <div class="goods-title">추천 상품 리스트</div>
     <div class="goods-tabs">
       <button
-        v-for="item in res.setList"
+        v-for="(item, index) in res.setList"
         :key="item.contentInfoList[0].dispSetSeq"
-        :class="{ 'goods-tab': true, active: item.setNm === activeTab }"
-        @click="handleTabs(item.setNm)"
+        :class="{ 'goods-tab': true, active: index === activeTab }"
+        @click="handleTabs(item, index)"
       >
         {{ item.contentInfoList[0].textList[0].contTitleNm }}
       </button>
     </div>
-    <TabOne :list="list"></TabOne>
-
-    <!-- 탭으로 구현 -->
-    <!-- <div class="tab-item">
-      <keep-alive>
-        <component v-bind:is="tabs" :list="list"></component>
-      </keep-alive>
-    </div> -->
+    <GoodsList :list="list"></GoodsList>
   </div>
 </template>
 
 <script>
-import TabOne from "./TabOne.vue";
-// import TabTwo from "./TabTwo.vue";
-// import TabThree from "./TabThree.vue";
+import GoodsList from "./GoodsList.vue";
+
 export default {
   components: {
-    TabOne,
-    // TabTwo,
-    // TabThree,
+    GoodsList,
   },
   props: {
     res: {
@@ -40,36 +30,14 @@ export default {
   },
   data() {
     return {
-      // tabs: "TabOne",
-      list: {},
-      activeTab: "탭1",
+      list: this.res.setList[0],
+      activeTab: 0,
     };
   },
-  async fetch() {
-    this.list = this.res.setList.find((item) => item.setNm === "탭1") || {};
-  },
   methods: {
-    // 탭으로 구현
-    // handleTabs(TabName) {
-    //   this.list = this.res.find((item) => item.setNm === TabName);
-    //   switch (TabName) {
-    //     case "탭1":
-    //       this.tabs = "TabOne";
-    //       break;
-    //     case "탭2":
-    //       this.tabs = "TabOne";
-    //       break;
-    //     case "탭3":
-    //       this.tabs = "TabThree";
-    //       break;
-    //     default:
-    //       this.tabs = "TabOne";
-    //   }
-    // },
-
-    handleTabs(tab) {
-      this.activeTab = tab;
-      this.list = this.res.setList.find((item) => item.setNm === tab);
+    handleTabs(item, index) {
+      this.activeTab = index;
+      this.list = item;
     },
   },
 };

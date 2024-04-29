@@ -1,5 +1,5 @@
 <template>
-  <div class="shop-wrapper">
+  <div v-if="res.setList[0].contentInfoList[0]" class="shop-wrapper">
     <div class="shop-title">MD's PICK</div>
     <div class="shop-swiper">
       <Swiper :options="SwiperOptions">
