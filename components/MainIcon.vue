@@ -5,7 +5,7 @@
         <div v-for="item in res.setList" :key="item.dispSetSeq">
           <div
             @click="
-              handleAlert(item.contentInfoList[1].textList[0].linkUrlAddr)
+              handleAlert(item.contentInfoList[0].imageList[0].linkUrlAddr)
             "
             class="Icon-item"
           >

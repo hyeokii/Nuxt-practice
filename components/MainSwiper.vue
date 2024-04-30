@@ -89,7 +89,6 @@ export default {
       } else {
         this.$refs.mySwiper.$swiper.autoplay.stop();
       }
-      console.log(this.$refs.mySwiper);
     },
   },
 };
