@@ -14,8 +14,8 @@ export default {
       "https://gw.x2bee.com/api/display/v1/shop/1"
     );
 
-    console.log(mainData);
-    console.log('11111');
+    // console.log(mainData);
+    // console.log('11111');
     return {
       list: mainData?.data?.conrList ?? [],      
     };
@@ -28,14 +28,14 @@ export default {
   },
   data() {
     return {
-      title: null,
-      kvData: null,
+      // title: null,
+      // kvData: null,
     };
   },
   computed: {
-    isView() {
-      return (this.cornerData?.setList[0]?.contentInfoList[0]?.imageList ?? []).length > 0 
-    }
+    // isView() {
+    //   return (this.cornerData?.setList[0]?.contentInfoList[0]?.imageList ?? []).length > 0 
+    // }
   },
   methods: {
     toCamelCase(str) {

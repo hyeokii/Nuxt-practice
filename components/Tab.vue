@@ -29,20 +29,14 @@ export default {
   methods: {     
     changeTab(index) {
       this.currentTab = index;
-      console.log('ddd');
     },
   },
   computed: {
-    // currentTab: {
-    //   handler(newVal, oldVal) {
-    //     console.log(newVal, oldVal)
-    //   }
-    // },
   },
   watch: {
     currentTab: {
       handler(newVal, oldVal) {
-        console.log(newVal, oldVal)
+        // console.log(newVal, oldVal)
       }
     }
   }
