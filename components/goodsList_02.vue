@@ -1,13 +1,14 @@
 <template>
   <div class="mdPickContainer" v-if="data">
     <Title :title="'추천 상품 리스트'" />
-    <div class="tabButtons">
+    <div class="tabs">
       <button
         v-for="(goods, idx) in data"
         :key="idx"
         @click="currentTab = `${idx}`"
         :class="{ 'active-tab': currentTab === `${idx}` }"
       >
+        <!-- key, 변수명도 친절하게... -->
         {{ goods.contentInfoList[0].textList[0].contTitleNm }}
       </button>
       <div class="tabContent">
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      currentTab: "0",
+      currentTab: 0,
     };
   },
 };
@@ -36,7 +37,7 @@ export default {
   margin-bottom: 3rem;
 }
 
-.tabButtons {
+.tabs {
   width: 100%;
   padding: 0 25px;
 }
@@ -47,7 +48,7 @@ export default {
   margin-bottom: 3rem;
 }
 
-.tabButtons button {
+.tabs button {
   padding: 12px 20px;
   border: none;
   cursor: pointer;
@@ -59,7 +60,7 @@ export default {
   font-weight: 500;
 }
 
-.tabButtons button.active-tab {
+.tabs button.active-tab {
   border: 1px solid black;
   font-weight: 700;
 }

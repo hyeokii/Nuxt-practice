@@ -1,5 +1,6 @@
 <template>
   <div v-if="data[0].contentInfoList[0].planShopList" class="mdPickContainer">
+    <!-- data.at() -->
     <Title :title="`MD's PICK`" />
     <Swiper
       :pagination="{}"

@@ -25,7 +25,7 @@
 export default {
   props: {
     product: Object,
-  },
+  },    
   methods: {
     routeToUrl(goodsNo) {
       alert(`goods/detail/${goodsNo}로 이동`);
