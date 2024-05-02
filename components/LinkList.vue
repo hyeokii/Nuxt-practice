@@ -1,14 +1,12 @@
 <template>
-  <div class="link-list">
-    <template v-if="index === 0">
-      <button type="button" @click="addPlanData()">전체</button>
-    </template>
-		<button type="button" @click="addPlanData()">{{linkListData.dispGrpNm}}</button>
-  </div>
+  <button type="button" @click="addPlanData()">{{linkListData.dispGrpNm}}</button>
 </template>
 <script>
+
+import planMixins from "@/mixins/plan-mixins";
 export default {
   name: "LinkList",
+  mixins:[planMixins],
   props: {
     linkListData: {
       type: Object,
@@ -23,12 +21,18 @@ export default {
   methods: {
     addPlanData() {
       this.$router.push({path:"/plan",query:{pageNo:1,groupNo: this.linkListData.dispGrpNo}});
+      // this.$router.
     }
   },
   computed: {
   }
 };
 </script>
-<style scoped lang="scss">
+<style lang="scss">
+  .link-list {
+    display: flex;
+    justify-content: flex-start;
+    gap:0 40px;
+  }
 </style>
 
