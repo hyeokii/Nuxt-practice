@@ -41,9 +41,9 @@ export default {
       isOpen1: false,
       isOpen2: false,
       selected1: "선택하세요",
-      selected2: "선택하세요",
+      selected2: "최신순",
       options1: ["옵션 1", "옵션 2", "옵션 3"],
-      options2: ["옵션 A", "옵션 B", "옵션 C"],
+      options2: ["최신순", "마감순"],
     };
   },
   methods: {
@@ -59,9 +59,11 @@ export default {
     selectOption(option, selectBoxNumber) {
       if (selectBoxNumber === 1) {
         this.selected1 = option;
+        this.$store.commit("setSelectedBrandOption", this.selected1);
         this.isOpen1 = false;
       } else if (selectBoxNumber === 2) {
         this.selected2 = option;
+        this.$store.commit("setSelectedTimeOption", this.selected2);
         this.isOpen2 = false;
       }
     },
@@ -73,12 +75,13 @@ export default {
 .custom-select-wrapper {
   position: relative;
   width: 100%;
+  margin-bottom: 20px;
+  padding: 0 100px;
   .custom-select-list {
-    right: 0;
-    position: absolute;
     display: flex;
     gap: 10px;
-    padding: 0 40px;
+
+    justify-content: end;
     .custom-select {
       width: 140px;
       .select-styled {
@@ -93,7 +96,7 @@ export default {
           content: "";
           position: absolute;
           top: 50%;
-          right: 10px;
+          right: 10%;
           width: 0;
           height: 0;
           border: 6px solid transparent;
@@ -104,6 +107,7 @@ export default {
       }
 
       .select-options {
+        width: 140px;
         position: absolute;
         list-style: none;
         padding: 0;

@@ -1,8 +1,12 @@
 <template>
   <div class="category-wrapper">
     <div class="category-list">
-      <button>전체sadfasdf</button>
-      <button v-for="item in data" :key="item.dispSeq">
+      <button @click="goToCategory('')">전체</button>
+      <button
+        v-for="item in data"
+        :key="item.dispGrpNo"
+        @click="goToCategory(item.dispGrpNo)"
+      >
         {{ item.dispGrpNm }}
       </button>
     </div>
@@ -25,6 +29,15 @@ export default {
   data() {
     return {};
   },
+
+  methods: {
+    goToCategory(categoryId) {
+      this.$router.push({
+        path: "/plan",
+        query: { pageNo: 1, group: categoryId },
+      });
+    },
+  },
 };
 </script>
 
@@ -32,7 +45,7 @@ export default {
 .category-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding: 40px 40px;
+  padding: 20px 100px;
   .category-list {
     position: relative;
     width: 100%;

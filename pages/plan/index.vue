@@ -8,6 +8,7 @@
 <script>
 import Category from "../../components/Category.vue";
 import Selectbox from "../../components/Selectbox.vue";
+import PlanList from "../../components/PlanList.vue";
 import { getPlanGroup } from "../../api";
 
 export default {
@@ -15,6 +16,7 @@ export default {
   components: {
     Category,
     Selectbox,
+    PlanList,
   },
 
   async asyncData() {
