@@ -1,7 +1,7 @@
 <template>
   <div class="category-wrapper">
     <div class="category-list">
-      <button>전체</button>
+      <button>전체sadfasdf</button>
       <button v-for="item in data" :key="item.dispSeq">
         {{ item.dispGrpNm }}
       </button>
