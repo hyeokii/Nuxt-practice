@@ -5,7 +5,7 @@
 				<img :src="`https://img-stg.x2bee.com/${planListData.imageList[0].bnrImgPathNm}`" :alt="`${planListData.mkdpNm} 이미지`"/>
 			</div>
 			<div class="btn-area">
-				<button type="button">like</button>
+				<button type="button"><img :scr="`https://img-stg.x2bee.com/images/icons/like.svg`" alt='좋아요'></button>
 				<button type="button">share</button>
 			</div>
 			<p class="name">{{ planListData.mkdpNm }}</p>
@@ -37,6 +37,7 @@ export default {
     
   },
   computed: {
+		
   }
 };
 </script>
@@ -68,6 +69,12 @@ export default {
 			object-fit: cover;
 		}
 	}
+	.btn-area {
+		display:flex;
+		justify-content: flex-end;
+		margin-top:8px;
+		gap:0 4px;
+	}
 	.name {
 		margin:8px 0 0;
 		font-size:14px;
@@ -78,11 +85,14 @@ export default {
 		margin:4px 0 0;
 		font-size:12px;
 		overflow: hidden;
-		text-wrap:nowrap;
+		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
 	.date {
-		// color:;
+		display: flex;		
+		margin-top:2px;
+		color:#767676;
+		font-size:12px;
 	}
 }
 </style>
