@@ -27,6 +27,7 @@ export default {
       "dispMediaCd",
       "pageNo",
       "pageSize",
+      "sortType",
     ]),
   },
   data() {
@@ -49,7 +50,7 @@ export default {
         path: "/plan",
         query: {
           dispMediaCd: this.dispMediaCd,
-          // sortType: this.sortType,
+          sortType: this.sortType,
           pageNo: this.pageNo,
           pageSize: "9",
           // progressYn: this.progressYn,

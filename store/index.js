@@ -6,7 +6,7 @@ export const state = () => ({
   sortType: "recent",
   pageNo: 1,
   pageSize: 9,
-  progressYn: "",
+  progressYn: "Y",
 });
 
 export const mutations = {
@@ -36,21 +36,10 @@ export const actions = {
   async fetchGroupData({ commit }) {
     const response = await this.$axios.get(
       "https://gw.x2bee.com/api/display/v1/plan/group"
-    ); // API 경로는 예시입니다.
+    );
     commit("SET_GROUP_DATA", response.data);
   },
-  // async fetchPlanList({ commit }) {
-  //   const response = await this.$axios.get(
-  //     `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=1&pageSize=9&sortType=recent`
-  //   ); // API 경로는 예시입니다.
-  //   commit("SET_PLAN_LIST", response.data);
-  // },
-  async fetchGroupPlan({ commit }, { grpNo, pgNo }) {
-    const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=${pgNo}&pageSize=9&dispGrpNo=${grpNo}&sortType=recent`
-    ); // API 경로는 예시입니다.
-    commit("SET_GROUP_PLAN", response.data);
-  },
+
   async setNewGrpNo({ commit }, grpNo) {
     commit("SET_NEW_GRPNO", grpNo);
   },
@@ -59,13 +48,13 @@ export const actions = {
   },
   async fetchSortPlan({ commit }, { grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=1&dispGrpNo=${grpNo}&sortType=${sort}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=1&dispGrpNo=${grpNo}&sortType=${sort}&progressYn=Y`
     );
     commit("SET_SORT_PLAN", response.data);
   },
   async fetchGroupPlan({ commit }, { pgNo, grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=${pgNo}&dispGrpNo=${grpNo}&sortType=${sort}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=${pgNo}&dispGrpNo=${grpNo}&sortType=${sort}&progressYn=Y`
     );
     commit("SET_GROUP_PLAN", response.data);
   },

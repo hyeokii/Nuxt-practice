@@ -31,7 +31,6 @@ export default {
   methods: {
     ...mapActions(["fetchSortPlan", "setSortType"]),
     async updateRoute() {
-      console.log(this.newSortType);
       this.$router.push({
         path: "/plan",
         query: {
