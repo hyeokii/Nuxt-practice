@@ -50,10 +50,8 @@ export default {
         path: "/plan",
         query: {
           dispMediaCd: this.dispMediaCd,
-          sortType: this.sortType,
           pageNo: this.pageNo,
           pageSize: "9",
-          // progressYn: this.progressYn,
           // brandNo: this.brandNo,
           dispGrpNo: newGrpNo,
         },
@@ -62,6 +60,7 @@ export default {
       await this.$store.dispatch("fetchGroupPlan", {
         pgNo: 1,
         grpNo: newGrpNo,
+        sort: this.sortType,
       });
     },
   },
