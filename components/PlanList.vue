@@ -1,12 +1,13 @@
 <template>
   <div class="planListContainer">
-    <div class="planList">
+    <div class="planList" v-if="planList.payload.planInfoList.length > 0">
       <PlanCard
         v-for="(plan, idx) in planList.payload.planInfoList"
         :key="`${idx}${plan.mkdpNo}`"
         :plan="plan"
       />
     </div>
+    <div v-else>진행중인 기획전이 없습니다.</div>
     <div v-if="shouldShowMoreButton" class="moreBtnContainer">
       <button @click="loadMore" class="moreBtn">기획전 더보기</button>
     </div>

@@ -54,7 +54,7 @@ export const actions = {
   },
   async fetchGroupPlan({ commit }, { pgNo, grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=${pgNo}&progressYn=Y&dispGrpNo=${grpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=${pgNo}&pageSize=9&progressYn=Y&dispGrpNo=${grpNo}`
     );
     commit("SET_GROUP_PLAN", response.data);
   },
