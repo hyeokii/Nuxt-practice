@@ -53,11 +53,13 @@ export const actions = {
   async setSortType({ commit }, sort) {
     commit("SET_SORT_TYPE", sort);
   },
-  async fetchSortPlan({ commit }, { grpNo, sort }) {
+  async fetchSortPlan({ commit, state }, { grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=1&pageSize=9&progressYn=Y&dispGrpNo=${grpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=1&pageSize=${
+        state.pageNo * state.pageSize
+      }&progressYn=Y&dispGrpNo=${grpNo}`
     );
-    commit("SET_SORT_PLAN", response.data);
+    commit("SET_SORT_PLAN", response.data.payload.planInfoList);
   },
   async fetchGroupPlan({ commit, state }) {
     // 페이지 번호 사용
