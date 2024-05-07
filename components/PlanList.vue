@@ -49,6 +49,7 @@ export default {
 	gap:40px 24px;
 }
 .plan-item {
+	overflow:hidden;
 	a {
 		display: block;
 	}

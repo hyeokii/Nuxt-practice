@@ -22,9 +22,9 @@ export default {
   name: "ProductList",
   props: {
 	productList: {
-      type: Object,
-      required: true,
-    },
+	  type: Object,
+	  required: true,
+	},
   },
   data() {
 	return {};
