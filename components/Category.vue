@@ -1,11 +1,17 @@
 <template>
   <div class="category-wrapper">
     <div class="category-list">
-      <button @click="goToCategory('')">전체</button>
       <button
-        v-for="item in data"
+        @click="goToCategory('', -1)"
+        :class="{ categoryBtn: true, active: activeBtn === -1 }"
+      >
+        전체
+      </button>
+      <button
+        v-for="(item, index) in data"
         :key="item.dispGrpNo"
-        @click="goToCategory(item.dispGrpNo)"
+        @click="goToCategory(item.dispGrpNo, index)"
+        :class="{ categoryBtn: true, active: index === activeBtn }"
       >
         {{ item.dispGrpNm }}
       </button>
@@ -27,15 +33,20 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      activeBtn: -1,
+    };
   },
 
   methods: {
-    goToCategory(categoryId) {
+    goToCategory(categoryId, index) {
+      this.activeBtn = index;
+      this.$store.commit("setDispGrpNo", categoryId);
       this.$router.push({
         path: "/plan",
         query: { pageNo: 1, group: categoryId },
       });
+      this.$store.dispatch("getPlanList");
     },
   },
 };
@@ -45,12 +56,20 @@ export default {
 .category-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding: 20px 100px;
+  padding: 20px 80px;
   .category-list {
     position: relative;
     width: 100%;
     display: flex;
     gap: 20px;
+    .categoryBtn {
+      font-size: 16px;
+      color: #767676;
+      font-weight: bold;
+      &.active {
+        color: black;
+      }
+    }
   }
 }
 

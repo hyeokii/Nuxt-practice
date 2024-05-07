@@ -9,7 +9,7 @@
           <li
             v-for="option in options1"
             :key="option"
-            @click="selectOption(option, 1)"
+            @click="selectBrand(option)"
           >
             {{ option }}
           </li>
@@ -24,7 +24,7 @@
           <li
             v-for="option in options2"
             :key="option"
-            @click="selectOption(option, 2)"
+            @click="selectSort(option)"
           >
             {{ option }}
           </li>
@@ -56,16 +56,11 @@ export default {
         this.isOpen1 = false;
       }
     },
-    selectOption(option, selectBoxNumber) {
-      if (selectBoxNumber === 1) {
-        this.selected1 = option;
-        this.$store.commit("setSelectedBrandOption", this.selected1);
-        this.isOpen1 = false;
-      } else if (selectBoxNumber === 2) {
-        this.selected2 = option;
-        this.$store.commit("setSelectedTimeOption", this.selected2);
-        this.isOpen2 = false;
-      }
+    selectSort(option) {
+      this.$store.commit("setSortType", option);
+      this.selected2 = option;
+      this.$store.dispatch("getSortPlanList");
+      this.isOpen2 = false;
     },
   },
 };
