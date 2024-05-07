@@ -48,13 +48,13 @@ export const actions = {
   },
   async fetchSortPlan({ commit }, { grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=1&dispGrpNo=${grpNo}&sortType=${sort}&progressYn=Y`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=1&pageSize=9&progressYn=Y&dispGrpNo=${grpNo}`
     );
     commit("SET_SORT_PLAN", response.data);
   },
   async fetchGroupPlan({ commit }, { pgNo, grpNo, sort }) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&pageNo=${pgNo}&dispGrpNo=${grpNo}&sortType=${sort}&progressYn=Y`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=${pgNo}&progressYn=Y&dispGrpNo=${grpNo}`
     );
     commit("SET_GROUP_PLAN", response.data);
   },

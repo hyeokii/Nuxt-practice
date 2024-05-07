@@ -1,22 +1,29 @@
 <template>
-  <div>
-    <ul>
-      <li @click="routeToGroup('')">전체</li>
+  <div class="planWrapper">
+    <ul class="categoryContainer">
+      <li
+        class="category"
+        @click="routeToGroup('', 0)"
+        :class="{ active: selectedGroup === 0 }"
+      >
+        전체
+      </li>
       <li
         v-for="(group, idx) in groupData"
-        :key="idx"
-        @click="routeToGroup(group.dispGrpNo)"
+        :key="`${idx}${dispGrpNo}`"
+        @click="routeToGroup(group.dispGrpNo, idx + 1)"
+        class="category"
+        :class="{ active: selectedGroup === idx + 1 }"
       >
         {{ group.dispGrpNm }}
       </li>
     </ul>
-    <CustomSelectBox />
+    <sortSelectBox />
     <PlanList :planList="planList" />
   </div>
 </template>
 
 <script>
-import CustomSelectBox from "../../components/CustomSelectBox.vue";
 import { mapState, mapActions } from "vuex";
 export default {
   computed: {
@@ -33,11 +40,16 @@ export default {
   data() {
     return {
       newGrpNo: "",
+      selectedGroup: 0,
     };
   },
   async asyncData({ store }) {
     await store.dispatch("fetchGroupData");
-    await store.dispatch("fetchGroupPlan", { pgNo: 1, grpNo: "" });
+    await store.dispatch("fetchGroupPlan", {
+      pgNo: 1,
+      grpNo: "",
+      sort: "recent",
+    });
     return {};
   },
   methods: {
@@ -45,7 +57,8 @@ export default {
       "fetchGroupData", // Store의 action 호출
       "fetchPlanList", // Store의 action 호출
     ]),
-    async routeToGroup(newGrpNo) {
+    async routeToGroup(newGrpNo, groupNo) {
+      this.newGrpNo = newGrpNo;
       this.$router.push({
         path: "/plan",
         query: {
@@ -53,30 +66,44 @@ export default {
           pageNo: this.pageNo,
           pageSize: "9",
           // brandNo: this.brandNo,
-          dispGrpNo: newGrpNo,
+          dispGrpNo: this.newGrpNo,
         },
       });
-      await this.$store.dispatch("setNewGrpNo", newGrpNo);
+      await this.$store.dispatch("setNewGrpNo", this.newGrpNo);
       await this.$store.dispatch("fetchGroupPlan", {
         pgNo: 1,
-        grpNo: newGrpNo,
+        grpNo: this.dispGrpNo,
         sort: this.sortType,
       });
+      this.selectedGroup = groupNo;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-ul {
+.planWrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.categoryContainer {
   display: flex;
   flex-direction: row;
   margin-top: 3rem;
 
-  li {
+  .category {
     list-style-type: none;
-    margin-right: 10px;
+    margin-right: 2rem;
     cursor: pointer;
+    font-size: 14px;
   }
+}
+
+.category.active {
+  font-weight: bold;
+  /* 추가적으로 원하는 스타일을 넣으세요 */
 }
 </style>
