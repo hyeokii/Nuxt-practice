@@ -31,6 +31,13 @@ export const mutations = {
   INCREMENT_PAGE_NO(state) {
     state.pageNo++;
   },
+  SET_MORE_PLAN(state, moreData) {
+    state.planList = [...state.planList, ...moreData.payload.planInfoList];
+    console.log(state.planList, moreData.payload.planInfoList);
+  },
+  RESET_PAGE_NO(state) {
+    state.pageNo = 1;
+  },
 };
 export const actions = {
   async fetchGroupData({ commit }) {
@@ -52,10 +59,21 @@ export const actions = {
     );
     commit("SET_SORT_PLAN", response.data);
   },
-  async fetchGroupPlan({ commit }, { pgNo, grpNo, sort }) {
+  async fetchGroupPlan({ commit, state }) {
+    // 페이지 번호 사용
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=${pgNo}&pageSize=9&progressYn=Y&dispGrpNo=${grpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${state.sortType}&pageNo=${state.pageNo}&pageSize=${state.pageSize}&progressYn=Y&dispGrpNo=${state.dispGrpNo}`
     );
-    commit("SET_GROUP_PLAN", response.data);
+    if (state.pageNo >= 2) {
+      commit("SET_MORE_PLAN", response.data);
+    } else {
+      commit("SET_GROUP_PLAN", response.data.payload.planInfoList);
+    }
+  },
+  async incrementPageNo({ commit }) {
+    commit("INCREMENT_PAGE_NO");
+  },
+  async resetPageNo({ commit }) {
+    commit("RESET_PAGE_NO");
   },
 };

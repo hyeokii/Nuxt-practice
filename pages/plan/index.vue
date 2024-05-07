@@ -56,8 +56,10 @@ export default {
     ...mapActions([
       "fetchGroupData", // Store의 action 호출
       "fetchPlanList", // Store의 action 호출
+      "resetPageNo",
     ]),
     async routeToGroup(newGrpNo, groupNo) {
+      await this.$store.dispatch("resetPageNo");
       this.newGrpNo = newGrpNo;
       this.$router.push({
         path: "/plan",

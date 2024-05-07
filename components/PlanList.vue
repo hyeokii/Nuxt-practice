@@ -1,13 +1,12 @@
 <template>
   <div class="planListContainer">
-    <div class="planList" v-if="planList.payload.planInfoList.length > 0">
+    <div class="planList">
       <PlanCard
-        v-for="(plan, idx) in planList.payload.planInfoList"
-        :key="`${idx}${plan.mkdpNo}`"
+        v-for="(plan, idx) in displayedPlanList"
+        :key="idx"
         :plan="plan"
       />
     </div>
-    <div v-else>진행중인 기획전이 없습니다.</div>
     <div v-if="shouldShowMoreButton" class="moreBtnContainer">
       <button @click="loadMore" class="moreBtn">기획전 더보기</button>
     </div>
@@ -27,23 +26,36 @@ export default {
       "sortType",
     ]),
     displayedPlanList() {
-      // 화면에 표시할 데이터는 최대 9개로 제한
-      return this.planList.payload.planInfoList.slice(0, 9);
+      return this.planList;
     },
     shouldShowMoreButton() {
-      // 전체 데이터 개수가 화면에 표시된 데이터 개수보다 많은 경우에만 버튼 표시
-      return this.planList.payload.planInfoList.length > 9;
+      return this.planList.length >= this.pageSize;
     },
   },
   methods: {
-    ...mapActions(["fetchGroupPlan", "incrementPageNo"]),
+    ...mapActions([
+      "fetchGroupPlan",
+      "setNewGrpNo",
+      "setSortType",
+      "incrementPageNo",
+    ]),
     async loadMore() {
-      // 페이지 번호 증가
       this.incrementPageNo();
-      // 새로운 데이터 요청
-      await this.$store.dispatch("fetchGroupPlan", {
-        pgNo: this.pageNo,
+
+      this.$router.push({
+        path: "/plan",
+        query: {
+          dispMediaCd: this.dispMediaCd,
+          pageNo: this.pageNo,
+          pageSize: "9",
+          // brandNo: this.brandNo,
+          dispGrpNo: this.newGrpNo,
+        },
+      });
+
+      await this.fetchGroupPlan({
         grpNo: this.dispGrpNo,
+        pgNo: this.pageNo,
         sort: this.sortType,
       });
     },
