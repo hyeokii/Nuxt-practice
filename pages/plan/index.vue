@@ -19,6 +19,7 @@
       </li>
     </ul>
     <sortSelectBox />
+    <!-- {{ totalGroupPlan }} -->
     <PlanList :planList="planList" />
   </div>
 </template>
@@ -35,6 +36,7 @@ export default {
       "pageNo",
       "pageSize",
       "sortType",
+      "totalGroupPlan",
     ]),
   },
   data() {
@@ -45,18 +47,16 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch("fetchGroupData");
-    await store.dispatch("fetchGroupPlan", {
-      pgNo: 1,
-      grpNo: "",
-      sort: "recent",
-    });
+    await store.dispatch("fetchGroupPlan");
+    await store.dispatch("fetchTotalGroupPlan");
     return {};
   },
   methods: {
     ...mapActions([
-      "fetchGroupData", // Store의 action 호출
-      "fetchPlanList", // Store의 action 호출
+      "fetchGroupData",
+      "fetchPlanList",
       "resetPageNo",
+      "fetchTotalGroupPlan",
     ]),
     async routeToGroup(newGrpNo, groupNo) {
       await this.$store.dispatch("resetPageNo");
@@ -72,6 +72,7 @@ export default {
         },
       });
       await this.$store.dispatch("setNewGrpNo", this.newGrpNo);
+      await this.$store.dispatch("fetchTotalGroupPlan");
       await this.$store.dispatch("fetchGroupPlan", {
         pgNo: 1,
         grpNo: this.dispGrpNo,
@@ -106,6 +107,5 @@ export default {
 
 .category.active {
   font-weight: bold;
-  /* 추가적으로 원하는 스타일을 넣으세요 */
 }
 </style>
