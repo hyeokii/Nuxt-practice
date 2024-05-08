@@ -25,23 +25,18 @@ export default {
       "pageNo",
       "pageSize",
       "sortType",
-      "totalGroupPlan",
     ]),
 
     shouldShowMoreButton() {
       return this.totalGroupPlan.length > this.planList.length;
     },
   },
-  // async asyncData({ store }) {
-  //   await store.dispatch("fetchTotalGroupPlan");
-  // },
   methods: {
     ...mapActions([
       "fetchGroupPlan",
       "setNewGrpNo",
       "setSortType",
       "incrementPageNo",
-      "fetchTotalGroupPlan",
     ]),
     async loadMore() {
       this.incrementPageNo();

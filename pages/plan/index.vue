@@ -19,7 +19,6 @@
       </li>
     </ul>
     <sortSelectBox />
-    <!-- {{ totalGroupPlan }} -->
     <PlanList :planList="planList" />
   </div>
 </template>
