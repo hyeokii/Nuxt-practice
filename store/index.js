@@ -4,6 +4,7 @@ export const state = () => ({
   sortType: "recent",
   dispGrpNo: "",
   pageNo: 1,
+  brandNo: "",
 });
 
 export const mutations = {
@@ -35,7 +36,7 @@ export const actions = {
   async nuxtServerInit({ commit }) {
     try {
       const res = await this.$axios.get(
-        `https://gw.x2bee.com/api/display/v1/plan/planList?progressYn=Y&pageSize=9&pageNo=1&sortType=recent`
+        `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=1&sortType=recent&dispGrpNo=&brandNo=`
       );
       commit("setPlanList", res.data.payload.planInfoList);
     } catch (error) {
@@ -47,24 +48,31 @@ export const actions = {
   async getPlanList({ commit, state }) {
     commit("setPageNo", 1);
     const res = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
     );
     commit("setPlanList", res.data.payload.planInfoList);
   },
 
   async addPlanList({ commit, state }) {
     const res = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
     );
     commit("addPlanList", res.data.payload.planInfoList);
   },
 
   async getSortPlanList({ commit, state }) {
-    commit("setPageNo", 1);
-    const res = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}&sortType=${state.sortType}`
-    );
-    commit("setPlanList", res.data.payload.planInfoList);
+    if (state.pageNo !== 1) {
+      const size = 9 * state.pageNo;
+      const res = await this.$axios.get(
+        `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=${size}&pageNo=1&dispGrpNo=${state.dispGrpNo}&sortType=${state.sortType}`
+      );
+      commit("setPlanList", res.data.payload.planInfoList);
+    } else {
+      const res = await this.$axios.get(
+        `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}&sortType=${state.sortType}`
+      );
+      commit("setPlanList", res.data.payload.planInfoList);
+    }
   },
 
   async getMoreList({ commit, dispatch, state }) {
