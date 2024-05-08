@@ -22,17 +22,17 @@ export default {
 
 <style lang="scss">
 	.nodata {
-		padding:10px;
+		padding:112px 0;
 		text-align:center;
 		.text {
-			margin-bottom:0;
+			margin:0;
 			color:#767676;
 			line-height:24px;
 			font-size:16px;
 			&::before{
 				content:'';
 				display:block;
-				margin:0 auto;
+				margin:0 auto 12px;
 				width:48px;
 				height:48px;
 				background:url('https://fo.x2bee.com/images/icons/ico_warning.svg') no-repeat;

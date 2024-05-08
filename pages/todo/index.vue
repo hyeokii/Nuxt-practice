@@ -32,8 +32,8 @@ export default {
   },
   data() {
     return {
-      dataList: [],
       message: "TODOLIST",
+      dataList: [],
       id: null,
       currentData: null,
       loginId: null,

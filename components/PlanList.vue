@@ -11,13 +11,12 @@
 			<p class="name">{{ planListData.mkdpNm }}</p>
 			<p class="desc">{{ planListData.introConts }}</p>
 			<div class="date">
-				<span>{{ planListData.startDate }}</span>~<span>{{ planListData.endDate }}</span>
+				<span>{{planListData.startDate}}</span>~<span>{{planListData.endDate}}</span>
 			</div>
 		</a>
 	</div>
 </template>
 <script>
-
 import planMixins from "@/mixins/plan-mixins";
 export default {
   name: "LinkList",
@@ -29,7 +28,8 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+		};
   },
   created() {},
   mounted() {},
