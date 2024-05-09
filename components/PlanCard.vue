@@ -83,6 +83,9 @@ export default {
   .planCont {
     font-size: 14px;
     margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .planPeriod {

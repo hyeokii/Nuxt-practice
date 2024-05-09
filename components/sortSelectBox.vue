@@ -74,8 +74,7 @@ export default {
 .custom-select {
   cursor: pointer;
   padding: 0.5rem 3rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid #dfdfdf;
   font-size: 1rem;
   width: 100%;
 
