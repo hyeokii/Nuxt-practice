@@ -1,9 +1,12 @@
 <template>
   <div class="selectContainer">
-    <select class="custom-select" v-model="sortType" @change="updateRoute">
-      <option value="recent" selected>최신순</option>
-      <option value="close">마감순</option>
-    </select>
+    <div class="custom-select-wrapper">
+      <select class="custom-select" v-model="sortType" @change="updateRoute">
+        <option value="recent" selected>최신순</option>
+        <option value="close">마감순</option>
+      </select>
+      <span class="arrow">&#9660;</span>
+    </div>
   </div>
 </template>
 
@@ -56,28 +59,37 @@ export default {
 
 <style lang="scss" scoped>
 .selectContainer {
-  width: 100%;
-  max-width: 1240px;
+  width: 1240px;
+  padding: 0 3rem;
+  margin: 2rem 0;
   display: flex;
   justify-content: end;
-  margin: 2rem 0;
-}
-.custom-select {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 1px solid black;
-  background-color: #fff;
-  cursor: pointer;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-size: 14px;
 }
 
-.custom-select option {
-  font-weight: normal;
-  padding: 10px 20px;
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select {
+  cursor: pointer;
+  padding: 0.5rem 3rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 1rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2rem;
 }
 </style>
