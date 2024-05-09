@@ -3,11 +3,11 @@
     <div class="custom-select-list">
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown(1)">
-          {{ selected1 }}
+          {{ brandSelected }}
         </div>
-        <ul class="select-options" v-show="isOpen1">
+        <ul class="select-options" v-show="brandOpen">
           <li
-            v-for="option in options1"
+            v-for="option in brandOption"
             :key="option"
             @click="selectBrand(option)"
           >
@@ -18,11 +18,11 @@
 
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown(2)">
-          {{ selected2 }}
+          {{ sortSelected }}
         </div>
-        <ul class="select-options" v-show="isOpen2">
+        <ul class="select-options" v-show="sortOpen">
           <li
-            v-for="option in options2"
+            v-for="option in sortOption"
             :key="option"
             @click="selectSort(option)"
           >
@@ -38,29 +38,54 @@
 export default {
   data() {
     return {
-      isOpen1: false,
-      isOpen2: false,
-      selected1: "선택하세요",
-      selected2: "최신순",
-      options1: ["옵션 1", "옵션 2", "옵션 3"],
-      options2: ["최신순", "마감순"],
+      brandOpen: false,
+      sortOpen: false,
+      brandSelected: "선택하세요",
+      sortSelected: "최신순",
+      brandOption: ["옵션 1", "옵션 2", "옵션 3"],
+      sortOption: ["최신순", "마감순"],
     };
   },
+  computed: {},
+  async fetch() {
+    if (this.$route.query.sortOption === "close") {
+      this.sortSelected = "마감순";
+    } else {
+      this.sortSelected = "최신순";
+    }
+  },
+
   methods: {
     toggleDropdown(selectBoxNumber) {
       if (selectBoxNumber === 1) {
-        this.isOpen1 = !this.isOpen1;
-        this.isOpen2 = false;
+        this.brandOpen = !this.brandOpen;
+        this.sortOpen = false;
       } else if (selectBoxNumber === 2) {
-        this.isOpen2 = !this.isOpen2;
-        this.isOpen1 = false;
+        this.sortOpen = !this.isOpen2;
+        this.brandOpen = false;
       }
     },
     selectSort(option) {
-      this.$store.commit("setSortType", option);
-      this.selected2 = option;
-      this.$store.dispatch("getSortPlanList");
-      this.isOpen2 = false;
+      if (option === "최신순") {
+        this.sortSelected = option;
+        this.$router.push({
+          path: this.$route.path,
+          query: {
+            ...this.$route.query,
+            sortOption: "recent",
+          },
+        });
+      } else if (option === "마감순") {
+        this.sortSelected = option;
+        this.$router.push({
+          path: this.$route.path,
+          query: {
+            ...this.$route.query,
+            sortOption: "close",
+          },
+        });
+      }
+      this.sortOpen = false;
     },
   },
 };

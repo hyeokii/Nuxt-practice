@@ -9,9 +9,9 @@
       >
       </PlanCard>
       <button
-        v-if="totalCount !== showPlan"
+        v-if="!(showPlan === totalCount)"
         class="plan-more"
-        @click="moreList"
+        @click="getMoreList"
       >
         기획전 더 보기
       </button>
@@ -21,21 +21,89 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import PlanCard from "./PlanCard.vue";
+import { getPlanList, addPlanList } from "../api";
 export default {
   components: {
     PlanCard,
   },
   data() {
-    return {};
+    return {
+      planList: {},
+    };
   },
   computed: {
-    ...mapState(["planList", "totalCount", "showPlan"]),
+    dispGrpNo() {
+      return this.$route.query.group;
+    },
+    sortOption() {
+      return this.$route.query.sortOption;
+    },
+    totalCount() {
+      return this.planList?.payload?.totalCount;
+    },
+    showPlan() {
+      return this.planList?.payload?.planInfoList
+        ? this.planList.payload.planInfoList.length
+        : 0;
+    },
+  },
+  watch: {
+    "$route.query.group"(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.fetchPlans();
+      }
+    },
+    "$route.query.sortOption"(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.fetchPlans();
+      }
+    },
+  },
+  async fetch() {
+    this.planList = await getPlanList({
+      dispGrpNo: this.dispGrpNo,
+      sortOption: this.sortOption,
+      pageNo: this.$route.query.pageNo,
+    });
   },
   methods: {
-    async moreList() {
-      await this.$store.dispatch("getMoreList");
+    async fetchPlans() {
+      this.planList = await getPlanList({
+        dispGrpNo: this.dispGrpNo,
+        sortOption: this.sortOption,
+        pageNo: this.$route.query.pageNo,
+      });
+    },
+
+    async getMoreList() {
+      let pageNo = 1;
+      if (this.$route.query.pageNo) {
+        pageNo = this.$route.query.pageNo;
+      } else {
+        pageNo = 1;
+        this.$router.push({
+          path: "/plan",
+          query: { ...this.$route.query, pageNo },
+        });
+      }
+      const addList = await addPlanList({
+        pageNo: pageNo,
+        dispGrpNo: this.dispGrpNo,
+        sortOption: this.sortOption,
+      });
+
+      this.$router.push({
+        path: "/plan",
+        query: {
+          ...this.$route.query,
+          pageNo: Number(this.$route.query.pageNo) + 1,
+        },
+      });
+      this.planList.payload.planInfoList = [
+        ...this.planList.payload.planInfoList,
+        ...addList,
+      ];
     },
   },
 };

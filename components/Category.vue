@@ -41,12 +41,14 @@ export default {
   methods: {
     goToCategory(categoryId, index) {
       this.activeBtn = index;
-      this.$store.commit("setDispGrpNo", categoryId);
+      const query = { pageNo: 1, group: categoryId };
+      if (this.$route.query.sortOption) {
+        query.sortOption = this.$route.query.sortOption;
+      }
       this.$router.push({
         path: "/plan",
-        query: { pageNo: 1, group: categoryId },
+        query: query,
       });
-      this.$store.dispatch("getPlanList");
     },
   },
 };
