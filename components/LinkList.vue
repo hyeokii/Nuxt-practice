@@ -1,5 +1,5 @@
 <template>
-	<button type="button" @click="$emit('getPlanListData', 1, linkListData.dispGrpNo)" :class="[active , 'btn-link']">{{linkListData.dispGrpNm}}</button>
+	<button type="button" @click="$emit('getPlanListData', 1, linkListData.dispGrpNo)">{{linkListData.dispGrpNm}}</button>
 </template>
 <script>
 
@@ -14,16 +14,17 @@ export default {
 		},
 	},
 	data() {
-		return {};
+		return {
+			// isActive:false,
+		};
 	},
 	created() {},
 	mounted() {},
 	methods: {
-		addPlanData() {
-			
-		}
+		
 	},
 	computed: {
+		
 	}
 };
 </script>

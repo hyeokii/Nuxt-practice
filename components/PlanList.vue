@@ -5,13 +5,13 @@
 				<img :src="`https://img-stg.x2bee.com/${planListData.imageList[0].bnrImgPathNm}`" :alt="`${planListData.mkdpNm} 이미지`"/>
 			</div>
 			<div class="btn-area">
-				<button type="button"><img :scr="`https://img-stg.x2bee.com/images/icons/like.svg`" alt='좋아요'></button>
-				<button type="button">share</button>
+				<button type="button" class="btn-like" :class="{on : isActive}" @click="evtLike">좋아요</button >
+				<button type="button" class="btn-share">share</button>
 			</div>
 			<p class="name">{{ planListData.mkdpNm }}</p>
 			<p class="desc">{{ planListData.introConts }}</p>
 			<div class="date">
-				<span>{{planListData.startDate}}</span>~<span>{{planListData.endDate}}</span>
+				<span>{{date(planListData.startDate)}}</span>~<span>{{date(planListData.endDate)}}</span>
 			</div>
 		</a>
 	</div>
@@ -29,15 +29,27 @@ export default {
   },
   data() {
     return {
+			rangeDate : null,
+			isActive: false
 		};
   },
-  created() {},
+  created() {		
+	},
   mounted() {},
   methods: {
-    
+    date(date) {
+			const rangeDate = new Date(date)
+			return (
+				rangeDate.getFullYear() + "-" +
+				(rangeDate.getMonth() + 1).toString().padStart(2,'0') + "-" +
+				rangeDate.getDate().toString().padStart(2,'0')
+			)
+		},
+		evtLike :function() {
+			this.isActive = !this.isActive;
+		}
   },
-  computed: {
-		
+  computed: {				
   }
 };
 </script>
@@ -74,7 +86,23 @@ export default {
 		display:flex;
 		justify-content: flex-end;
 		margin-top:8px;
-		gap:0 4px;
+		gap:0 12px;
+		button {
+			font-size:0;				
+		}
+		.btn-like {
+			width:20px;
+			height:20px;
+			background:url('https://fo.x2bee.com/images/icons/like.svg') no-repeat;
+			&.on {
+				background:url('https://fo.x2bee.com/images/icons/like_active.svg') no-repeat;
+			}
+		}
+		.btn-share {
+			width:20px;
+			height:20px;
+			background:url('https://fo.x2bee.com/images/icons/ico_share02.svg') no-repeat;
+		}
 	}
 	.name {
 		margin:8px 0 0;
