@@ -7,6 +7,14 @@
       :src="imageUrl(image.bnrImgPathNm)"
       :alt="image.mkdpNo"
     />
+    <div class="plan-like">
+      <div @click="handleLike()">
+        <img src="https://fo.x2bee.com/images/icons/like.svg" alt="" />
+      </div>
+      <div @click="handleShare()">
+        <img src="https://fo.x2bee.com/images/icons/ico_share02.svg" alt="" />
+      </div>
+    </div>
     <p class="plan-title">{{ plan.mkdpNm }}</p>
     <p class="plan-content">{{ plan.introConts }}</p>
     <p class="plan-date">{{ plan.startDate }} ~ {{ plan.endDate }}</p>
@@ -32,6 +40,12 @@ export default {
     imageUrl(src) {
       return `https://img-stg.x2bee.com/${src}`;
     },
+    handleLike() {
+      alert("좋아요!!");
+    },
+    handleShare() {
+      alert("공유!!");
+    },
   },
 };
 </script>
@@ -41,6 +55,15 @@ export default {
   width: 100%;
   height: 384px;
   object-fit: fill;
+}
+.plan-like {
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+  padding-top: 4px;
+  div {
+    cursor: pointer;
+  }
 }
 .plan-title {
   font-size: 14px;

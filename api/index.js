@@ -1,9 +1,9 @@
 import axios from "axios";
 
+const BASE_URL = "https://gw.x2bee.com/api/display/v1/plan";
+
 export const getPlanGroup = async () => {
-  const res = (
-    await axios.get("https://gw.x2bee.com/api/display/v1/plan/group")
-  ).data;
+  const res = (await axios.get(`${BASE_URL}/group`)).data;
   return res;
 };
 
@@ -16,9 +16,9 @@ export const getPlanList = async ({
 }) => {
   let url = "";
   if (pageNo === 1) {
-    url = `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=${pageNo}&pageSize=${pageSize}&progressYn=Y`;
+    url = `${BASE_URL}/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=${pageNo}&pageSize=${pageSize}&progressYn=Y`;
   } else {
-    url = `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=1&pageSize=${
+    url = `${BASE_URL}/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=1&pageSize=${
       pageSize * pageNo
     }&progressYn=Y`;
   }
@@ -40,11 +40,23 @@ export const addPlanList = async ({
   sortOption = "recent",
 }) => {
   const nextPage = Number(pageNo) + 1;
-  let url = `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=${nextPage}&pageSize=9&progressYn=Y`;
+  let url = `${BASE_URL}/planList?dispMediaCd=99&sortType=${sortOption}&pageNo=${nextPage}&pageSize=9&progressYn=Y`;
 
   if (dispGrpNo) {
     url += `&dispGrpNo=${dispGrpNo}`;
   }
   const res = await axios.get(url);
   return res.data.payload.planInfoList;
+};
+
+export const getBrandList = async () => {
+  const res = (await axios.get(`${BASE_URL}/brand`)).data;
+  return res;
+};
+
+export const getBrandNameList = async () => {
+  const res = (await axios.get(`${BASE_URL}/brand`)).data;
+  return res.map((brand) => {
+    return brand.brandNm;
+  });
 };

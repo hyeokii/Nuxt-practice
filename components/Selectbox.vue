@@ -6,12 +6,13 @@
           {{ brandSelected }}
         </div>
         <ul class="select-options" v-show="brandOpen">
+          <li @click="selectBrand('All')">브랜드 전체</li>
           <li
-            v-for="option in brandOption"
-            :key="option"
+            v-for="option in brandList"
+            :key="option.brandNo"
             @click="selectBrand(option)"
           >
-            {{ option }}
+            {{ option.brandNm }}
           </li>
         </ul>
       </div>
@@ -35,24 +36,27 @@
 </template>
 
 <script>
+import { getBrandNameList, getBrandList } from "../api";
 export default {
   data() {
     return {
       brandOpen: false,
       sortOpen: false,
-      brandSelected: "선택하세요",
+      brandSelected: "브랜드 전체",
       sortSelected: "최신순",
-      brandOption: ["옵션 1", "옵션 2", "옵션 3"],
+      brandList: {},
+      brandOption: [],
       sortOption: ["최신순", "마감순"],
     };
   },
-  computed: {},
   async fetch() {
     if (this.$route.query.sortOption === "close") {
       this.sortSelected = "마감순";
     } else {
       this.sortSelected = "최신순";
     }
+    this.brandList = await getBrandList();
+    this.brandOption = await getBrandNameList();
   },
 
   methods: {
@@ -87,6 +91,17 @@ export default {
       }
       this.sortOpen = false;
     },
+    selectBrand(option) {
+      this.brandSelected = option.brandNm ? option.brandNm : "브랜드 전체";
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          ...this.$route.query,
+          brand: option.brandNo,
+        },
+      });
+      this.brandOpen = false;
+    },
   },
 };
 </script>
@@ -100,7 +115,6 @@ export default {
   .custom-select-list {
     display: flex;
     gap: 10px;
-
     justify-content: end;
     .custom-select {
       width: 140px;
