@@ -22,13 +22,13 @@ export default {
   name: "LinkList",
   mixins:[planMixins],
   props: {
-    planListData: {
-      type: Object,
-      defaultValue: undefined,
-    },
+	planListData: {
+	  type: Object,
+	  defaultValue: undefined,
+	},
   },
   data() {
-    return {
+	return {
 			rangeDate : null,
 			isActive: false
 		};
@@ -37,7 +37,7 @@ export default {
 	},
   mounted() {},
   methods: {
-    date(date) {
+	date(date) {
 			const rangeDate = new Date(date)
 			return (
 				rangeDate.getFullYear() + "-" +

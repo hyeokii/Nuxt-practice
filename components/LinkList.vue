@@ -1,5 +1,5 @@
 <template>
-	<button type="button" @click="$emit('getPlanListData', 1, linkListData.dispGrpNo)">{{linkListData.dispGrpNm}}</button>
+	<button type="button" :class="{on : dispGrpNo === linkListData.dispGrpNo}" @click="$emit('getPlanListData', 1, linkListData.dispGrpNo)">{{linkListData.dispGrpNm}}</button>
 </template>
 <script>
 
@@ -12,6 +12,10 @@ export default {
 			type: Object,
 			defaultValue: undefined,
 		},
+		dispGrpNo : {
+			type: Object,
+			defaultValue:undefined
+		}
 	},
 	data() {
 		return {
@@ -20,12 +24,8 @@ export default {
 	},
 	created() {},
 	mounted() {},
-	methods: {
-		
-	},
-	computed: {
-		
-	}
+	methods: {},
+	computed: {}
 };
 </script>
 <style lang="scss">

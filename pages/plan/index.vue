@@ -1,8 +1,8 @@
 <template>
 	 <div class="pg-plan">
 		<div class="link-list">
-			<button type="button" @click="getPlanList()">전체</button>
-			<LinkList v-for="(linkListData, linkListIndex) in planGroup" :key="linkListIndex" :linkListData="linkListData" @getPlanListData="getPlanList"/>
+			<button type="button" @click="getPlanList()" :class="{on : dispGrpNo === undefined }">전체</button>
+			<LinkList v-for="(linkListData, linkListIndex) in planGroup" :key="linkListIndex" :linkListData="linkListData" @getPlanListData="getPlanList" :dispGrpNo="dispGrpNo"/>
 		</div>
 		<SortArea @getSelectData="sortChangeEvent"/>
 		<div class="cont">
@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+
 export default {
 	layout : 'Plan',
 	async asyncData({$axios,route}) {
@@ -69,8 +70,8 @@ export default {
 			if(pageNo === null || pageNo === undefined) pageNo = 1;
 			
 			if(groupNo !== this.dispGrpNo || pageNo === 1) { // groupNo 랑 dispGrpNo랑 다를 시
-        this.planList = [] // planList 초기화
-      }
+				this.planList = [] // planList 초기화
+			}
 
 			if(sortType) {
 				this.planList = [] // planList 초기화
@@ -113,7 +114,7 @@ export default {
 
 		// link 버튼 이벤트 
 		linkBtnEvent() {
-
+			
 		}
 	}
 }
@@ -143,6 +144,7 @@ export default {
 		background: url('https://fo.x2bee.com/images/icons/ico_arrow12.svg') no-repeat;
 	}
 }
+
 .link-list {
 	button.on {
 		font-weight:bold;
