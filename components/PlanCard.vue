@@ -15,10 +15,10 @@
       </div>
       <span class="planTitle">{{ plan.mkdpNm }}</span>
       <span class="planCont">{{ plan.introConts }}</span>
-      <!-- <span v-if="plan.startDate" class="planPeriod"
+      <span v-if="plan.startDate" class="planPeriod"
         >{{ plan.startDate.split(" ")[0] }} ~
         {{ plan.endDate.split(" ")[0] }}</span
-      > -->
+      >
     </div>
   </div>
 </template>

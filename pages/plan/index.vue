@@ -40,13 +40,14 @@ export default {
     };
   },
   async asyncData({ route }) {
+    let query = route.query;
     const categoryData = await apiData.fetchGroupData();
     const totalData = await apiData.fetchPlanList(
-      route.query.sortType ? route.query.sortType : "recent",
-      route.query.pageNo ? route.query.pageNo : 1,
-      route.query.dispGrpNo === null || route.query.dispGrpNo === undefined
+      query.sortType ? query.sortType : "recent",
+      query.pageNo ? query.pageNo : 1,
+      query.dispGrpNo === null || query.dispGrpNo === undefined
         ? ""
-        : route.query.dispGrpNo
+        : query.dispGrpNo
     );
     return {
       categoryData: categoryData.data,

@@ -17,40 +17,35 @@ export default {
     planList: { type: Array, required: true },
   },
 
-  data() {
-    return {
-      curPageNo: 1,
-    };
+  computed: {
+    curPageNo() {
+      return this.$router.currentRoute.query.pageNo || 1;
+    },
   },
 
   methods: {
     async loadMore() {
+      let query = this.$router.currentRoute.query;
       this.$router.push({
         path: "/plan",
         query: {
-          dispMediaCd: this.$router.currentRoute.query.dispMediaCd,
           sortType: localStorage.getItem("sortType") || "recent",
-          pageNo: this.curPageNo + 1,
+          pageNo: Number(this.curPageNo) + 1,
           dispGrpNo:
-            this.$router.currentRoute.query.dispGrpNo === null ||
-            this.$router.currentRoute.query.dispGrpNo === undefined
+            query.dispGrpNo === null || query.dispGrpNo === undefined
               ? ""
-              : this.$router.currentRoute.query.dispGrpNo,
+              : query.dispGrpNo,
         },
       });
 
       try {
         const responseData = await apiData.fetchGroupPlan(
-          this.$router.currentRoute.sortType
-            ? this.$router.currentRoute.sortType
-            : "recent",
-          this.curPageNo + 1,
-          this.$router.currentRoute.query.dispGrpNo === null ||
-            this.$router.currentRoute.query.dispGrpNo === undefined
+          query.sortType ? query.sortType : "recent",
+          Number(this.curPageNo) + 1,
+          query.dispGrpNo === null || query.dispGrpNo === undefined
             ? ""
-            : this.$router.currentRoute.query.dispGrpNo
+            : query.dispGrpNo
         );
-        this.curPageNo++;
         this.$emit("addPlanList", responseData.data);
       } catch (error) {
         console.error("API 요청 중 오류 발생:", error);
