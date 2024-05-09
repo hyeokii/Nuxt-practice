@@ -9,7 +9,7 @@
         전체
       </li>
       <li
-        v-for="(group, idx) in groupData"
+        v-for="(group, idx) in categoryData"
         :key="`${idx}${dispGrpNo}`"
         @click="routeToGroup(group.dispGrpNo, idx + 1)"
         class="category"
@@ -18,66 +18,74 @@
         {{ group.dispGrpNm }}
       </li>
     </ul>
-    <sortSelectBox />
-    <PlanList :planList="planList" />
+    <sortSelectBox @updatePlanList="updatePlanList" :planList="planList" />
+    <PlanList :planList="planList" @addPlanList="addPlanList" />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import apiData from "../../api/apiData";
 export default {
-  computed: {
-    ...mapState([
-      "groupData",
-      "planList",
-      "dispGrpNo",
-      "dispMediaCd",
-      "pageNo",
-      "pageSize",
-      "sortType",
-      "totalGroupPlan",
-    ]),
-  },
   data() {
     return {
-      newGrpNo: "",
+      categoryData: [],
+      planList: [],
+      totalGroupData: [],
+      dispMediaCd: 99,
+      pageNo: 1,
+      pageSize: 9,
       selectedGroup: 0,
+      sortType: "recent",
+      dispGrpNo: "",
     };
   },
-  async asyncData({ store }) {
-    await store.dispatch("fetchGroupData");
-    await store.dispatch("fetchGroupPlan");
-    await store.dispatch("fetchTotalGroupPlan");
-    return {};
+  async asyncData({ route }) {
+    const categoryData = await apiData.fetchGroupData();
+    const totalData = await apiData.fetchPlanList(
+      route.query.sortType ? route.query.sortType : "recent",
+      route.query.pageNo ? route.query.pageNo : 1,
+      route.query.dispGrpNo === null || route.query.dispGrpNo === undefined
+        ? ""
+        : route.query.dispGrpNo
+    );
+    return {
+      categoryData: categoryData.data,
+      planList: totalData.data.payload.planInfoList,
+    };
+  },
+  mounted() {
+    this.selectedGroup = Number(localStorage.getItem("selectedGroup"));
+    this.sortType = localStorage.getItem("sortType");
   },
   methods: {
-    ...mapActions([
-      "fetchGroupData",
-      "fetchPlanList",
-      "resetPageNo",
-      "fetchTotalGroupPlan",
-    ]),
     async routeToGroup(newGrpNo, groupNo) {
-      await this.$store.dispatch("resetPageNo");
-      this.newGrpNo = newGrpNo;
       this.$router.push({
         path: "/plan",
         query: {
-          dispMediaCd: this.dispMediaCd,
+          sortType: localStorage.getItem("sortType") || "recent",
           pageNo: this.pageNo,
-          pageSize: "9",
-          // brandNo: this.brandNo,
-          dispGrpNo: this.newGrpNo,
+          dispGrpNo: newGrpNo,
         },
       });
-      await this.$store.dispatch("setNewGrpNo", this.newGrpNo);
-      await this.$store.dispatch("fetchTotalGroupPlan");
-      await this.$store.dispatch("fetchGroupPlan", {
-        pgNo: 1,
-        grpNo: this.dispGrpNo,
-        sort: this.sortType,
-      });
+      try {
+        const responseData = await apiData.fetchGroupPlan(
+          localStorage.getItem("sortType") || "recent",
+          this.pageNo,
+          newGrpNo
+        );
+        this.planList = responseData.data.payload.planInfoList;
+      } catch (error) {
+        console.error("API 요청 중 오류 발생:", error);
+      }
       this.selectedGroup = groupNo;
+      localStorage.setItem("selectedGroup", groupNo);
+    },
+
+    updatePlanList(newPlanList) {
+      this.planList = newPlanList;
+    },
+    addPlanList(morePlanList) {
+      this.planList = [...this.planList, ...morePlanList.payload.planInfoList];
     },
   },
 };

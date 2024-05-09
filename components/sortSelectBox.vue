@@ -1,6 +1,6 @@
 <template>
   <div class="selectContainer">
-    <select class="custom-select" v-model="newSortType" @change="updateRoute">
+    <select class="custom-select" v-model="sortType" @change="updateRoute">
       <option value="recent" selected>최신순</option>
       <option value="close">마감순</option>
     </select>
@@ -8,41 +8,47 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import apiData from "../api/apiData";
 
 export default {
-  computed: {
-    ...mapState([
-      "groupData",
-      "planList",
-      "dispGrpNo",
-      "dispMediaCd",
-      "pageNo",
-      "pageSize",
-      "sortType",
-    ]),
-  },
   data() {
     return {
-      newSortType: "recent",
+      sortType: this.$router.currentRoute.query.sortType || "recent",
     };
   },
 
+  props: {
+    planList: { type: Array, required: true },
+  },
+
   methods: {
-    ...mapActions(["fetchSortPlan", "setSortType"]),
     async updateRoute() {
+      const currentRoute = this.$router.currentRoute;
+      const { query } = currentRoute;
+      const { pageNo = "1", pageSize = "9", dispGrpNo = "" } = query;
+
+      const newQuery = {
+        ...query,
+        sortType: this.sortType,
+      };
+
       this.$router.push({
         path: "/plan",
-        query: {
-          dispGrpNo: this.dispGrpNo,
-          sortType: this.newSortType,
-        },
+        query: newQuery,
       });
-      await this.$store.dispatch("setSortType", this.newSortType);
-      await this.$store.dispatch("fetchSortPlan", {
-        grpNo: this.dispGrpNo,
-        sort: this.sortType,
-      });
+
+      try {
+        const responseData = await apiData.fetchSortPlan(
+          this.sortType,
+          pageNo,
+          pageSize,
+          dispGrpNo === null ? "" : dispGrpNo
+        );
+        this.$emit("updatePlanList", responseData.data.payload.planInfoList);
+        localStorage.setItem("sortType", this.sortType);
+      } catch (error) {
+        console.error("API 요청 중 오류 발생:", error);
+      }
     },
   },
 };

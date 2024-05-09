@@ -1,5 +1,4 @@
 export const state = () => ({
-  groupData: [],
   planList: [],
   totalGroupPlan: [],
   dispGrpNo: "",
@@ -34,7 +33,6 @@ export const mutations = {
   },
   SET_MORE_PLAN(state, moreData) {
     state.planList = [...state.planList, ...moreData.payload.planInfoList];
-    console.log(state.planList, moreData.payload.planInfoList);
   },
   RESET_PAGE_NO(state) {
     state.pageNo = 1;
@@ -73,9 +71,9 @@ export const actions = {
       commit("SET_GROUP_PLAN", response.data.payload.planInfoList);
     }
   },
-  async fetchTotalGroupPlan({ commit, state }) {
+  async fetchTotalGroupPlan(dispGrpNo) {
     const response = await this.$axios.get(
-      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&dispGrpNo=${state.dispGrpNo}`
+      `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&dispGrpNo=${dispGrpNo}`
     );
     commit("SET_TOTAL_LIST", response.data.payload.planInfoList);
   },

@@ -11,17 +11,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  computed: {
-    ...mapState([
-      "groupData",
-      "planList",
-      "dispGrpNo",
-      "dispMediaCd",
-      "pageNo",
-      "pageSize",
-      "sortType",
-    ]),
-  },
   data() {
     return {
       newSortType: "recent",
