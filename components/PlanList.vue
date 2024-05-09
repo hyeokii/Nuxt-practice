@@ -1,7 +1,11 @@
 <template>
   <div class="planListContainer" v-if="planList">
     <div class="planList" v-if="planList.length !== 0">
-      <PlanCard v-for="(plan, idx) in planList" :key="`${idx}`" :plan="plan" />
+      <PlanCard
+        v-for="(plan, idx) in planList"
+        :key="`${idx}${plan.mkdpNo}`"
+        :plan="plan"
+      />
     </div>
     <div v-else>진행중인 기획전이 없습니다.</div>
     <div class="moreBtnContainer">
@@ -42,6 +46,7 @@ export default {
 
   methods: {
     async loadMore() {
+      // 기획전 더보기 버튼 누르면 실행
       let query = this.$router.currentRoute.query;
       this.$router.push({
         path: "/plan",

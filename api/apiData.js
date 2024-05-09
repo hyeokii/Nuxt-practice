@@ -23,6 +23,7 @@ export default {
   },
 
   async fetchPlanList(sortType, pageNo, dispGrpNo) {
+    // 2페이지 이상일 경우
     return axios.get(
       `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sortType}&pageNo=1&pageSize=${
         9 * pageNo

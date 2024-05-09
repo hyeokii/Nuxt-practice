@@ -26,6 +26,7 @@ export default {
 
   methods: {
     async updateRoute() {
+      // selectBox 눌렀을 때 실행
       const currentRoute = this.$router.currentRoute;
       const { query } = currentRoute;
       const { pageNo = "1", pageSize = "9", dispGrpNo = "" } = query;

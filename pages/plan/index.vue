@@ -38,6 +38,7 @@ export default {
   async asyncData({ route }) {
     let query = route.query;
     const categoryData = await apiData.fetchGroupData();
+    // 카테고리 데이터
     const totalData = await apiData.fetchPlanList(
       query.sortType ? query.sortType : "recent",
       query.pageNo ? query.pageNo : 1,
@@ -45,6 +46,7 @@ export default {
         ? ""
         : query.dispGrpNo
     );
+    //PlanList 데이터
     return {
       categoryData: categoryData.data,
       planList: totalData.data.payload.planInfoList,
@@ -52,10 +54,11 @@ export default {
   },
   mounted() {
     this.selectedGroup = Number(localStorage.getItem("selectedGroup"));
-    this.sortType = localStorage.getItem("sortType");
+    // this.sortType = localStorage.getItem("sortType");
   },
   methods: {
     async routeToGroup(newGrpNo, groupNo) {
+      // 카테고리 누르면 실행
       this.$router.push({
         path: "/plan",
         query: {

@@ -15,7 +15,7 @@
       </div>
       <span class="planTitle">{{ plan.mkdpNm }}</span>
       <span class="planCont">{{ plan.introConts }}</span>
-      <span v-if="plan.startDate" class="planPeriod"
+      <span class="planPeriod"
         >{{ plan.startDate.split(" ")[0] }} ~
         {{ plan.endDate.split(" ")[0] }}</span
       >
@@ -26,7 +26,7 @@
 <script>
 export default {
   props: {
-    plan: Object,
+    plan: { type: Object, required: true },
   },
   data() {
     return {};
