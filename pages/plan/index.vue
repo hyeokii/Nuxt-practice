@@ -1,7 +1,7 @@
 <template>
 	 <div class="pg-plan">
 		<div class="link-list">
-			<button type="button" @click="getPlanList()" :class="{on : isActive}">전체</button>
+			<button type="button" @click="getPlanList()">전체</button>
 			<LinkList v-for="(linkListData, linkListIndex) in planGroup" :key="linkListIndex" :linkListData="linkListData" @getPlanListData="getPlanList"/>
 		</div>
 		<SortArea @getSelectData="sortChangeEvent"/>
