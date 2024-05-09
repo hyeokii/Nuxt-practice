@@ -10,7 +10,7 @@
       </li>
       <li
         v-for="(group, idx) in categoryData"
-        :key="`${idx}${dispGrpNo}`"
+        :key="`${idx}${group.dispGrpNo}`"
         @click="routeToGroup(group.dispGrpNo, idx + 1)"
         class="category"
         :class="{ active: selectedGroup === idx + 1 }"
@@ -30,13 +30,9 @@ export default {
     return {
       categoryData: [],
       planList: [],
-      totalGroupData: [],
-      dispMediaCd: 99,
       pageNo: 1,
-      pageSize: 9,
       selectedGroup: 0,
       sortType: "recent",
-      dispGrpNo: "",
     };
   },
   async asyncData({ route }) {
@@ -76,7 +72,7 @@ export default {
         );
         this.planList = responseData.data.payload.planInfoList;
       } catch (error) {
-        console.error("API 요청 중 오류 발생:", error);
+        console.error("error", error);
       }
       this.selectedGroup = groupNo;
       localStorage.setItem("selectedGroup", groupNo);

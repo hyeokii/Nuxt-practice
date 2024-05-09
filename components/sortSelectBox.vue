@@ -47,7 +47,7 @@ export default {
         this.$emit("updatePlanList", responseData.data.payload.planInfoList);
         localStorage.setItem("sortType", this.sortType);
       } catch (error) {
-        console.error("API 요청 중 오류 발생:", error);
+        console.error("error", error);
       }
     },
   },

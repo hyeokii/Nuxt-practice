@@ -5,7 +5,9 @@
     </div>
     <div v-else>진행중인 기획전이 없습니다.</div>
     <div class="moreBtnContainer">
-      <button @click="loadMore" class="moreBtn">기획전 더보기</button>
+      <button @click="loadMore" class="moreBtn" v-show="showMoreBtn">
+        기획전 더보기
+      </button>
     </div>
   </div>
 </template>
@@ -20,6 +22,21 @@ export default {
   computed: {
     curPageNo() {
       return this.$router.currentRoute.query.pageNo || 1;
+    },
+
+    showMoreBtn() {
+      let query = this.$router.currentRoute.query;
+      // if (this.planList.length === Number(query.pageNo) * 9) {
+      //   const res = apiData.fetchGroupPlan(
+      //     query.sortType ? query.sortType : "recent",
+      //     Number(query.pageNo) + 1,
+      //     query.dispGrpNo === null || query.dispGrpNo === undefined
+      //       ? ""
+      //       : query.dispGrpNo
+      //   );
+      //   return res.data.payload.planInfoList.length !== 0;
+      // }
+      return this.planList.length >= Number(query.pageNo) * 9;
     },
   },
 
@@ -48,7 +65,7 @@ export default {
         );
         this.$emit("addPlanList", responseData.data);
       } catch (error) {
-        console.error("API 요청 중 오류 발생:", error);
+        console.error("error", error);
       }
     },
   },
