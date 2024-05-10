@@ -1,10 +1,13 @@
 <template>
   <div class="selectContainer">
     <div class="custom-select-wrapper">
-      <select class="custom-select" v-model="sortType" @change="updateRoute">
-        <option value="recent" :selected="sortType === 'recent'">최신순</option>
-
-        <option value="close" :selected="sortType === 'close'">마감순</option>
+      <select class="custom-select" v-model="newSortType" @change="updateRoute">
+        <option value="recent" :selected="newSortType === 'recent'">
+          최신순
+        </option>
+        <option value="close" :selected="newSortType === 'close'">
+          마감순
+        </option>
       </select>
       <span class="arrow">&#9660;</span>
     </div>
@@ -12,17 +15,16 @@
 </template>
 
 <script>
-import apiData from "../api/apiData";
-
 export default {
-  data() {
-    return {
-      sortType: this.$router.currentRoute.query.sortType || "recent",
-    };
-  },
-
   props: {
     planList: { type: Array, required: true },
+    sortType: { type: String, required: true },
+  },
+
+  data() {
+    return {
+      newSortType: this.sortType,
+    };
   },
 
   methods: {
@@ -34,7 +36,7 @@ export default {
 
       const newQuery = {
         ...query,
-        sortType: this.sortType,
+        sortType: this.newSortType,
       };
 
       this.$router.push({
@@ -42,18 +44,7 @@ export default {
         query: newQuery,
       });
 
-      try {
-        const responseData = await apiData.fetchSortPlan(
-          this.sortType,
-          pageNo,
-          pageSize,
-          dispGrpNo === null ? "" : dispGrpNo
-        );
-        this.$emit("updatePlanList", responseData.data.payload.planInfoList);
-        localStorage.setItem("sortType", this.sortType);
-      } catch (error) {
-        console.error("error", error);
-      }
+      this.$emit("updatePlanList", this.newSortType);
     },
   },
 };

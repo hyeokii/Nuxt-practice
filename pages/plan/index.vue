@@ -1,6 +1,5 @@
 <template>
   <div class="planWrapper">
-    {{ selectedGroup }}
     <ul class="categoryContainer">
       <li
         class="category"
@@ -19,7 +18,11 @@
         {{ group.dispGrpNm }}
       </li>
     </ul>
-    <sortSelectBox @updatePlanList="updatePlanList" :planList="planList" />
+    <sortSelectBox
+      @updatePlanList="updatePlanList"
+      :planList="planList"
+      :sortType="sortType"
+    />
     <PlanList :planList="planList" @addPlanList="addPlanList" />
   </div>
 </template>
@@ -36,9 +39,9 @@ export default {
       planList: [],
       pageNo: 1,
       selectedGroup: 0,
-      //query로 저장
+      // query에 저장(O)
       sortType: "recent",
-      // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X
+      // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
     };
   },
   async asyncData({ route }) {
@@ -57,7 +60,8 @@ export default {
     return {
       categoryData: categoryData.data,
       planList: totalData.data.payload.planInfoList,
-      selectedGroup: query.selectedGrp,
+      selectedGroup: Number(query.selectedGrp) || 0,
+      sortType: query.sortType || "recent",
     };
   },
   methods: {
@@ -66,7 +70,7 @@ export default {
       this.$router.push({
         path: "/plan",
         query: {
-          sortType: localStorage.getItem("sortType") || "recent",
+          sortType: this.sortType,
           pageNo: this.pageNo,
           dispGrpNo: newGrpNo,
           selectedGrp: groupNo,
@@ -74,7 +78,7 @@ export default {
       });
       try {
         const responseData = await apiData.fetchGroupPlan(
-          localStorage.getItem("sortType") || "recent",
+          this.sortType,
           this.pageNo,
           newGrpNo
         );
@@ -85,10 +89,27 @@ export default {
       this.selectedGroup = groupNo;
     },
 
-    updatePlanList(newPlanList) {
-      this.planList = newPlanList;
+    async updatePlanList(sortType) {
+      // sort api 호출
+      this.sortType = sortType;
+
+      try {
+        const responseData = await apiData.fetchSortPlan(
+          this.sortType,
+          this.pageNo,
+          9,
+          this.$router.currentRoute.query.dispGrpNo
+            ? this.$router.currentRoute.query.dispGrpN
+            : ""
+        );
+        this.planList = responseData.data.payload.planInfoList;
+      } catch (error) {
+        console.error("error", error);
+      }
     },
+
     addPlanList(morePlanList) {
+      // 기획전 더보기 버튼
       this.planList = [...this.planList, ...morePlanList.payload.planInfoList];
     },
   },
