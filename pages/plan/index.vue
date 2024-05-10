@@ -3,8 +3,8 @@
     <ul class="categoryContainer">
       <li
         class="category"
-        @click="routeToGroup('', 0)"
-        :class="{ active: selectedGroup === 0 }"
+        @click="routeToGroup('', '0')"
+        :class="{ active: selectedGroup === '0' }"
       >
         전체
       </li>
@@ -23,7 +23,12 @@
       :planList="planList"
       :sortType="sortType"
     />
-    <PlanList :planList="planList" @addPlanList="addPlanList" />
+    <PlanList
+      :planList="planList"
+      @addPlanList="addPlanList"
+      :totalCount="totalCount"
+      :sortType="sortType"
+    />
   </div>
 </template>
 
@@ -38,9 +43,10 @@ export default {
       categoryData: [],
       planList: [],
       pageNo: 1,
-      selectedGroup: 0,
+      selectedGroup: "0",
       // query에 저장(O)
       sortType: "recent",
+      totalCount: 0,
       // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
     };
   },
@@ -50,7 +56,7 @@ export default {
     // 카테고리 데이터
     const totalData = await apiData.fetchPlanList(
       query.sortType ? query.sortType : "recent",
-      query.pageNo ? query.pageNo : 1,
+      query.pageNo ? Number(query.pageNo) : 1,
       query.dispGrpNo === null || query.dispGrpNo === undefined
         ? ""
         : query.dispGrpNo
@@ -60,8 +66,9 @@ export default {
     return {
       categoryData: categoryData.data,
       planList: totalData.data.payload.planInfoList,
-      selectedGroup: Number(query.selectedGrp) || 0,
+      selectedGroup: query.selectedGrp || "0",
       sortType: query.sortType || "recent",
+      totalCount: totalData.data.payload.totalCount,
     };
   },
   methods: {
@@ -83,6 +90,7 @@ export default {
           newGrpNo
         );
         this.planList = responseData.data.payload.planInfoList;
+        this.totalCount = responseData.data.payload.totalCount;
       } catch (error) {
         console.error("error", error);
       }
@@ -96,10 +104,10 @@ export default {
       try {
         const responseData = await apiData.fetchSortPlan(
           this.sortType,
-          this.$router.currentRoute.query.pageNo,
+          this.$router.currentRoute.query.pageNo || 1,
           9,
           this.$router.currentRoute.query.dispGrpNo
-            ? this.$router.currentRoute.query.dispGrpN
+            ? this.$router.currentRoute.query.dispGrpNo
             : ""
         );
         this.planList = responseData.data.payload.planInfoList;
@@ -108,9 +116,24 @@ export default {
       }
     },
 
-    addPlanList(morePlanList) {
+    async addPlanList(curPageNo) {
       // 기획전 더보기 버튼
-      this.planList = [...this.planList, ...morePlanList.payload.planInfoList];
+      const query = this.$router.currentRoute.query;
+      try {
+        const responseData = await apiData.fetchGroupPlan(
+          query.sortType ? query.sortType : "recent",
+          curPageNo + 1,
+          query.dispGrpNo === null || query.dispGrpNo === undefined
+            ? ""
+            : query.dispGrpNo
+        );
+        this.planList = [
+          ...this.planList,
+          ...responseData.data.payload.planInfoList,
+        ];
+      } catch (error) {
+        console.error("error", error);
+      }
     },
   },
 };

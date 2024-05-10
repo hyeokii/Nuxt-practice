@@ -21,6 +21,8 @@ import apiData from "../api/apiData";
 export default {
   props: {
     planList: { type: Array, required: true },
+    totalCount: { type: Number, requiredt: true },
+    sortType: { type: String, required: true },
   },
 
   computed: {
@@ -30,7 +32,7 @@ export default {
 
     showMoreBtn() {
       const query = this.$router.currentRoute.query;
-      return this.planList.length >= Number(query.pageNo || 1) * 9;
+      return this.totalCount >= Number(query.pageNo || 1) * 9;
     },
   },
 
@@ -41,7 +43,7 @@ export default {
       this.$router.push({
         path: "/plan",
         query: {
-          sortType: localStorage.getItem("sortType") || "recent",
+          sortType: this.sortType,
           pageNo: Number(this.curPageNo) + 1,
           dispGrpNo:
             query.dispGrpNo === null || query.dispGrpNo === undefined
@@ -50,21 +52,7 @@ export default {
         },
       });
 
-      try {
-        const responseData = await apiData.fetchGroupPlan(
-          query.sortType ? query.sortType : "recent",
-          Number(this.curPageNo) + 1,
-          query.dispGrpNo === null || query.dispGrpNo === undefined
-            ? ""
-            : query.dispGrpNo
-        );
-        this.$emit("addPlanList", responseData.data);
-        // api를 요청하는 부분이 너무 여러곳.
-        // 기획전 더보기 버튼 누르면 실행.
-        // 데이터가 있는 곳에서 바꿔주는 게 좋음.
-      } catch (error) {
-        console.error("error", error);
-      }
+      this.$emit("addPlanList", Number(this.curPageNo));
     },
   },
 };
