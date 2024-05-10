@@ -1,5 +1,6 @@
 <template>
   <div class="planWrapper">
+    {{ selectedGroup }}
     <ul class="categoryContainer">
       <li
         class="category"
@@ -11,9 +12,9 @@
       <li
         v-for="(group, idx) in categoryData"
         :key="`${idx}${group.dispGrpNo}`"
-        @click="routeToGroup(group.dispGrpNo, idx + 1)"
+        @click="routeToGroup(group.dispGrpNo, group.dispGrpNo)"
         class="category"
-        :class="{ active: selectedGroup === idx + 1 }"
+        :class="{ active: selectedGroup === group.dispGrpNo }"
       >
         {{ group.dispGrpNm }}
       </li>
@@ -26,6 +27,8 @@
 <script>
 import apiData from "../../api/apiData";
 // watch는 최대한 지양해라.
+// 원본데이터는 최대한 바꾸지 마라.
+
 export default {
   data() {
     return {
@@ -35,11 +38,11 @@ export default {
       selectedGroup: 0,
       //query로 저장
       sortType: "recent",
-      // props로 내려서 관리(emit)
+      // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X
     };
   },
   async asyncData({ route }) {
-    let query = route.query;
+    const query = route.query;
     const categoryData = await apiData.fetchGroupData();
     // 카테고리 데이터
     const totalData = await apiData.fetchPlanList(
@@ -49,15 +52,13 @@ export default {
         ? ""
         : query.dispGrpNo
     );
+
     //PlanList 데이터
     return {
       categoryData: categoryData.data,
       planList: totalData.data.payload.planInfoList,
+      selectedGroup: query.selectedGrp,
     };
-  },
-  mounted() {
-    this.selectedGroup = Number(localStorage.getItem("selectedGroup"));
-    // this.sortType = localStorage.getItem("sortType");
   },
   methods: {
     async routeToGroup(newGrpNo, groupNo) {
@@ -68,6 +69,7 @@ export default {
           sortType: localStorage.getItem("sortType") || "recent",
           pageNo: this.pageNo,
           dispGrpNo: newGrpNo,
+          selectedGrp: groupNo,
         },
       });
       try {
@@ -81,7 +83,6 @@ export default {
         console.error("error", error);
       }
       this.selectedGroup = groupNo;
-      localStorage.setItem("selectedGroup", groupNo);
     },
 
     updatePlanList(newPlanList) {
