@@ -1,7 +1,7 @@
 <template>
   <div class="custom-select-wrapper">
     <div class="custom-select-list">
-      <div class="custom-select">
+      <!-- <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown(1)">
           {{ brandSelected }}
         </div>
@@ -15,19 +15,18 @@
             {{ option.brandNm }}
           </li>
         </ul>
-      </div>
-
+      </div> -->
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown(2)">
           {{ sortSelected }}
         </div>
         <ul class="select-options" v-show="sortOpen">
           <li
-            v-for="option in sortOption"
-            :key="option"
-            @click="selectSort(option)"
+            v-for="(value, key) in sortOptionList"
+            :key="key - value"
+            @click="selectSort(key)"
           >
-            {{ option }}
+            {{ value }}
           </li>
         </ul>
       </div>
@@ -40,20 +39,26 @@ import { getBrandNameList, getBrandList } from "../api";
 export default {
   data() {
     return {
-      brandOpen: false,
+      // brandOpen: false,
       sortOpen: false,
-      brandSelected: "브랜드 전체",
+      // brandSelected: "브랜드 전체",
       sortSelected: "최신순",
-      brandList: {},
-      brandOption: [],
-      sortOption: ["최신순", "마감순"],
+      // brandList: {},
+      // brandOption: [],
+      sortOptionList: { recent: "최신순", close: "마감순" }, //key value
     };
   },
+  computed: {
+    sortOption() {
+      return this.$route.query.sortOption;
+    },
+  },
+
   async fetch() {
-    if (this.$route.query.sortOption === "close") {
-      this.sortSelected = "마감순";
-    } else {
-      this.sortSelected = "최신순";
+    for (const key in this.sortOptionList) {
+      if (key === this.sortOption) {
+        this.sortSelected = this.sortOptionList[key];
+      }
     }
     this.brandList = await getBrandList();
     this.brandOption = await getBrandNameList();
@@ -69,39 +74,28 @@ export default {
         this.brandOpen = false;
       }
     },
-    selectSort(option) {
-      if (option === "최신순") {
-        this.sortSelected = option;
-        this.$router.push({
-          path: this.$route.path,
-          query: {
-            ...this.$route.query,
-            sortOption: "recent",
-          },
-        });
-      } else if (option === "마감순") {
-        this.sortSelected = option;
-        this.$router.push({
-          path: this.$route.path,
-          query: {
-            ...this.$route.query,
-            sortOption: "close",
-          },
-        });
-      }
-      this.sortOpen = false;
-    },
-    selectBrand(option) {
-      this.brandSelected = option.brandNm ? option.brandNm : "브랜드 전체";
+    selectSort(key) {
+      this.sortSelected = this.sortOptionList[key];
       this.$router.push({
         path: this.$route.path,
         query: {
           ...this.$route.query,
-          brand: option.brandNo,
+          sortOption: key,
         },
       });
-      this.brandOpen = false;
+      this.sortOpen = false;
     },
+    // selectBrand(option) {
+    //   this.brandSelected = option.brandNm ? option.brandNm : "브랜드 전체";
+    //   this.$router.push({
+    //     path: this.$route.path,
+    //     query: {
+    //       ...this.$route.query,
+    //       brand: option.brandNo,
+    //     },
+    //   });
+    //   this.brandOpen = false;
+    // },
   },
 };
 </script>

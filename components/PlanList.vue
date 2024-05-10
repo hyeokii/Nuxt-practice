@@ -9,7 +9,7 @@
       >
       </PlanCard>
       <button
-        v-if="!(showPlan === totalCount)"
+        v-if="!(showPlan >= totalCount)"
         class="plan-more"
         @click="getMoreList"
       >
@@ -31,7 +31,7 @@ export default {
     return {
       planList: {},
     };
-  },
+  }, //data
   computed: {
     dispGrpNo() {
       return this.$route.query.group;
@@ -41,6 +41,9 @@ export default {
     },
     totalCount() {
       return this.planList?.payload?.totalCount;
+    },
+    pageNo() {
+      return this.$route.query.pageNo ?? 1;
     },
     showPlan() {
       return this.planList?.payload?.planInfoList
@@ -59,12 +62,12 @@ export default {
         this.fetchPlans();
       }
     },
-  },
+  }, //이벤트 버스
   async fetch() {
     this.planList = await getPlanList({
       dispGrpNo: this.dispGrpNo,
       sortOption: this.sortOption,
-      pageNo: this.$route.query.pageNo,
+      pageNo: this.pageNo, //데이터
     });
   },
   methods: {
@@ -72,23 +75,17 @@ export default {
       this.planList = await getPlanList({
         dispGrpNo: this.dispGrpNo,
         sortOption: this.sortOption,
-        pageNo: this.$route.query.pageNo,
+        pageNo: this.pageNo,
       });
     },
 
     async getMoreList() {
-      let pageNo = 1;
-      if (this.$route.query.pageNo) {
-        pageNo = this.$route.query.pageNo;
-      } else {
-        pageNo = 1;
-        this.$router.push({
-          path: "/plan",
-          query: { ...this.$route.query, pageNo },
-        });
-      }
+      this.$router.push({
+        path: "/plan",
+        query: { ...this.$route.query, pageNo: this.pageNo },
+      });
       const addList = await addPlanList({
-        pageNo: pageNo,
+        pageNo: this.pageNo,
         dispGrpNo: this.dispGrpNo,
         sortOption: this.sortOption,
       });
@@ -97,13 +94,10 @@ export default {
         path: "/plan",
         query: {
           ...this.$route.query,
-          pageNo: Number(this.$route.query.pageNo) + 1,
+          pageNo: Number(this.pageNo) + 1,
         },
       });
-      this.planList.payload.planInfoList = [
-        ...this.planList.payload.planInfoList,
-        ...addList,
-      ];
+      this.planList.payload.planInfoList.push(...addList);
     },
   },
 };
