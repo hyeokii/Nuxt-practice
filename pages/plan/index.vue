@@ -96,7 +96,7 @@ export default {
       try {
         const responseData = await apiData.fetchSortPlan(
           this.sortType,
-          this.pageNo,
+          this.$router.currentRoute.query.pageNo,
           9,
           this.$router.currentRoute.query.dispGrpNo
             ? this.$router.currentRoute.query.dispGrpN

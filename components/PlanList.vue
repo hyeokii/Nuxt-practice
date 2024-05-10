@@ -30,19 +30,7 @@ export default {
 
     showMoreBtn() {
       const query = this.$router.currentRoute.query;
-      // const, let 혼용해서 쓰지 말자.
-      // if (this.planList.length === Number(query.pageNo) * 9) {
-      //   const res = apiData.fetchGroupPlan(
-      //     query.sortType ? query.sortType : "recent",
-      //     Number(query.pageNo) + 1,
-      //     query.dispGrpNo === null || query.dispGrpNo === undefined
-      //       ? ""
-      //       : query.dispGrpNo
-      //   );
-      //   return res.data.payload.planInfoList.length !== 0;
-      // }
-      // totalCount 받아와서 계산 => api 리턴값에 있음.
-      return this.planList.length >= Number(query.pageNo) * 9;
+      return this.planList.length >= Number(query.pageNo || 1) * 9;
     },
   },
 
