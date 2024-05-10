@@ -2,8 +2,9 @@
   <div class="selectContainer">
     <div class="custom-select-wrapper">
       <select class="custom-select" v-model="sortType" @change="updateRoute">
-        <option value="recent" selected>최신순</option>
-        <option value="close">마감순</option>
+        <option value="recent" :selected="sortType === 'recent'">최신순</option>
+
+        <option value="close" :selected="sortType === 'close'">마감순</option>
       </select>
       <span class="arrow">&#9660;</span>
     </div>

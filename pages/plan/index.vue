@@ -25,6 +25,7 @@
 
 <script>
 import apiData from "../../api/apiData";
+// watch는 최대한 지양해라.
 export default {
   data() {
     return {
@@ -32,7 +33,9 @@ export default {
       planList: [],
       pageNo: 1,
       selectedGroup: 0,
+      //query로 저장
       sortType: "recent",
+      // props로 내려서 관리(emit)
     };
   },
   async asyncData({ route }) {

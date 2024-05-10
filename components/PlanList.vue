@@ -29,7 +29,8 @@ export default {
     },
 
     showMoreBtn() {
-      let query = this.$router.currentRoute.query;
+      const query = this.$router.currentRoute.query;
+      // const, let 혼용해서 쓰지 말자.
       // if (this.planList.length === Number(query.pageNo) * 9) {
       //   const res = apiData.fetchGroupPlan(
       //     query.sortType ? query.sortType : "recent",
@@ -40,13 +41,14 @@ export default {
       //   );
       //   return res.data.payload.planInfoList.length !== 0;
       // }
+      // totalCount 받아와서 계산 => api 리턴값에 있음.
       return this.planList.length >= Number(query.pageNo) * 9;
     },
   },
 
   methods: {
     async loadMore() {
-      // 기획전 더보기 버튼 누르면 실행
+      // 상위로 이벤트를 보낸 다음에 처리
       let query = this.$router.currentRoute.query;
       this.$router.push({
         path: "/plan",
@@ -69,6 +71,9 @@ export default {
             : query.dispGrpNo
         );
         this.$emit("addPlanList", responseData.data);
+        // api를 요청하는 부분이 너무 여러곳.
+        // 기획전 더보기 버튼 누르면 실행.
+        // 데이터가 있는 곳에서 바꿔주는 게 좋음.
       } catch (error) {
         console.error("error", error);
       }
