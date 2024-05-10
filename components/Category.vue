@@ -8,10 +8,10 @@
         전체
       </button>
       <button
-        v-for="(item, index) in data"
+        v-for="item in data"
         :key="item.dispGrpNo"
-        @click="goToCategory(item.dispGrpNo, index)"
-        :class="{ categoryBtn: true, active: index === activeBtn }"
+        @click="goToCategory(item.dispGrpNo)"
+        :class="{ categoryBtn: true, active: item.dispGrpNo === activeBtn }"
       >
         {{ item.dispGrpNm }}
       </button>
@@ -20,30 +20,33 @@
 </template>
 
 <script>
-import PlanList from "./PlanList.vue";
-
 export default {
-  components: {
-    PlanList,
-  },
   props: {
     data: {
       type: Array,
       required: true,
     },
   },
+  computed: {
+    group() {
+      return this.$route.query.group ?? "";
+    },
+    sortOption() {
+      return this.$route.query.sortOption;
+    },
+  },
   data() {
     return {
-      activeBtn: -1,
+      activeBtn: this.$route.query.group,
     };
   },
 
   methods: {
-    goToCategory(categoryId, index) {
-      this.activeBtn = index;
+    goToCategory(categoryId) {
+      this.activeBtn = categoryId;
       const query = { pageNo: 1, group: categoryId };
-      if (this.$route.query.sortOption) {
-        query.sortOption = this.$route.query.sortOption;
+      if (this.sortOption) {
+        query.sortOption = this.sortOption;
       }
       this.$router.push({
         path: "/plan",

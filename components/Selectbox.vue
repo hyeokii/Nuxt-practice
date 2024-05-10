@@ -23,7 +23,7 @@
         <ul class="select-options" v-show="sortOpen">
           <li
             v-for="(value, key) in sortOptionList"
-            :key="key - value"
+            :key="key"
             @click="selectSort(key)"
           >
             {{ value }}
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getBrandNameList, getBrandList } from "../api";
+// import { getBrandNameList, getBrandList } from "../api";
 export default {
   data() {
     return {
@@ -56,12 +56,13 @@ export default {
 
   async fetch() {
     for (const key in this.sortOptionList) {
+      console.log(key);
       if (key === this.sortOption) {
         this.sortSelected = this.sortOptionList[key];
       }
     }
-    this.brandList = await getBrandList();
-    this.brandOption = await getBrandNameList();
+    // this.brandList = await getBrandList();
+    // this.brandOption = await getBrandNameList();
   },
 
   methods: {
