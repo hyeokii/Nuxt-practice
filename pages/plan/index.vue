@@ -4,7 +4,7 @@
 			<button type="button" @click="getPlanList()" :class="{on : dispGrpNo === undefined }">전체</button>
 			<LinkList v-for="(linkListData, linkListIndex) in planGroup" :key="linkListIndex" :linkListData="linkListData" @getPlanListData="getPlanList" :dispGrpNo="dispGrpNo"/>
 		</div>
-		<SortArea @getSelectData="sortChangeEvent"/>
+		<SortArea @getSelectData="sortChangeEvent" :sortType="sortType"/>
 		<div class="cont">
 			<div class="plan-list">
 				<PlanList v-for="(planListData, planListIndex) in planList" :planListData="planListData" :key="planListIndex"/>
@@ -15,23 +15,16 @@
   </div>
 </template>
 <script>
-
+import apiData from "../../api/apiData";
 export default {
 	layout : 'Plan',
 	async asyncData({$axios,route}) {
-		const pageNo = 1; // 페이지 번호 기본 값 
-		const sortType = 'recent'; // sort type 기본 값
+		const pageNo = route.query.pageNo ? route.query.pageNo : 1; // 페이지 번호 기본 값 
+		const sortType = route.query.sortType ? route.query.sortType : 'recent'; // sort type 기본 값
 		const planGroupData = await $axios.get("https://gw.x2bee.com/api/display/v1/plan/group")
-		const planSearchData = {
-			dispMediaCd: "99",	// 전시매체코드(고정)
-			sortType: sortType,	// recent, close 정렬코드
-			pageNo: pageNo,	// 페이지 번호
-			pageSize: 9,	// 페이지사이즈 (고정)
-			progressYn: "Y",	// 진행중 여부
-			brandNo: "",	// 브랜드 번호
-			dispGrpNo: route.query.groupNo	// 기획전그룹번호 (없으면 전체)
-		};
-		const planResultData = await $axios.get("https://gw.x2bee.com/api/display/v1/plan/planList", {params: planSearchData});		
+
+		const planResultData = await apiData.getPlanResult(1, 9 * pageNo, route.query.groupNo, sortType);
+
 		const totalPageCount = Math.ceil(planResultData?.data?.payload?.totalCount/9);
 		return {
 			planGroup : planGroupData?.data ?? [],
@@ -78,18 +71,10 @@ export default {
 				this.sortType = sortType 
 			}
 
-			this.$router.push({path:"/plan",query:{pageNo:pageNo, groupNo: groupNo}});			
-			const planSearchData = {
-				dispMediaCd: "99",	// 전시매체코드(고정)
-				sortType: this.sortType,	// recent, close 정렬코드
-				pageNo: pageNo,	// 페이지 번호
-				pageSize: 9,	// 페이지사이즈 (고정)
-				progressYn: "Y",	// 진행중 여부
-				brandNo: "",	// 브랜드 번호
-				dispGrpNo: groupNo	// 기획전그룹번호 (없으면 전체)
-			};
+			this.$router.push({path:"/plan",query:{pageNo:pageNo, groupNo: groupNo, sortType:sortType}});
 
-			const planResultData = await this.$axios.get("https://gw.x2bee.com/api/display/v1/plan/planList", {params: planSearchData});
+			const planResultData = await apiData.getPlanResult(pageNo, 9, groupNo, this.sortType);
+
 			this.pageNo = pageNo
 			this.totalPageCount = Math.ceil(planResultData?.data?.payload?.totalCount/9);			
 			// planInfoList를 따로 저장한다.
@@ -104,18 +89,13 @@ export default {
 
 		//더보기 버튼 이벤트
 		moreClickEvent() { 
-			this.getPlanList(this.pageNo + 1, this.dispGrpNo)
+			this.getPlanList(Number(this.pageNo) + 1, this.dispGrpNo)
 		},
 
 		//정렬 select
 		sortChangeEvent(sortType) { // sortType을 받아서 getPlanList 에 넣어주기
 			this.getPlanList(1, this.dispGrpNo, sortType)
 		},
-
-		// link 버튼 이벤트 
-		linkBtnEvent() {
-			
-		}
 	}
 }
 </script>
