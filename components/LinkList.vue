@@ -13,7 +13,7 @@ export default {
 			defaultValue: undefined,
 		},
 		dispGrpNo : {
-			type: Object,
+			type: String,
 			defaultValue:undefined
 		}
 	},

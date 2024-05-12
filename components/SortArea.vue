@@ -1,11 +1,9 @@
 <template>
   <div class="sort-area">
-		<div class="select">
-			<select @change="$emit('getSelectData', changeEvent($event) )"> <!-- on change methods -->
-				<option value="recent" selected>최신순</option>
-				<option value="close">마감순</option>
-			</select>		
-		</div>
+		<select @change="$emit('getSelectData', changeEvent($event) )" v-model="this.sortType"> <!-- on change methods -->
+			<option value="recent">최신순</option>
+			<option value="close">마감순</option>
+		</select>		
 	</div>
 </template>
 <script>
@@ -13,12 +11,17 @@ export default {
   name: "SortArea",
   props: {
     getSelectData: {
-			type: Object,
+			type: String,
 			defaultValue: undefined,
 		},
+		sortType: {
+			type: String,
+			defaultValue: undefined
+		}
   },
   data() {
-    return {};
+    return {
+		};
   },
   created() {},
   mounted() {},
