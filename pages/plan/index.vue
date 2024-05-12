@@ -9,7 +9,7 @@
 			<div class="plan-list">
 				<PlanList v-for="(planListData, planListIndex) in planList" :planListData="planListData" :key="planListIndex"/>
 			</div>
-			<Nodata v-if="isView"/>
+			<Nodata v-if="isNodataView"/> 
 			<button v-if="isMoreView" type="button" class="btn-more" @click="moreClickEvent">기획전 더보기</button>
 		</div>
   </div>
@@ -32,7 +32,7 @@ export default {
 			dispGrpNo: route.query.groupNo	// 기획전그룹번호 (없으면 전체)
 		};
 		const planResultData = await $axios.get("https://gw.x2bee.com/api/display/v1/plan/planList", {params: planSearchData});		
-		const totalPageCount = Math.ceil(planResultData?.data?.payload?.totalCount/9);
+		const totalPageCount = Math.ceil(planResultData?.data?.payload?.totalCount/9); //기획전 9개씩 계산
 		return {
 			planGroup : planGroupData?.data ?? [],
 			planList: planResultData?.data?.payload?.planInfoList ?? [], // 컴포넌트 안에 있어야함
@@ -58,7 +58,7 @@ export default {
 		};
 	},
 	computed : {
-		isView() {
+		isNodataView() {
 			return(this.planList ?? []).length === 0
 		},
 		isMoreView() {
@@ -95,10 +95,11 @@ export default {
 			// planInfoList를 따로 저장한다.
 			let planInfoList = planResultData?.data?.payload?.planInfoList;
 			// planInfoList 루프를 돌린다.
-			for(let index = 0; index < planInfoList.length; ++index) {
-					const data = planInfoList[index];
-					this.planList.push(data);
-			}
+			this.planList = [...this.planList, ...planInfoList]
+			// for(let index = 0; index < planInfoList.length; ++index) {
+			// 		const data = planInfoList[index];
+			// 		this.planList.push(data);
+			// }
 			this.dispGrpNo = groupNo; // groupNo 저장
 		},
 
@@ -111,11 +112,6 @@ export default {
 		sortChangeEvent(sortType) { // sortType을 받아서 getPlanList 에 넣어주기
 			this.getPlanList(1, this.dispGrpNo, sortType)
 		},
-
-		// link 버튼 이벤트 
-		linkBtnEvent() {
-			
-		}
 	}
 }
 </script>

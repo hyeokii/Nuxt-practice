@@ -37,7 +37,7 @@ export default {
 	},
   mounted() {},
   methods: {
-	date(date) {
+		date(date) {
 			const rangeDate = new Date(date)
 			return (
 				rangeDate.getFullYear() + "-" +
@@ -48,7 +48,7 @@ export default {
 		evtLike :function() {
 			this.isActive = !this.isActive;
 		}
-  },
+	},
   computed: {				
   }
 };

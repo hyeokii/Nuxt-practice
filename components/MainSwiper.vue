@@ -12,8 +12,8 @@
               alt="img"
             />
             <div class="text-box">
-              <p class="title">{{ data.contentInfoList[1].textList.at(0)?.contTitleNm }}</p>
-              <p class="desc">{{ data.contentInfoList[1].textList.at(1)?.contTitleNm }}</p>
+              <!-- <p class="title">{{ data.contentInfoList[1].textList.at(0)?.contTitleNm }}</p> -->
+              <!-- <p class="desc">{{ data.contentInfoList[1].textList.at(1)?.contTitleNm }}</p> -->
             </div>
           </a>
         </swiper-slide>
