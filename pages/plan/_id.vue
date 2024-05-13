@@ -2,14 +2,20 @@
   <div class="planDetailContainer" v-if="planDataList">
     <div class="planTitle">기획전</div>
     <div class="titleImg" v-html="planDataList.titleHtmlPc"></div>
-    <PlanDetail
+    <ScrollSelectBox
+      :planDivList="planDivList"
+      :curScroll="curScroll"
+      @moveToDiv="moveToDiv"
+    />
+    <PlanDiv
       class="planDiv"
       v-for="planDiv in planDivList"
       :planDiv="planDiv"
-      :key="planDiv.divObjNo"
+      :key="planDiv.divobjNo"
       :goodsList="planDiv.goodsList"
       :mkdpNo="mkdpNo"
-    ></PlanDetail>
+      ref="planDivs"
+    ></PlanDiv>
     <div class="planFooter">{{ planDataList.footerContents }}</div>
   </div>
 </template>
@@ -22,6 +28,7 @@ export default {
       planDataList: [],
       planDivList: [],
       mkdpNo: "",
+      curScroll: "1",
     };
   },
   async asyncData({ route }) {
@@ -34,6 +41,11 @@ export default {
       planDivList: planData.data.planDivObjList,
       mkdpNo: params.id,
     };
+  },
+  methods: {
+    moveToDiv(newScroll) {
+      console.log(this.$refs.planDivs[newScroll - 1].$el.scrollIntoView());
+    },
   },
 };
 </script>

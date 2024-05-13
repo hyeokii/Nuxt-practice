@@ -1,13 +1,13 @@
 <template>
   <div class="selectContainer">
     <div class="custom-select-wrapper">
-      <select class="custom-select" v-model="newSortType" @change="sortGoods">
-        <option value="10" :selected="newSortType === '10'">최신순</option>
-        <option value="20" :selected="newSortType === '20'">판매 많은순</option>
-        <option value="30" :selected="newSortType === '30'">높은 가격순</option>
-        <option value="40" :selected="newSortType === '40'">낮은 가격순</option>
-        <option value="50" :selected="newSortType === '50'">
-          상품평 많은순
+      <select class="custom-select" v-model="newScroll" @change="moveToDiv">
+        <option
+          v-for="(planDiv, idx) in planDivList"
+          :key="`${idx}${planDiv.divobjGbCd}`"
+          :value="planDiv.divobjNo"
+        >
+          {{ planDiv.divobjNm }}
         </option>
       </select>
       <span class="arrow">&#9660;</span>
@@ -18,19 +18,19 @@
 <script>
 export default {
   props: {
-    sortType: { type: String, required: true },
+    planDivList: { type: Array, required: true },
+    curScroll: { type: String },
   },
 
   data() {
     return {
-      newSortType: this.sortType,
+      newScroll: this.curScroll,
     };
   },
 
   methods: {
-    async sortGoods() {
-      // selectBox 눌렀을 때 실행
-      this.$emit("updateGoodsList", this.newSortType);
+    async moveToDiv() {
+      this.$emit("moveToDiv", this.newScroll);
     },
   },
 };
