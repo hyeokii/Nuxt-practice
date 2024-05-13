@@ -1,0 +1,84 @@
+<template>
+  <div class="selectContainer">
+    <div class="custom-select-wrapper">
+      <select class="custom-select" v-model="newSortType" @change="updateRoute">
+        <option value="recent" :selected="newSortType === 'recent'">
+          최신순
+        </option>
+        <option value="close" :selected="newSortType === 'close'">
+          마감순
+        </option>
+      </select>
+      <span class="arrow">&#9660;</span>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {},
+
+  data() {
+    return {
+      curScroll: "",
+    };
+  },
+
+  methods: {
+    async updateRoute() {
+      // selectBox 눌렀을 때 실행
+      const currentRoute = this.$router.currentRoute;
+      const { query } = currentRoute;
+      const { pageNo = "1", pageSize = "9", dispGrpNo = "" } = query;
+
+      const newQuery = {
+        ...query,
+        sortType: this.newSortType,
+      };
+
+      this.$router.push({
+        path: "/plan",
+        query: newQuery,
+      });
+
+      this.$emit("updatePlanList", this.newSortType);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.selectContainer {
+  width: 1240px;
+  padding: 0 3rem;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: end;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select {
+  cursor: pointer;
+  padding: 0.5rem 3rem;
+  border: 1px solid #dfdfdf;
+  font-size: 1rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2rem;
+}
+</style>

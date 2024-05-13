@@ -1,11 +1,14 @@
 <template>
-  <div class="planDetailContainer">
+  <div class="planDetailContainer" v-if="planDataList">
     <div class="planTitle">기획전</div>
-    <div
-      class="titleImg"
-      v-html="planData.titleHtmlPc"
-      v-if="planData.titleHtmlPc"
-    ></div>
+    <div class="titleImg" v-html="planDataList.titleHtmlPc"></div>
+    <PlanDetail
+      class="planDiv"
+      v-for="planDiv in planDivList"
+      :planDiv="planDiv"
+      :key="planDiv.divObjNo"
+      :goodsList="planDiv.goodsList"
+    ></PlanDetail>
   </div>
 </template>
 
@@ -14,7 +17,8 @@ import apiData from "../../api/apiData";
 export default {
   data() {
     return {
-      planData: [],
+      planDataList: [],
+      planDivList: [],
     };
   },
   async asyncData({ route }) {
@@ -23,7 +27,8 @@ export default {
 
     //PlanList 데이터
     return {
-      planData: planData.data,
+      planDataList: planData.data,
+      planDivList: planData.data.planDivObjList,
     };
   },
 };
@@ -37,10 +42,22 @@ export default {
 }
 
 .planTitle {
-  font-size: 32px;
+  font-size: 28px;
+  margin-bottom: 2rem;
 }
 
-.titleImg p {
-  margin: 0;
+.titleImg::v-deep {
+  margin-bottom: 2rem;
+  p {
+    margin: 0;
+
+    img {
+      width: 1240px;
+    }
+  }
+}
+
+.planDiv {
+  margin-bottom: 2rem;
 }
 </style>

@@ -22,7 +22,7 @@ export default {
     planList: { type: Array, required: true },
     totalCount: { type: Number, requiredt: true },
     sortType: { type: String, required: true },
-    curPageNo: Number,
+    curPageNo: { Number, required: true },
   },
 
   computed: {
