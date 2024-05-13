@@ -28,6 +28,7 @@
       @addPlanList="addPlanList"
       :totalCount="totalCount"
       :sortType="sortType"
+      :curPageNo="curPageNo"
     />
   </div>
 </template>
@@ -47,6 +48,7 @@ export default {
       // query에 저장(O)
       sortType: "recent",
       totalCount: 0,
+      curPageNo: 1,
       // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
     };
   },
@@ -69,10 +71,12 @@ export default {
       selectedGroup: query.selectedGrp || "0",
       sortType: query.sortType || "recent",
       totalCount: totalData.data.payload.totalCount,
+      curPageNo: query.pageNo || 1,
     };
   },
   methods: {
     async routeToGroup(newGrpNo, groupNo) {
+      this.curPageNo = 1;
       // 카테고리 누르면 실행
       this.$router.push({
         path: "/plan",
@@ -100,15 +104,13 @@ export default {
     async updatePlanList(sortType) {
       // sort api 호출
       this.sortType = sortType;
-
+      const query = this.$router.currentRoute.query;
       try {
         const responseData = await apiData.fetchSortPlan(
           this.sortType,
-          this.$router.currentRoute.query.pageNo || 1,
+          query.pageNo || 1,
           9,
-          this.$router.currentRoute.query.dispGrpNo
-            ? this.$router.currentRoute.query.dispGrpNo
-            : ""
+          query.dispGrpNo ? query.dispGrpNo : ""
         );
         this.planList = responseData.data.payload.planInfoList;
       } catch (error) {
@@ -116,13 +118,14 @@ export default {
       }
     },
 
-    async addPlanList(curPageNo) {
+    async addPlanList() {
       // 기획전 더보기 버튼
+      this.curPageNo = this.curPageNo + 1;
       const query = this.$router.currentRoute.query;
       try {
         const responseData = await apiData.fetchGroupPlan(
           query.sortType ? query.sortType : "recent",
-          curPageNo + 1,
+          this.curPageNo,
           query.dispGrpNo === null || query.dispGrpNo === undefined
             ? ""
             : query.dispGrpNo

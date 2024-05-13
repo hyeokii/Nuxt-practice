@@ -1,24 +1,27 @@
 <template>
   <div v-if="plan" class="planCardContainer">
-    <img
-      :src="`https://img-stg.x2bee.com/${plan.imageList[0].bnrImgPathNm}`"
-      v-if="plan.imageList && plan.imageList[0]"
-      class="cardImg"
-      loading="lazy"
-      alt="img"
-    />
-    <div class="noImg" v-else>이미지가 없습니다.</div>
+    <NuxtLink :to="`/plan/${plan.mkdpNo}`">
+      <img
+        :src="`https://img-stg.x2bee.com/${plan.imageList[0].bnrImgPathNm}`"
+        v-if="plan.imageList && plan.imageList[0]"
+        class="cardImg"
+        loading="lazy"
+        alt="img"
+      />
+      <div class="noImg" v-else>이미지가 없습니다.</div>
+    </NuxtLink>
     <div class="planCardContent">
       <div class="btnContainer">
         <button class="likeBtn">&#9829;</button>
         <button class="shareBtn">공유</button>
       </div>
-      <span class="planTitle">{{ plan.mkdpNm }}</span>
-      <span class="planCont">{{ plan.introConts }}</span>
-      <span class="planPeriod"
-        >{{ plan.startDate.split(" ")[0] }} ~
-        {{ plan.endDate.split(" ")[0] }}</span
-      >
+      <NuxtLink :to="`/plan/${plan.mkdpNo}`">
+        <div class="planTitle">{{ plan.mkdpNm }}</div>
+        <div class="planCont">{{ plan.introConts }}</div>
+        <div class="planPeriod">
+          {{ plan.startDate.split(" ")[0] }} ~ {{ plan.endDate.split(" ")[0] }}
+        </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -46,6 +49,11 @@ export default {
 .planCardContainer {
   margin-bottom: 30px;
   width: 382px;
+
+  a {
+    text-decoration-line: none;
+    color: black;
+  }
 }
 
 .planCardContent {

@@ -30,4 +30,11 @@ export default {
       }&progressYn=Y&dispGrpNo=${dispGrpNo}`
     );
   },
+
+  async fetchPlanDetail(mkdpNo) {
+    // 개별 plan 데이터 불러오기
+    return axios.get(
+      `https://gw.x2bee.com/api/display/v1/plan/planDetail/${mkdpNo}`
+    );
+  },
 };

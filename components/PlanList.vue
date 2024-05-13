@@ -17,34 +17,29 @@
 </template>
 
 <script>
-import apiData from "../api/apiData";
 export default {
   props: {
     planList: { type: Array, required: true },
     totalCount: { type: Number, requiredt: true },
     sortType: { type: String, required: true },
+    curPageNo: Number,
   },
 
   computed: {
-    curPageNo() {
-      return this.$router.currentRoute.query.pageNo || 1;
-    },
-
     showMoreBtn() {
-      const query = this.$router.currentRoute.query;
-      return this.totalCount >= Number(query.pageNo || 1) * 9;
+      return this.totalCount >= this.curPageNo * 9;
     },
   },
 
   methods: {
     async loadMore() {
-      // 상위로 이벤트를 보낸 다음에 처리
+      // 상위로 이벤트를 보낸 다음에 처리(?)
       let query = this.$router.currentRoute.query;
       this.$router.push({
         path: "/plan",
         query: {
           sortType: this.sortType,
-          pageNo: Number(this.curPageNo) + 1,
+          pageNo: this.curPageNo + 1,
           dispGrpNo:
             query.dispGrpNo === null || query.dispGrpNo === undefined
               ? ""
@@ -52,7 +47,7 @@ export default {
         },
       });
 
-      this.$emit("addPlanList", Number(this.curPageNo));
+      this.$emit("addPlanList");
     },
   },
 };
