@@ -110,7 +110,7 @@ export default {
 }
 
 .listBtn {
-  border: 1px solid rgb(193, 193, 193);
+  border: 1px solid rgb(223, 223, 223);
   padding: 0.5rem 10rem;
   font-size: 14px;
   margin-top: 3rem;

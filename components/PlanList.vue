@@ -5,6 +5,7 @@
         v-for="(plan, idx) in planList"
         :key="`${idx}${plan.mkdpNo}`"
         :plan="plan"
+        type="main"
       />
     </div>
     <div v-else>진행중인 기획전이 없습니다.</div>

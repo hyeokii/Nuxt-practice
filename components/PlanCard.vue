@@ -1,5 +1,5 @@
 <template>
-  <div v-if="plan" class="planCardContainer">
+  <div v-if="plan" :class="['planCardContainer', type]">
     <NuxtLink :to="`/plan/${plan.mkdpNo}`">
       <img
         :src="`https://img-stg.x2bee.com/${plan.imageList[0].bnrImgPathNm}`"
@@ -30,6 +30,7 @@
 export default {
   props: {
     plan: { type: Object, required: true },
+    type: { type: String },
   },
   data() {
     return {};
@@ -44,6 +45,20 @@ export default {
   height: 280px;
   object-fit: cover;
   margin-bottom: 1rem;
+}
+
+.main .cardImg,
+.main .noImg {
+  width: 380px;
+  height: 380px;
+}
+
+.main .planCardContainer {
+  width: 380px;
+}
+
+.main .planCardContent {
+  width: 380px;
 }
 
 .planCardContainer {
