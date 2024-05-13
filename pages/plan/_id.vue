@@ -69,7 +69,7 @@ export default {
 
 .planTitle {
   font-size: 28px;
-  margin: 2rem 0;
+  margin-bottom: 3rem;
 }
 
 .titleImg::v-deep {
@@ -94,8 +94,8 @@ export default {
 
 .line {
   width: 1240px;
-  height: 2px;
-  background-color: rgb(189, 189, 189);
+  height: 3px;
+  background-color: rgb(236, 236, 236);
   margin-bottom: 3rem;
 }
 
@@ -113,6 +113,6 @@ export default {
   border: 1px solid rgb(193, 193, 193);
   padding: 0.5rem 10rem;
   font-size: 14px;
-  /* font-weight: 600; */
+  margin-top: 3rem;
 }
 </style>

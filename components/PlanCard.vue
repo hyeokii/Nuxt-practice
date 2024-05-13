@@ -40,15 +40,15 @@ export default {
 <style lang="scss" scoped>
 .cardImg,
 .noImg {
-  width: 382px;
-  height: 382px;
+  width: 280px;
+  height: 280px;
   object-fit: cover;
   margin-bottom: 1rem;
 }
 
 .planCardContainer {
   margin-bottom: 30px;
-  width: 382px;
+  width: 280px;
 
   a {
     text-decoration-line: none;
@@ -59,13 +59,14 @@ export default {
 .planCardContent {
   display: flex;
   flex-direction: column;
-  width: 382px;
+  width: 280px;
 
   .btnContainer {
     width: 100%;
     display: flex;
     justify-content: end;
     margin-bottom: 5px;
+    font-weight: 500;
 
     button {
       font-size: 12px;
@@ -86,6 +87,9 @@ export default {
     font-weight: 700;
     font-size: 14px;
     margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .planCont {
@@ -94,6 +98,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: 500;
   }
 
   .planPeriod {

@@ -29,6 +29,7 @@ export default {
         spaceBetween: 30,
         loop: false,
         pagination: "",
+        slidesPerGroup: 4,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
@@ -45,8 +46,8 @@ export default {
   position: relative;
 }
 .swiper {
-  /* height: 330px; */
-  width: 1245px;
+  width: 1280px;
+  padding: 0 18px;
   position: relative;
   .swiper-slide {
     display: flex;
@@ -54,37 +55,12 @@ export default {
     z-index: 10;
     justify-content: center;
     align-items: center;
-    text-align: center;
     font-weight: bold;
-    opacity: 0.7;
     overflow: hidden;
     cursor: pointer;
-
-    &.swiper-slide-active {
-      opacity: 1;
-    }
-
-    .planCardContainer {
-    }
   }
 }
 
-.swiper {
-  width: 1280px;
-  padding: 0 18px;
-
-  @media (min-width: 1900px) {
-    width: 1900px;
-  }
-
-  .swiper-slide {
-    width: 100%;
-  }
-}
-
-.swiper-slide {
-  opacity: 1;
-}
 .swiper-button-prev,
 .swiper-button-next {
   background-color: white;
@@ -93,8 +69,8 @@ export default {
   border-radius: 50%;
   position: absolute;
   z-index: 25;
-  top: 45%;
-  transform: translateY(-45%);
+  top: 33%;
+  transform: translateY(-33%);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0 24px;
