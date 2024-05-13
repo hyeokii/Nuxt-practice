@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .planDivContainer {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .planDivHtml::v-deep {
   p {

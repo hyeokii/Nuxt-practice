@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 .selectContainer {
   width: 1240px;
-  padding: 0 3rem;
+
   margin: 2rem 0;
   display: flex;
   justify-content: end;

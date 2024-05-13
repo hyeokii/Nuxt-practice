@@ -16,7 +16,14 @@
       :mkdpNo="mkdpNo"
       ref="planDivs"
     ></PlanDiv>
-    <div class="planFooter">{{ planDataList.footerContents }}</div>
+    <div class="line"></div>
+    <div class="recentPlanTitle">최신 기획전</div>
+    <RecentGoodsSwiper :recentPlanList="planDataList.recentPlanList" />
+
+    <div class="planFooter" v-html="planDataList.footerContents"></div>
+    <div>
+      <button @click="goToMain" class="listBtn">목록</button>
+    </div>
   </div>
 </template>
 
@@ -46,6 +53,8 @@ export default {
     moveToDiv(newScroll) {
       console.log(this.$refs.planDivs[newScroll - 1].$el.scrollIntoView());
     },
+
+    goToMain() {},
   },
 };
 </script>
@@ -55,11 +64,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem 0;
 }
 
 .planTitle {
   font-size: 28px;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 }
 
 .titleImg::v-deep {
@@ -80,5 +90,29 @@ export default {
 .planFooter {
   width: 1240px;
   text-align: start;
+}
+
+.line {
+  width: 1240px;
+  height: 2px;
+  background-color: rgb(189, 189, 189);
+  margin-bottom: 3rem;
+}
+
+.recentPlanContainer {
+  width: 1240px;
+}
+
+.recentPlanTitle {
+  width: 1240px;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.listBtn {
+  border: 1px solid rgb(193, 193, 193);
+  padding: 0.5rem 10rem;
+  font-size: 14px;
+  /* font-weight: 600; */
 }
 </style>
