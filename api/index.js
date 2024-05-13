@@ -60,3 +60,8 @@ export const getBrandNameList = async () => {
     return brand.brandNm;
   });
 };
+
+export const getBrandDetail = async (id) => {
+  const res = (await axios.get(`${BASE_URL}/planDetail/${id}`)).data;
+  return res;
+};

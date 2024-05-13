@@ -36,6 +36,7 @@
 
 <script>
 // import { getBrandNameList, getBrandList } from "../api";
+import { EventBus } from "..";
 export default {
   data() {
     return {
@@ -56,7 +57,6 @@ export default {
 
   async fetch() {
     for (const key in this.sortOptionList) {
-      console.log(key);
       if (key === this.sortOption) {
         this.sortSelected = this.sortOptionList[key];
       }
@@ -77,13 +77,11 @@ export default {
     },
     selectSort(key) {
       this.sortSelected = this.sortOptionList[key];
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          ...this.$route.query,
-          sortOption: key,
-        },
-      });
+      const query = { ...this.$route.query };
+      query.sortOption = key;
+
+      EventBus.$emit("planList-event", "sort-event", key, query);
+
       this.sortOpen = false;
     },
     // selectBrand(option) {

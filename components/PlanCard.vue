@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="moveDetail(plan.mkdpNo)">
     <img
       v-if="isView"
       class="plan-img"
@@ -45,6 +45,9 @@ export default {
     },
     handleShare() {
       alert("공유!!");
+    },
+    moveDetail(id) {
+      this.$router.push(`plan/${id}`);
     },
   },
 };

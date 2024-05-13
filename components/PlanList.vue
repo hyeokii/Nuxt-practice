@@ -23,6 +23,7 @@
 <script>
 import PlanCard from "./PlanCard.vue";
 import { getPlanList, addPlanList } from "../api";
+import { EventBus } from "..";
 export default {
   components: {
     PlanCard,
@@ -40,29 +41,29 @@ export default {
       return this.$route.query.sortOption;
     },
     totalCount() {
-      return this.planList?.payload?.totalCount;
+      return this.planList?.payload?.totalCount ?? 0;
     },
     pageNo() {
       return this.$route.query.pageNo ?? 1;
     },
     showPlan() {
-      return this.planList?.payload?.planInfoList
+      return this.planList.payload.planInfoList
         ? this.planList.payload.planInfoList.length
         : 0;
     },
   },
-  watch: {
-    "$route.query.group"(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.fetchPlans();
-      }
-    },
-    "$route.query.sortOption"(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.fetchPlans();
-      }
-    },
-  }, //이벤트 버스
+  // watch: {
+  //   dispGrpNo(newValue, oldValue) {
+  //     if (newValue !== oldValue) {
+  //       this.fetchPlans();
+  //     }
+  //   },
+  //   sortOption(newValue, oldValue) {
+  //     if (newValue !== oldValue) {
+  //       this.fetchPlans();
+  //     }
+  //   },
+  // },
   async fetch() {
     this.planList = await getPlanList({
       dispGrpNo: this.dispGrpNo,
@@ -70,12 +71,30 @@ export default {
       pageNo: this.pageNo, //데이터
     });
   },
+
+  created() {
+    EventBus.$on("planList-event", (eventType, data, query) => {
+      this.$router.push({
+        path: this.$route.path,
+        query: query,
+      });
+      if (eventType === "categoryId-event") {
+        this.fetchPlans({ categoryId: data });
+      } else if (eventType === "sort-event") {
+        this.fetchPlans({ sortOption: data });
+      }
+    });
+  },
+
   methods: {
-    async fetchPlans() {
+    async fetchPlans({
+      categoryId = this.dispGrpNo,
+      sortOption = this.sortOption,
+    }) {
       this.planList = await getPlanList({
-        dispGrpNo: this.dispGrpNo,
-        sortOption: this.sortOption,
-        pageNo: this.pageNo,
+        dispGrpNo: categoryId,
+        sortOption: sortOption,
+        pageNo: this.pageNo, //데이터
       });
     },
 
@@ -97,6 +116,7 @@ export default {
           pageNo: Number(this.pageNo) + 1,
         },
       });
+
       this.planList.payload.planInfoList.push(...addList);
     },
   },

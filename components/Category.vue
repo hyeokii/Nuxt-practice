@@ -2,8 +2,8 @@
   <div class="category-wrapper">
     <div class="category-list">
       <button
-        @click="goToCategory('', -1)"
-        :class="{ categoryBtn: true, active: activeBtn === -1 }"
+        @click="goToCategory('')"
+        :class="{ categoryBtn: true, active: activeBtn === '' }"
       >
         전체
       </button>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { EventBus } from "..";
 export default {
   props: {
     data: {
@@ -37,7 +38,7 @@ export default {
   },
   data() {
     return {
-      activeBtn: this.$route.query.group,
+      activeBtn: this.$route.query.group || "",
     };
   },
 
@@ -48,10 +49,8 @@ export default {
       if (this.sortOption) {
         query.sortOption = this.sortOption;
       }
-      this.$router.push({
-        path: "/plan",
-        query: query,
-      });
+
+      EventBus.$emit("planList-event", "categoryId-event", categoryId, query);
     },
   },
 };
