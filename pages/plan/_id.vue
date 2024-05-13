@@ -8,7 +8,9 @@
       :planDiv="planDiv"
       :key="planDiv.divObjNo"
       :goodsList="planDiv.goodsList"
+      :mkdpNo="mkdpNo"
     ></PlanDetail>
+    <div class="planFooter">{{ planDataList.footerContents }}</div>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ export default {
     return {
       planDataList: [],
       planDivList: [],
+      mkdpNo: "",
     };
   },
   async asyncData({ route }) {
@@ -29,6 +32,7 @@ export default {
     return {
       planDataList: planData.data,
       planDivList: planData.data.planDivObjList,
+      mkdpNo: params.id,
     };
   },
 };
@@ -59,5 +63,10 @@ export default {
 
 .planDiv {
   margin-bottom: 2rem;
+}
+
+.planFooter {
+  width: 1240px;
+  text-align: start;
 }
 </style>

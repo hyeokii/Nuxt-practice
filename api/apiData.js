@@ -37,4 +37,11 @@ export default {
       `https://gw.x2bee.com/api/display/v1/plan/planDetail/${mkdpNo}`
     );
   },
+
+  async fetchSortGoods(mkdpNo, divobjNo, sortType) {
+    // 기획전 상세에서 goods 정렬
+    return axios.get(
+      `https://fo.x2bee.com/api/display/v1/plan/planGoodsInfo?mkdpNo=${mkdpNo}&divobjNo=${divobjNo}&sort=${sortType}&dispMediaCd=99`
+    );
+  },
 };

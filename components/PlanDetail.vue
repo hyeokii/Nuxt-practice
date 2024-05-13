@@ -17,21 +17,51 @@
       />
     </div>
 
-    <div class="goodsListContainer">
-      <ItemCard
-        v-for="(goods, idx) in planDiv.goodsList"
-        :key="`${idx}${goods.goodsNo}`"
-        :goods="goods"
-      ></ItemCard>
+    <div>
+      <GoodsSortSelectBox
+        :sortType="sortType"
+        @updateGoodsList="updateGoodsList"
+      />
+      <div class="goodsListContainer">
+        <ItemCard
+          v-for="(goods, idx) in newGoodsList"
+          :key="`${idx}${goods.goodsNo}`"
+          :goods="goods"
+        ></ItemCard>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import apiData from "../api/apiData";
+
 export default {
+  data() {
+    return {
+      sortType: "10",
+      newGoodsList: [...this.goodsList],
+    };
+  },
   props: {
     planDiv: { type: Object, required: true },
     goodsList: { type: Array },
+    mkdpNo: { type: String, required: true },
+  },
+  methods: {
+    async updateGoodsList(sortType) {
+      try {
+        const responseData = await apiData.fetchSortGoods(
+          this.mkdpNo,
+          this.planDiv.divobjNo,
+          sortType
+        );
+        this.newGoodsList = responseData.data[0].goodsList;
+        // this.newGoodsList = responseData.data.payload.planInfoList;
+      } catch (error) {
+        console.error("error", error);
+      }
+    },
   },
 };
 </script>

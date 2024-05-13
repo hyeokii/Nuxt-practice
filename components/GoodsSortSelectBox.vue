@@ -1,12 +1,13 @@
 <template>
   <div class="selectContainer">
     <div class="custom-select-wrapper">
-      <select class="custom-select" v-model="newSortType" @change="updateRoute">
-        <option value="recent" :selected="newSortType === 'recent'">
-          최신순
-        </option>
-        <option value="close" :selected="newSortType === 'close'">
-          마감순
+      <select class="custom-select" v-model="newSortType" @change="sortGoods">
+        <option value="10" :selected="newSortType === '10'">최신순</option>
+        <option value="20" :selected="newSortType === '20'">판매 많은순</option>
+        <option value="30" :selected="newSortType === '30'">높은 가격순</option>
+        <option value="40" :selected="newSortType === '40'">낮은 가격순</option>
+        <option value="50" :selected="newSortType === '50'">
+          상품평 많은순
         </option>
       </select>
       <span class="arrow">&#9660;</span>
@@ -16,32 +17,22 @@
 
 <script>
 export default {
-  props: {},
+  props: {
+    sortType: { type: String, required: true },
+    // mkdpNo: { type: String },
+    // divobjNo: { type: String },
+  },
 
   data() {
     return {
-      curScroll: "",
+      newSortType: this.sortType,
     };
   },
 
   methods: {
-    async updateRoute() {
+    async sortGoods() {
       // selectBox 눌렀을 때 실행
-      const currentRoute = this.$router.currentRoute;
-      const { query } = currentRoute;
-      const { pageNo = "1", pageSize = "9", dispGrpNo = "" } = query;
-
-      const newQuery = {
-        ...query,
-        sortType: this.newSortType,
-      };
-
-      this.$router.push({
-        path: "/plan",
-        query: newQuery,
-      });
-
-      this.$emit("updatePlanList", this.newSortType);
+      this.$emit("updateGoodsList", this.newSortType);
     },
   },
 };
