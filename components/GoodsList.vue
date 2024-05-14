@@ -20,9 +20,9 @@ export default {
 
 <style lang="scss" scoped>
 .goods-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   width: 100%;
-  flex-wrap: wrap;
   gap: 24px;
   padding-bottom: 20px;
 }
