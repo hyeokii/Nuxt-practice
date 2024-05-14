@@ -2,6 +2,7 @@
   <div class="selectContainer">
     <div class="custom-select-wrapper">
       <select class="custom-select" v-model="newScroll" @change="moveToDiv">
+        <option value="0" hidden>선택해 주세요.</option>
         <option
           v-for="(planDiv, idx) in planDivList"
           :key="`${idx}${planDiv.divobjGbCd}`"
@@ -30,7 +31,9 @@ export default {
 
   methods: {
     async moveToDiv() {
-      this.$emit("moveToDiv", this.newScroll);
+      if (this.newScroll !== "0") {
+        this.$emit("moveToDiv", this.newScroll);
+      }
     },
   },
 };

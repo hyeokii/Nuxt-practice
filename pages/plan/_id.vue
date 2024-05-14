@@ -46,7 +46,7 @@ export default {
       planDataList: [],
       planDivList: [],
       mkdpNo: "",
-      curScroll: "1",
+      curScroll: "0",
       isLike: false,
     };
   },
