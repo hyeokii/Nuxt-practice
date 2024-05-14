@@ -36,7 +36,7 @@
 <script>
 import apiData from "../../api/apiData";
 // watch는 최대한 지양해라.
-// 원본데이터는 최대한 바꾸지 마라.
+// 원본데이터는 바꾸지 마라.
 
 export default {
   data() {

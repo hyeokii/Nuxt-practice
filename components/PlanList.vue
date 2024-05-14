@@ -8,7 +8,13 @@
         type="main"
       />
     </div>
-    <div v-else>진행중인 기획전이 없습니다.</div>
+    <div class="planListNoData" v-else>
+      <img
+        src="../public/warning.png"
+        alt="warningImg"
+        class="noDataImg"
+      /><span>진행중인 기획전이 없습니다.</span>
+    </div>
     <div class="moreBtnContainer">
       <button @click="loadMore" class="moreBtn" v-show="showMoreBtn">
         기획전 더보기
@@ -73,5 +79,16 @@ export default {
   width: 300px;
   border: 1px solid rgb(143, 143, 143);
   font-size: 12px;
+}
+
+.planListNoData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .noDataImg {
+    margin-bottom: 1rem;
+  }
 }
 </style>
