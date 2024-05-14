@@ -61,7 +61,17 @@ export const getBrandNameList = async () => {
   });
 };
 
-export const getBrandDetail = async (id) => {
-  const res = (await axios.get(`${BASE_URL}/planDetail/${id}`)).data;
+export const getPlanDetail = async (id, sort = "10") => {
+  const res = (await axios.get(`${BASE_URL}/planDetail/${id}?sort=${sort}`))
+    .data;
+  return res;
+};
+
+export const getDivobjNo = async (id, sort, divobjNo) => {
+  const res = (
+    await axios.get(
+      `${BASE_URL}/planDetail/${id}?divobjNo=${divobjNo}&sort=${sort}`
+    )
+  ).data;
   return res;
 };

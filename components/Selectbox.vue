@@ -1,21 +1,6 @@
 <template>
   <div class="custom-select-wrapper">
     <div class="custom-select-list">
-      <!-- <div class="custom-select">
-        <div class="select-styled" @click="toggleDropdown(1)">
-          {{ brandSelected }}
-        </div>
-        <ul class="select-options" v-show="brandOpen">
-          <li @click="selectBrand('All')">브랜드 전체</li>
-          <li
-            v-for="option in brandList"
-            :key="option.brandNo"
-            @click="selectBrand(option)"
-          >
-            {{ option.brandNm }}
-          </li>
-        </ul>
-      </div> -->
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown(2)">
           {{ sortSelected }}
@@ -35,18 +20,13 @@
 </template>
 
 <script>
-// import { getBrandNameList, getBrandList } from "../api";
 import { EventBus } from "..";
 export default {
   data() {
     return {
-      // brandOpen: false,
       sortOpen: false,
-      // brandSelected: "브랜드 전체",
       sortSelected: "최신순",
-      // brandList: {},
-      // brandOption: [],
-      sortOptionList: { recent: "최신순", close: "마감순" }, //key value
+      sortOptionList: { recent: "최신순", close: "마감순" },
     };
   },
   computed: {
@@ -61,40 +41,19 @@ export default {
         this.sortSelected = this.sortOptionList[key];
       }
     }
-    // this.brandList = await getBrandList();
-    // this.brandOption = await getBrandNameList();
   },
 
   methods: {
-    toggleDropdown(selectBoxNumber) {
-      if (selectBoxNumber === 1) {
-        this.brandOpen = !this.brandOpen;
-        this.sortOpen = false;
-      } else if (selectBoxNumber === 2) {
-        this.sortOpen = !this.isOpen2;
-        this.brandOpen = false;
-      }
+    toggleDropdown() {
+      this.sortOpen = !this.sortOpen;
     },
     selectSort(key) {
       this.sortSelected = this.sortOptionList[key];
       const query = { ...this.$route.query };
       query.sortOption = key;
-
       EventBus.$emit("planList-event", "sort-event", key, query);
-
       this.sortOpen = false;
     },
-    // selectBrand(option) {
-    //   this.brandSelected = option.brandNm ? option.brandNm : "브랜드 전체";
-    //   this.$router.push({
-    //     path: this.$route.path,
-    //     query: {
-    //       ...this.$route.query,
-    //       brand: option.brandNo,
-    //     },
-    //   });
-    //   this.brandOpen = false;
-    // },
   },
 };
 </script>

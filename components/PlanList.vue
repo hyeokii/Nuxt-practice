@@ -52,18 +52,6 @@ export default {
         : 0;
     },
   },
-  // watch: {
-  //   dispGrpNo(newValue, oldValue) {
-  //     if (newValue !== oldValue) {
-  //       this.fetchPlans();
-  //     }
-  //   },
-  //   sortOption(newValue, oldValue) {
-  //     if (newValue !== oldValue) {
-  //       this.fetchPlans();
-  //     }
-  //   },
-  // },
   async fetch() {
     this.planList = await getPlanList({
       dispGrpNo: this.dispGrpNo,
@@ -133,15 +121,17 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 0 2.5rem;
   .plan-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    row-gap: 2.5rem;
+    column-gap: 1.5rem;
+    font-size: 14px;
     .plan-product {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      width: 100%;
       padding: 10px;
     }
     .plan-more {

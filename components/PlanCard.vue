@@ -56,7 +56,6 @@ export default {
 <style lang="scss" scoped>
 .plan-img {
   width: 100%;
-  height: 384px;
   object-fit: fill;
 }
 .plan-like {
@@ -69,14 +68,14 @@ export default {
   }
 }
 .plan-title {
-  font-size: 14px;
+  font-size: 100%;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 4px;
 }
 .plan-content {
-  font-size: 14px;
-  width: 384px;
-  margin-bottom: 0;
+  font-size: 100%;
+  width: 100%;
+  margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
