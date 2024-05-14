@@ -2,12 +2,12 @@
   <div class="custom-select-wrapper">
     <div class="custom-select-list">
       <div class="custom-select">
-        <div class="select-styled" @click="toggleDropdown(2)">
+        <div class="select-styled" @click="toggleDropdown()">
           {{ sortSelected }}
         </div>
         <ul class="select-options" v-show="sortOpen">
           <li
-            v-for="(value, key) in sortOptionList"
+            v-for="(value, key) in options"
             :key="key"
             @click="selectSort(key)"
           >
@@ -22,23 +22,34 @@
 <script>
 import { EventBus } from "..";
 export default {
+  props: {
+    options: {
+      type: Object,
+      required: true,
+    },
+    boxtype: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       sortOpen: false,
       sortSelected: "최신순",
-      sortOptionList: { recent: "최신순", close: "마감순" },
     };
   },
   computed: {
     sortOption() {
-      return this.$route.query.sortOption;
+      if (this.boxtype === "PlanMain") {
+        return this.$route.query.sortOption;
+      }
     },
   },
 
   async fetch() {
-    for (const key in this.sortOptionList) {
+    for (const key in this.options) {
       if (key === this.sortOption) {
-        this.sortSelected = this.sortOptionList[key];
+        this.sortSelected = this.options[key];
       }
     }
   },
@@ -48,11 +59,17 @@ export default {
       this.sortOpen = !this.sortOpen;
     },
     selectSort(key) {
-      this.sortSelected = this.sortOptionList[key];
-      const query = { ...this.$route.query };
-      query.sortOption = key;
-      EventBus.$emit("planList-event", "sort-event", key, query);
-      this.sortOpen = false;
+      if (this.boxtype === "PlanMain") {
+        this.sortSelected = this.options[key];
+        const query = { ...this.$route.query };
+        query.sortOption = key;
+        EventBus.$emit("planList-event", "sort-event", key, query);
+        this.sortOpen = false;
+      } else if (this.boxtype === "planDetail") {
+        this.sortSelected = this.options[key];
+        this.$emit("planDetail-event", key);
+        this.sortOpen = false;
+      }
     },
   },
 };
@@ -69,9 +86,9 @@ export default {
     gap: 10px;
     justify-content: end;
     .custom-select {
-      width: 140px;
+      width: 160px;
       .select-styled {
-        width: 140px;
+        width: 160px;
         padding: 10px 20px;
         border: 1px solid #ccc;
         cursor: pointer;
@@ -93,7 +110,7 @@ export default {
       }
 
       .select-options {
-        width: 140px;
+        width: 160px;
         position: absolute;
         list-style: none;
         padding: 0;

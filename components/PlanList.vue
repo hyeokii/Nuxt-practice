@@ -47,17 +47,16 @@ export default {
       return this.$route.query.pageNo ?? 1;
     },
     showPlan() {
-      return this.planList.payload.planInfoList
-        ? this.planList.payload.planInfoList.length
-        : 0;
+      return this.planList?.payload?.planInfoList?.length ?? 0;
     },
   },
   async fetch() {
     this.planList = await getPlanList({
       dispGrpNo: this.dispGrpNo,
       sortOption: this.sortOption,
-      pageNo: this.pageNo, //데이터
+      pageNo: this.pageNo,
     });
+    console.log(this.showPlan);
   },
 
   created() {

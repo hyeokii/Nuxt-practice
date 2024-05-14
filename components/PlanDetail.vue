@@ -10,7 +10,12 @@
       {{ data.textDivobjNm }}
     </div>
 
-    <DetailSelectbox @planDetail-event="fetchGoodsList"></DetailSelectbox>
+    <Selectbox
+      boxtype="planDetail"
+      :options="detailSortOptionList"
+      @planDetail-event="fetchGoodsList"
+      class="detail-sort"
+    ></Selectbox>
 
     <GoodsList :data="goodsList"></GoodsList>
     <div v-if="data.cpnBnrImgPathNm">
@@ -21,13 +26,13 @@
 
 <script>
 import GoodsList from "./GoodsList.vue";
-import DetailSelectbox from "./DetailSelectbox.vue";
+import Selectbox from "./Selectbox.vue";
 import { getDivobjNo } from "../api";
 
 export default {
   components: {
     GoodsList,
-    DetailSelectbox,
+    Selectbox,
   },
   props: {
     data: {
@@ -37,6 +42,13 @@ export default {
   data() {
     return {
       goodsList: Array,
+      detailSortOptionList: {
+        10: "최신순",
+        20: "판매 많은순",
+        30: "높은 가격순",
+        40: "낮은 가격순",
+        50: "상품평 많은순",
+      },
     };
   },
   async fetch() {
@@ -74,10 +86,10 @@ export default {
     width: 100%;
     margin-bottom: 20px;
   }
-}
-.section-wrap:last-child {
-  padding-bottom: 0;
-  background-color: red;
+  .detail-sort {
+    width: 100%;
+    padding: 0;
+  }
 }
 
 @media ($desktop) {

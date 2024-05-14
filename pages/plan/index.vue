@@ -1,7 +1,7 @@
 <template>
   <div class="containers">
     <Category :data="res"></Category>
-    <Selectbox></Selectbox>
+    <Selectbox boxtype="PlanMain" :options="sortOptionList"></Selectbox>
     <PlanList></PlanList>
   </div>
 </template>
@@ -17,6 +17,12 @@ export default {
     Category,
     Selectbox,
     PlanList,
+  },
+
+  data() {
+    return {
+      sortOptionList: { recent: "최신순", close: "마감순" },
+    };
   },
 
   async asyncData() {

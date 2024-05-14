@@ -53,9 +53,7 @@ export default {
       return `https://img-stg.x2bee.com/${src}`;
     },
     gotoPlan() {
-      this.$router.push({
-        path: "/plan",
-      });
+      this.$router.go(-1);
     },
   },
 };
