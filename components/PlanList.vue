@@ -8,15 +8,15 @@
         :key="plan.mkdpNo"
       >
       </PlanCard>
-      <button
-        v-if="!(showPlan >= totalCount)"
-        class="plan-more"
-        @click="getMoreList"
-      >
-        기획전 더 보기
-      </button>
     </div>
     <div v-else class="plan-no">해당 기획전이 없습니다.</div>
+    <button
+      v-if="!(showPlan >= totalCount)"
+      class="plan-more"
+      @click="getMoreList"
+    >
+      기획전 더 보기
+    </button>
   </div>
 </template>
 
@@ -134,17 +134,14 @@ export default {
       flex-direction: column;
       padding: 10px;
     }
-    .plan-more {
-      width: 384px;
-      height: 40px;
-      font-size: 14px;
-      font-weight: bold;
-      border: 1px solid gray;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%);
-    }
+  }
+
+  .plan-more {
+    width: 384px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid gray;
   }
   .plan-no {
     font-size: 30px;

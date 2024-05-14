@@ -27,8 +27,7 @@
 
     <hr class="divider" />
 
-    <recentPlanList :data="res.recentPlanList"></recentPlanList>
-    <div v-html="res.footerContents"></div>
+    <recentPlanList :data="res"></recentPlanList>
   </div>
 </template>
 
@@ -72,7 +71,7 @@ export default {
   width: 1200px;
   height: 100%;
   margin: 0 auto;
-  padding-top: 60px;
+  padding: 60px 0;
   .planDetail-title {
     margin-bottom: 10px;
     text-align: center;

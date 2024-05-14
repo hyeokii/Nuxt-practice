@@ -1,8 +1,9 @@
 <template>
   <div class="recent-swiper">
     <p class="recent-title">최신 기획전</p>
+
     <Swiper :options="SwiperOptions">
-      <SwiperSlide :key="item.mkdpNo" v-for="item in data">
+      <SwiperSlide :key="item.mkdpNo" v-for="item in data.recentPlanList">
         <a href="">
           <PlanCard :plan="item" class="swiper-card"></PlanCard>
         </a>
@@ -10,6 +11,11 @@
     </Swiper>
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
+
+    <div v-html="data.footerContents"></div>
+    <div class="btn-wrap">
+      <button class="toPlanBtn" @click="gotoPlan()">목록</button>
+    </div>
   </div>
 </template>
 
@@ -27,7 +33,7 @@ export default {
 
   props: {
     data: {
-      type: Array,
+      type: Object,
     },
   },
   data() {
@@ -46,6 +52,11 @@ export default {
     imageUrl(src) {
       return `https://img-stg.x2bee.com/${src}`;
     },
+    gotoPlan() {
+      this.$router.push({
+        path: "/plan",
+      });
+    },
   },
 };
 </script>
@@ -58,6 +69,7 @@ export default {
     font-size: 16px;
   }
   .swiper-container {
+    padding-bottom: 40px;
     .swiper-wrapper {
       .swiper-slide {
         width: calc(25% - 18px);
@@ -83,7 +95,7 @@ export default {
     border-radius: 50%;
     width: 2.25rem;
     height: 2.25rem;
-    top: 160px;
+    top: 38%;
   }
   .swiper-button-prev {
     left: -20px;
@@ -99,6 +111,20 @@ export default {
   .swiper-button-next::after {
     color: black;
     font-size: 10px;
+  }
+  .btn-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    .toPlanBtn {
+      width: 24rem;
+      padding: 0 1rem;
+      min-height: 2.5rem;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+      font-size: 14px;
+    }
   }
 }
 </style>

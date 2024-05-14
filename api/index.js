@@ -62,15 +62,16 @@ export const getBrandNameList = async () => {
 };
 
 export const getPlanDetail = async (id, sort = "10") => {
-  const res = (await axios.get(`${BASE_URL}/planDetail/${id}?sort=${sort}`))
-    .data;
+  const res = (
+    await axios.get(`${BASE_URL}/planDetail/${id}?dispMediaCd=99&sort=${sort}`)
+  ).data;
   return res;
 };
 
 export const getDivobjNo = async (id, sort, divobjNo) => {
   const res = (
     await axios.get(
-      `${BASE_URL}/planDetail/${id}?divobjNo=${divobjNo}&sort=${sort}`
+      `${BASE_URL}/planDetail/${id}?dispMediaCd=99&divobjNo=${divobjNo}&sort=${sort}`
     )
   ).data;
   return res;
