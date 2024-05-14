@@ -1,21 +1,23 @@
 <template>
-  <div
-    class="itemCardContainer"
-    @click="routeToUrl(goods.goodsNo)"
-    v-if="goods"
-  >
+  <div class="itemCardContainer" v-if="goods">
     <img
       :src="`https://img-stg.x2bee.com/${goods.goodsRepImgPathNm}`"
       alt="productImg"
       class="productImg"
       v-if="goods.goodsRepImgPathNm"
+      @click="routeToUrl(goods.goodsNo)"
     />
     <div class="likeBtnContainer">
-      <span class="likeBtn"
-        ><img src="../public/like.png" alt="likeImg"
+      <span class="likeBtn" @click="setIsLike"
+        ><img src="../public/like_full.png" alt="likeImg" v-if="isLike" /><img
+          v-else
+          src="../public/like.png"
+          alt="likeImg"
       /></span>
     </div>
-    <p class="productTitle">{{ goods.goodsNm }}</p>
+    <p class="productTitle" @click="routeToUrl(goods.goodsNo)">
+      {{ goods.goodsNm }}
+    </p>
     <span v-if="goods.dcRate !== 0" class="originPrice">{{
       goods.rcntSalePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
     }}</span>
@@ -38,6 +40,14 @@ export default {
     routeToUrl(goodsNo) {
       alert(`goods/detail/${goodsNo}로 이동`);
     },
+    setIsLike() {
+      this.isLike = !this.isLike;
+    },
+  },
+  data() {
+    return {
+      isLike: false,
+    };
   },
 };
 </script>
@@ -46,7 +56,6 @@ export default {
 .itemCardContainer {
   width: 280px;
   margin-bottom: 2rem;
-  cursor: pointer;
 
   @media (max-width: 1200px) {
     width: 350px;
@@ -59,6 +68,7 @@ export default {
   object-fit: cover;
   margin-bottom: 0.5rem;
   top: 0;
+  cursor: pointer;
 
   @media (max-width: 1200px) {
     width: 350px;
@@ -69,12 +79,17 @@ export default {
 .likeBtnContainer {
   width: 100%;
   text-align: right;
+
+  .likeBtn {
+    cursor: pointer;
+  }
 }
 
 .productTitle {
   margin-bottom: 5px;
   font-size: 12px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .originPrice {

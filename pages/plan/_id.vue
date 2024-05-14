@@ -2,8 +2,11 @@
   <div class="planDetailContainer" v-if="planDataList">
     <div class="planTitle">기획전</div>
     <div class="btnContainer">
-      <span class="likeBtn"
-        ><img src="../../public/like.png" alt="likeImg"
+      <span class="likeBtn" @click="setIsLike"
+        ><img
+          src="../../public/like_full.png"
+          alt="likeImg"
+          v-if="isLike" /><img v-else src="../../public/like.png" alt="likeImg"
       /></span>
       <span class="shareBtn"
         ><img src="../../public/share.png" alt="shareImg"
@@ -44,6 +47,7 @@ export default {
       planDivList: [],
       mkdpNo: "",
       curScroll: "1",
+      isLike: false,
     };
   },
   async asyncData({ route }) {
@@ -64,6 +68,10 @@ export default {
 
     goToMain() {
       this.$router.push("/plan");
+    },
+
+    setIsLike() {
+      this.isLike = !this.isLike;
     },
   },
 };
@@ -90,6 +98,11 @@ export default {
 
   .likeBtn {
     margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+  .shareBtn {
+    cursor: pointer;
   }
 }
 

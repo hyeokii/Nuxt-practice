@@ -12,8 +12,11 @@
     </NuxtLink>
     <div class="planCardContent">
       <div class="btnContainer">
-        <span class="likeBtn"
-          ><img src="../public/like.png" alt="likeImg"
+        <span class="likeBtn" @click="setIsLike"
+          ><img src="../public/like_full.png" alt="likeImg" v-if="isLike" /><img
+            v-else
+            src="../public/like.png"
+            alt="likeImg"
         /></span>
         <span class="shareBtn"
           ><img src="../public/share.png" alt="shareImg"
@@ -37,7 +40,14 @@ export default {
     type: { type: String },
   },
   data() {
-    return {};
+    return {
+      isLike: false,
+    };
+  },
+  methods: {
+    setIsLike() {
+      this.isLike = !this.isLike;
+    },
   },
 };
 </script>
@@ -86,7 +96,7 @@ export default {
     justify-content: end;
     margin-bottom: 5px;
     font-weight: 500;
-
+  
     button {
       font-size: 12px;
     }
@@ -94,11 +104,7 @@ export default {
     .likeBtn {
       margin-right: 5px;
       font-size: 16px;
-
-      &:active,
-      &:focus {
-        color: red;
-      }
+      cursor: pointer;
     }
   }
 
