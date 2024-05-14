@@ -1,6 +1,12 @@
 <template>
   <div class="itemCardContainer" v-if="goods">
-    <div class="soldOut" v-if="goods.saleStatCd === '20'">품절</div>
+    <div
+      class="soldOut"
+      v-if="goods.saleStatCd === '20'"
+      @click="routeToUrl(goods.goodsNo)"
+    >
+      품절
+    </div>
     <img
       :src="`https://img-stg.x2bee.com/${goods.goodsRepImgPathNm}`"
       alt="productImg"
@@ -66,6 +72,7 @@ export default {
 }
 
 .soldOut {
+  cursor: pointer;
   width: 100%;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
