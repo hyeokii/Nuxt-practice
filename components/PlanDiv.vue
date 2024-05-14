@@ -1,9 +1,11 @@
 <template>
   <div class="planDivContainer">
+    <!-- 제목 -->
     <div>
       <span v-if="planDiv.textDivobjNm">{{ planDiv.textDivobjNm }}</span>
     </div>
 
+    <!-- 메인이미지 -->
     <div
       class="planDivHtml"
       v-if="planDiv.htmlFileCont"
@@ -17,6 +19,7 @@
       />
     </div>
 
+    <!-- goods -->
     <div>
       <GoodsSortSelectBox
         :sortType="sortType"
@@ -29,6 +32,15 @@
           :goods="goods"
         ></ItemCard>
       </div>
+    </div>
+
+    <!-- 쿠폰 -->
+    <div class="cpnContainer" v-if="planDiv.cpnBnrImgPathNm">
+      <img
+        class="cpnImg"
+        :src="`https://img-stg.x2bee.com/${planDiv.cpnBnrImgPathNm}`"
+        @click="downloadCpn"
+      />
     </div>
   </div>
 </template>
@@ -62,6 +74,9 @@ export default {
         console.error("error", error);
       }
     },
+    downloadCpn() {
+      alert("선택한 쿠폰이 발급 완료 되었습니다.");
+    },
   },
 };
 </script>
@@ -91,5 +106,16 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 40px;
+}
+
+.cpnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+
+  .cpnImg {
+    cursor: pointer;
+  }
 }
 </style>

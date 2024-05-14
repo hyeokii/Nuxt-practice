@@ -12,8 +12,12 @@
     </NuxtLink>
     <div class="planCardContent">
       <div class="btnContainer">
-        <button class="likeBtn">&#9829;</button>
-        <button class="shareBtn">공유</button>
+        <span class="likeBtn"
+          ><img src="../public/like.png" alt="likeImg"
+        /></span>
+        <span class="shareBtn"
+          ><img src="../public/share.png" alt="shareImg"
+        /></span>
       </div>
       <NuxtLink :to="`/plan/${plan.mkdpNo}`">
         <div class="planTitle">{{ plan.mkdpNm }}</div>

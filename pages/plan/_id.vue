@@ -1,6 +1,14 @@
 <template>
   <div class="planDetailContainer" v-if="planDataList">
     <div class="planTitle">기획전</div>
+    <div class="btnContainer">
+      <span class="likeBtn"
+        ><img src="../../public/like.png" alt="likeImg"
+      /></span>
+      <span class="shareBtn"
+        ><img src="../../public/share.png" alt="shareImg"
+      /></span>
+    </div>
     <div class="titleImg" v-html="planDataList.titleHtmlPc"></div>
     <ScrollSelectBox
       :planDivList="planDivList"
@@ -51,10 +59,12 @@ export default {
   },
   methods: {
     moveToDiv(newScroll) {
-      console.log(this.$refs.planDivs[newScroll - 1].$el.scrollIntoView());
+      this.$refs.planDivs[newScroll - 1].$el.scrollIntoView();
     },
 
-    goToMain() {},
+    goToMain() {
+      this.$router.push("/plan");
+    },
   },
 };
 </script>
@@ -64,12 +74,23 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
+  padding: 3em 0;
 }
 
 .planTitle {
   font-size: 28px;
   margin-bottom: 3rem;
+}
+
+.btnContainer {
+  width: 1240px;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 1rem;
+
+  .likeBtn {
+    margin-right: 0.5rem;
+  }
 }
 
 .titleImg::v-deep {

@@ -1,10 +1,20 @@
 <template>
-  <div class="itemCardContainer" @click="routeToUrl(goods.goodsNo)">
+  <div
+    class="itemCardContainer"
+    @click="routeToUrl(goods.goodsNo)"
+    v-if="goods"
+  >
     <img
       :src="`https://img-stg.x2bee.com/${goods.goodsRepImgPathNm}`"
       alt="productImg"
       class="productImg"
+      v-if="goods.goodsRepImgPathNm"
     />
+    <div class="likeBtnContainer">
+      <span class="likeBtn"
+        ><img src="../public/like.png" alt="likeImg"
+      /></span>
+    </div>
     <p class="productTitle">{{ goods.goodsNm }}</p>
     <span v-if="goods.dcRate !== 0" class="originPrice">{{
       goods.rcntSalePrc.toLocaleString("ko-KR", { maximumFractionDigits: 4 })
@@ -54,6 +64,11 @@ export default {
     width: 350px;
     height: 350px;
   }
+}
+
+.likeBtnContainer {
+  width: 100%;
+  text-align: right;
 }
 
 .productTitle {
