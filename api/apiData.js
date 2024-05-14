@@ -15,5 +15,22 @@ export default {
     const planResultData = await axios.get("https://gw.x2bee.com/api/display/v1/plan/planList", {params: planSearchData});
 
     return planResultData;
+  },
+  async getplanDetail(mkdpNo) {
+    return await axios.get("https://gw.x2bee.com/api/display/v1/plan/planDetail/"+ mkdpNo);
+  },
+  async getPlanDetailResult() {
+    const planDetailData = {
+      mkdpNo: '55118', // 기획전 번호
+      divobjNo: '1',  // 구분자 번호
+      sort: '20', // 정렬코드
+      // 10: 최신순
+      // 20: 판매 많은 순
+      // 30: 높은 가격순
+      // 40: 낮은 가격순
+      // 50: 상품평 많은순
+      dispMediaCd: '99' // 미디어코드 (고정)
+    };
+    const planDetailResultData = await axios.get("https://gw.x2bee.com/api/display/v1/plan/planGoodsInfo" , {params:planDetailData})
   }
 };

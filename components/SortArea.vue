@@ -1,9 +1,11 @@
 <template>
   <div class="sort-area">
-		<select @change="$emit('getSelectData', changeEvent($event) )" v-model="this.sortType"> <!-- on change methods -->
-			<option value="recent">최신순</option>
-			<option value="close">마감순</option>
-		</select>		
+		<div class="select">
+			<select @change="$emit('getSelectData', changeEvent($event) )"> <!-- on change methods -->
+				<option value="recent" :selected="sortType === 'recent'">최신순</option>
+				<option value="close" :selected="sortType === 'close'">마감순</option>
+			</select>		
+		</div>
 	</div>
 </template>
 <script>
@@ -40,25 +42,9 @@ export default {
 		gap:0 8px;
 		justify-content: flex-end;
 		margin-top:20px;
-		.select {
-			position: relative;
-			width:120px;
-			border:1px solid #E5E5E5;
-			&::after {
-				content:'';
-				position:absolute;
-				width:16px;
-				height:16px;
-				right:10px;
-				top:50%;
-				transform: translateY(-50%);
-				background:url('https://fo.x2bee.com/images/icons/ico_arrow16.svg') no-repeat;
-			}
-		}
-		select {
-			border:none;
-			width: 100%;
-		}
+		.select {			
+			width:120px;			
+		}		
 	}
 </style>
 

@@ -95,6 +95,7 @@ export default {
 
 		//정렬 select
 		sortChangeEvent(sortType) { // sortType을 받아서 getPlanList 에 넣어주기
+			this.sortType = sortType
 			this.getPlanList(1, this.dispGrpNo, sortType)
 		},
 	}

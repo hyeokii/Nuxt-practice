@@ -1,6 +1,6 @@
 <template>
   <div class="plan-item">
-		<a href="javascript:void(0)">
+		<a :href="`plan/${planListData.mkdpNo}`">
 			<div class="img-box">
 				<img :src="`https://img-stg.x2bee.com/${planListData.imageList[0].bnrImgPathNm}`" :alt="`${planListData.mkdpNm} 이미지`"/>
 			</div>
@@ -17,15 +17,13 @@
 	</div>
 </template>
 <script>
-import planMixins from "@/mixins/plan-mixins";
 export default {
-  name: "LinkList",
-  mixins:[planMixins],
-  props: {
-	planListData: {
-	  type: Object,
-	  defaultValue: undefined,
-	},
+	name: "LinkList",
+	props: {
+		planListData: {
+			type: Object,
+			defaultValue: undefined,
+		},
   },
   data() {
 	return {

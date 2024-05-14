@@ -16,6 +16,7 @@ export default {
 
     // console.log(mainData);
     // console.log('11111');
+    console.log(mainData.data + '데이터')
     return {
       list: mainData?.data?.conrList ?? [],      
     };
