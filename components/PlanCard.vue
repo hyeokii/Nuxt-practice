@@ -96,14 +96,14 @@ export default {
     justify-content: end;
     margin-bottom: 5px;
     font-weight: 500;
-  
-    button {
-      font-size: 12px;
-    }
 
     .likeBtn {
       margin-right: 5px;
       font-size: 16px;
+      cursor: pointer;
+    }
+
+    .shareBtn {
       cursor: pointer;
     }
   }

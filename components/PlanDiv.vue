@@ -69,7 +69,6 @@ export default {
           sortType
         );
         this.newGoodsList = responseData.data[0].goodsList;
-        // this.newGoodsList = responseData.data.payload.planInfoList;
       } catch (error) {
         console.error("error", error);
       }
