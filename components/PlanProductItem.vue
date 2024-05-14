@@ -1,4 +1,4 @@
-<template>
+<template>	
 	<div class="item">
 		<a href="javascript:void(0)">
 			<div class="img-box">
@@ -9,8 +9,8 @@
 			</div>
 			<p class="name">{{ pdData.goodsNm }}</p>
 			<!-- rcntSalePrc(원래 가격)과 salePrc(세일가격) 차이가 있을 경우 노출  -->
-			<p class="recent-price" v-if="rcntSalePrc != salePrc">{{ pdData.rcntSalePrc }}</p>
-			<span class="percent" v-if="rcntSalePrc != salePrc">{{ pdData.dcRate }}</span>
+			<p class="recent-price" v-if="pdData.rcntSalePrc != pdData.salePrc">{{ pdData.rcntSalePrc }}</p>
+			<span class="percent" v-if="pdData.rcntSalePrc != pdData.salePrc">{{ pdData.dcRate }}</span>
 			<span class="price"><em>{{ pdData.salePrc }}</em>원</span>
 		</a>
 	</div>
@@ -50,9 +50,21 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.item {
-		
+		.img-box {
+			position:relative;
+			width:282px;
+			height:282px;
+			img {
+				position:absolute;
+				top:0; left:0;
+				display: block;
+				width:100%;
+				height:100%;
+				object-fit: cover;
+			}
+		}
 	}
 </style>
 

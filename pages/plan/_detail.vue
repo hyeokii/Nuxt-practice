@@ -13,7 +13,7 @@
 		<PlanSection v-for="(detailData, detailIndex) in planDetail" v-bind:key="`${detailData}_${detailIndex.id}`">
 			<PlanHtmlBox :htmlCode="detailData.htmlFileCont" />
 			<PlanBannerBox :imgData="detailData.bnrImgPathNm" :altData="detailData.divobjNm"/>
-			<PlanProductList :productData="planDetail.goodsList"/>
+			<PlanProductList :productData="detailData.goodsList"/>
 		</PlanSection>
   </div>
 </template>

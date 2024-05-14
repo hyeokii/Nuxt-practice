@@ -38,9 +38,11 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
-	.item {
-		
+<style lang="scss" scoped>
+	.product-list {
+		display:grid;
+		grid-template-columns: repeat(4,1fr);
+		gap:24px 40px;
 	}
 </style>
 
