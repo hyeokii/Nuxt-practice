@@ -1,12 +1,12 @@
 <template>
   <div class="section-wrap">
-    <div class="bnr-wrap" v-if="data.bnrImgPathNm">
+    <div class="bnr-wrap" v-if="data.divobjGbCd === '20'">
       <img loading="lazy" :src="imageUrl(data.bnrImgPathNm)" alt="" />
     </div>
-    <div class="bnr-wrap" v-else-if="data.htmlFileCont">
+    <div class="bnr-wrap" v-else-if="data.divobjGbCd === '30'">
       <div v-html="data.htmlFileCont"></div>
     </div>
-    <div class="bnr-wrap" v-if="data.textDivobjNm">
+    <div class="bnr-wrap" v-else-if="data.divobjGbCd === '10'">
       {{ data.textDivobjNm }}
     </div>
 
