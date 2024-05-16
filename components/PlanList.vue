@@ -56,7 +56,6 @@ export default {
       sortOption: this.sortOption,
       pageNo: this.pageNo,
     });
-    console.log(this.showPlan);
   },
 
   created() {
@@ -120,7 +119,6 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 0 2.5rem;
   .plan-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -131,7 +129,6 @@ export default {
     .plan-product {
       display: flex;
       flex-direction: column;
-      padding: 10px;
     }
   }
 
@@ -145,12 +142,6 @@ export default {
   .plan-no {
     font-size: 30px;
     font-weight: bold;
-  }
-}
-
-@media ($desktop) {
-  .plan-wrapper {
-    width: 1280px;
   }
 }
 </style>

@@ -60,7 +60,7 @@ export default {
 .category-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding: 20px 80px;
+  padding: 20px;
   .category-list {
     position: relative;
     width: 100%;
@@ -74,12 +74,6 @@ export default {
         color: black;
       }
     }
-  }
-}
-
-@media ($desktop) {
-  .category-wrapper {
-    width: 1280px;
   }
 }
 </style>

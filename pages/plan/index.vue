@@ -34,8 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .containers {
-  width: 100%;
-  height: 100%;
+  width: 1200px;
   margin: 0 auto;
   position: relative;
 }

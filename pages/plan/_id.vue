@@ -69,7 +69,6 @@ export default {
 <style lang="scss" scoped>
 .planDetail-wrap {
   width: 1200px;
-  height: 100%;
   margin: 0 auto;
   padding: 60px 0;
   .planDetail-title {
@@ -103,12 +102,6 @@ export default {
     height: 0.25rem;
     border: none;
     background-color: rgb(233 236 239);
-  }
-}
-
-@media ($desktop) {
-  .planDetail-main {
-    width: 1200px;
   }
 }
 </style>

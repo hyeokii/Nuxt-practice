@@ -1,6 +1,6 @@
 <template>
   <div class="custom-select-wrapper">
-    <div class="custom-select-list">
+    <div class="custom-select-list" ref="dropdown">
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown()">
           {{ sortSelected }}
@@ -56,18 +56,35 @@ export default {
 
   methods: {
     toggleDropdown() {
+      if (!this.sortOpen) {
+        document.addEventListener("click", this.handleClickOutside);
+      } else {
+        console.log("destroy");
+        document.removeEventListener("click", this.handleClickOutside);
+      }
       this.sortOpen = !this.sortOpen;
     },
     selectSort(key) {
       if (this.boxtype === "PlanMain") {
-        this.sortSelected = this.options[key];
-        const query = { ...this.$route.query };
-        query.sortOption = key;
-        EventBus.$emit("planList-event", "sort-event", key, query);
-        this.sortOpen = false;
+        this.selectMainSort(key);
       } else if (this.boxtype === "planDetail") {
-        this.sortSelected = this.options[key];
-        this.$emit("planDetail-event", key);
+        this.selectDetailSort(key);
+      }
+    },
+    selectMainSort(key) {
+      this.sortSelected = this.options[key];
+      const query = { ...this.$route.query };
+      query.sortOption = key;
+      EventBus.$emit("planList-event", "sort-event", key, query);
+      this.sortOpen = false;
+    },
+    selectDetailSort(key) {
+      this.sortSelected = this.options[key];
+      this.$emit("planDetail-event", key);
+      this.sortOpen = false;
+    },
+    handleClickOutside(event) {
+      if (!this.$refs.dropdown.contains(event.target)) {
         this.sortOpen = false;
       }
     },
@@ -77,10 +94,10 @@ export default {
 
 <style lang="scss" scoped>
 .custom-select-wrapper {
-  position: relative;
   width: 100%;
+  position: relative;
+  margin: 0 auto;
   margin-bottom: 20px;
-  padding: 0 100px;
   .custom-select-list {
     display: flex;
     gap: 10px;
@@ -98,12 +115,13 @@ export default {
         &:after {
           content: "";
           position: absolute;
-          top: 50%;
+          top: 40%;
           right: 10%;
-          width: 0;
-          height: 0;
-          border: 6px solid transparent;
-          border-color: #000 transparent transparent transparent;
+          width: 10px;
+          height: 10px;
+          border-top: 2px solid black;
+          border-left: 2px solid black;
+          transform: rotate(-135deg);
           pointer-events: none;
           margin-top: -3px;
         }
@@ -129,11 +147,6 @@ export default {
         }
       }
     }
-  }
-}
-@media ($desktop) {
-  .custom-select-wrapper {
-    width: 1900px;
   }
 }
 </style>
