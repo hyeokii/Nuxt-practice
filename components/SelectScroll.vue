@@ -1,20 +1,5 @@
 <template>
   <div class="custom-select-wrapper">
-    <!-- <select
-      name="section"
-      id="section"
-      @change="handleRef"
-      class="custom-select"
-      required
-    >
-      <option value="" class="option-default" disabled selected>
-        선택해주세요
-      </option>
-      <option v-for="item in data" :key="item.divobjNo" :value="item.divobjNm">
-        {{ item.divobjNm }}
-      </option>
-    </select> -->
-
     <div class="custom-select-list" ref="dropdown">
       <div class="custom-select">
         <div class="select-styled" @click="toggleDropdown()">
@@ -72,23 +57,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .select-wrap {
-//   display: flex;
-//   justify-content: end;
-//   padding-bottom: 20px;
-//   .custom-select {
-//     width: 320px;
-//     padding: 10px 20px;
-//     border: 1px solid #ccc;
-//     cursor: pointer;
-//     position: relative;
-
-//     .option-default {
-//       display: none;
-//     }
-//   }
-// }
-
 .custom-select-wrapper {
   position: relative;
   width: 100%;
@@ -98,9 +66,8 @@ export default {
     gap: 10px;
     justify-content: end;
     .custom-select {
-      width: 160px;
+      width: 200px;
       .select-styled {
-        width: 160px;
         padding: 10px 20px;
         border: 1px solid #ccc;
         cursor: pointer;
@@ -123,7 +90,7 @@ export default {
       }
 
       .select-options {
-        width: 160px;
+        width: 200px;
         position: absolute;
         list-style: none;
         padding: 0;

@@ -70,7 +70,7 @@ export default {
       left: 0;
       width: 100%;
       height: 282px;
-      background-color: rgba(0, 0, 0, 0.5); /* semi-transparent gray */
+      background-color: rgba(0, 0, 0, 0.5);
       z-index: 1;
       display: flex;
       justify-content: center;

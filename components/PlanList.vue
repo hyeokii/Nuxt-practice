@@ -32,7 +32,7 @@ export default {
     return {
       planList: {},
     };
-  }, //data
+  },
   computed: {
     dispGrpNo() {
       return this.$route.query.group;
@@ -80,7 +80,7 @@ export default {
       this.planList = await getPlanList({
         dispGrpNo: categoryId,
         sortOption: sortOption,
-        pageNo: this.pageNo, //데이터
+        pageNo: this.pageNo,
       });
     },
 
