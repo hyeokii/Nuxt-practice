@@ -1,49 +1,32 @@
+import apiData from "../api/apiData";
+
 export const state = () => ({
-  planList: [],
-  totalGroupPlan: [],
-  dispGrpNo: "",
-  dispMediaCd: 99,
-  sortType: "recent",
-  pageNo: 1,
-  pageSize: 9,
-  progressYn: "Y",
+  planFavoriteData: [],
 });
 
 export const mutations = {
-  SET_GROUP_DATA(state, groupData) {
-    state.groupData = groupData;
+  SET_PLAN_FAVORITE(state, planFavoriteData) {
+    state.planFavoriteData = planFavoriteData;
   },
-  SET_TOTAL_LIST(state, totalGroupPlan) {
-    state.totalGroupPlan = totalGroupPlan;
+  ADD_PLAN_FAVORITE(state, newPlan) {
+    state.planFavoriteData.push({ ...newPlan });
   },
-  SET_GROUP_PLAN(state, planList) {
-    state.planList = planList;
-  },
-  SET_NEW_GRPNO(state, dispGrpNo) {
-    state.dispGrpNo = dispGrpNo;
-  },
-  SET_SORT_TYPE(state, sortType) {
-    state.sortType = sortType;
-  },
-  SET_SORT_PLAN(state, planList) {
-    state.planList = planList;
-  },
-  INCREMENT_PAGE_NO(state) {
-    state.pageNo++;
-  },
-  SET_MORE_PLAN(state, moreData) {
-    state.planList = [...state.planList, ...moreData.payload.planInfoList];
-  },
-  RESET_PAGE_NO(state) {
-    state.pageNo = 1;
+  DELETE_PLAN_FAVORITE(state, id) {
+    state.planFavoriteData = state.planFavoriteData.filter(
+      (plan) => plan.id !== id
+    );
   },
 };
+
 export const actions = {
-  async fetchGroupData({ commit }) {
-    const response = await this.$axios.get(
-      "https://gw.x2bee.com/api/display/v1/plan/group"
-    );
-    commit("SET_GROUP_DATA", response.data);
+  async addPlanFavorite({ commit }, newPlan) {
+    await apiData.addPlanFavorite(newPlan);
+    commit("ADD_PLAN_FAVORITE", newPlan);
+  },
+
+  async deletePlanFavorite({ commit }, id) {
+    await apiData.deletePlanFavorite(id);
+    commit("DELETE_PLAN_FAVORITE", id);
   },
 
   async setNewGrpNo({ commit }, grpNo) {

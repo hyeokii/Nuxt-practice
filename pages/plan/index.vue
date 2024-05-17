@@ -50,9 +50,10 @@ export default {
       totalCount: 0,
       curPageNo: 1,
       // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
+      planFavoriteData: [],
     };
   },
-  async asyncData({ route }) {
+  async asyncData({ route, store }) {
     const query = route.query;
     const categoryData = await apiData.fetchGroupData();
     // 카테고리 데이터
@@ -63,6 +64,11 @@ export default {
         ? ""
         : query.dispGrpNo
     );
+
+    const planFavoriteData = await apiData.getPlanFavorite(
+      "http://localhost:3001/plan?loginId=ccomo07071"
+    );
+    store.commit("SET_PLAN_FAVORITE", planFavoriteData.data);
 
     //PlanList 데이터
     return {

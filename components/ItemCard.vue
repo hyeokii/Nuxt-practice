@@ -51,12 +51,10 @@ export default {
       this.isLike = !this.isLike;
     },
     getImgSrc(imgPath) {
-      if (imgPath.endsWith(".png")) {
-        return `https://img-stg.x2bee.com/${imgPath}`;
-      } else if (imgPath.endsWith(".svg")) {
+      if (imgPath.endsWith(".svg")) {
         return `https://fo.x2bee.com/${imgPath}`;
       } else {
-        return "";
+        return `https://img-stg.x2bee.com/${imgPath}`;
       }
     },
   },

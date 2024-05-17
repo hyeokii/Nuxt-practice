@@ -1,5 +1,6 @@
 <template>
   <div v-if="plan" :class="['planCardContainer', type]">
+    {{ this.$store.state.planFavoriteData }}
     <NuxtLink :to="`/plan/${plan.mkdpNo}`">
       <img
         :src="`https://img-stg.x2bee.com/${plan.imageList[0].bnrImgPathNm}`"
@@ -12,8 +13,11 @@
     </NuxtLink>
     <div class="planCardContent">
       <div class="btnContainer">
-        <span class="likeBtn" @click="setIsLike"
-          ><img src="../public/like_full.png" alt="likeImg" v-if="isLike" /><img
+        <span class="likeBtn" @click="setIsLike(plan.mkdpNo)"
+          ><img
+            src="../public/like_full.png"
+            alt="likeImg"
+            v-if="isLike(plan.mkdpNo)" /><img
             v-else
             src="../public/like.png"
             alt="likeImg"
@@ -34,19 +38,32 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState(["planFavoriteData"]),
+  },
   props: {
     plan: { type: Object, required: true },
     type: { type: String },
   },
-  data() {
-    return {
-      isLike: false,
-    };
-  },
   methods: {
-    setIsLike() {
-      this.isLike = !this.isLike;
+    setIsLike(mkdpNo) {
+      if (this.isLike(mkdpNo)) {
+        const id = this.planFavoriteData.filter(
+          (plan) => plan.mkdpNo === mkdpNo
+        )[0].id;
+        this.$store.dispatch("deletePlanFavorite", id);
+      } else {
+        this.$store.dispatch("addPlanFavorite", {
+          loginId: "ccomo07071",
+          mkdpNo: mkdpNo,
+        });
+      }
+    },
+    isLike(mkdpNo) {
+      const arr = this.planFavoriteData.map((plan) => plan.mkdpNo);
+      return arr.includes(mkdpNo);
     },
   },
 };

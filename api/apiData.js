@@ -8,7 +8,6 @@ export default {
 
   // 정렬된 데이터 불러오기
   async fetchSortPlan(sort, pageNo, pageSize, grpNo) {
-    console.log(pageNo, pageSize);
     let newPageSize = Number(pageNo) * Number(pageSize);
     return await axios.get(
       `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&sortType=${sort}&pageNo=1&pageSize=${newPageSize}&progressYn=Y&dispGrpNo=${grpNo}`
@@ -43,5 +42,17 @@ export default {
     return axios.get(
       `https://fo.x2bee.com/api/display/v1/plan/planGoodsInfo?mkdpNo=${mkdpNo}&divobjNo=${divobjNo}&sort=${sortType}&dispMediaCd=99`
     );
+  },
+
+  async getPlanFavorite() {
+    return axios.get("http://localhost:3001/plan?loginId=ccomo07071");
+  },
+
+  async addPlanFavorite(newPlan) {
+    return axios.post("http://localhost:3001/plan", newPlan);
+  },
+
+  async deletePlanFavorite(id) {
+    return axios.delete(`http://localhost:3001/plan/${id}`);
   },
 };
