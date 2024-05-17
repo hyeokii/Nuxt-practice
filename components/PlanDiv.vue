@@ -2,16 +2,16 @@
   <div class="planDivContainer">
     <!-- 제목 -->
     <div>
-      <span v-if="planDiv.textDivobjNm">{{ planDiv.textDivobjNm }}</span>
+      <span v-if="planDiv.divobjGbCd === '10'">{{ planDiv.textDivobjNm }}</span>
     </div>
 
     <!-- 메인이미지 -->
     <div
       class="planDivHtml"
-      v-if="planDiv.htmlFileCont"
+      v-if="planDiv.divobjGbCd === '30'"
       v-html="planDiv.htmlFileCont"
     ></div>
-    <div v-if="planDiv.bnrImgPathNm">
+    <div v-if="planDiv.divobjGbCd === '20'">
       <img
         class="planDivImg"
         :src="`https://img-stg.x2bee.com/${planDiv.bnrImgPathNm}`"
