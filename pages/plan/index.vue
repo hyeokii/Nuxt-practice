@@ -54,7 +54,7 @@ export default {
       planFavoriteData: [],
     };
   },
-  async asyncData({ route, store }) {
+  async asyncData({ route, store, $axios }) {
     const query = route.query;
     const categoryData = await apiData.fetchGroupData();
     // 카테고리 데이터
@@ -66,7 +66,9 @@ export default {
         : query.dispGrpNo
     );
 
-    const planFavoriteData = await apiData.getPlanFavorite();
+    const planFavoriteData = await $axios.get(
+      "http://localhost:3001/plan?loginId=ccomo07071"
+    );
     store.commit("SET_PLAN_FAVORITE", planFavoriteData.data);
 
     //PlanList 데이터
