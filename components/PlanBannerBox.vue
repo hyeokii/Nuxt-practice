@@ -1,20 +1,23 @@
 <template>
-	<div class="img-box" v-if="isView">
-		<img :src="`https://img-stg.x2bee.com/${imgData}`" :alt="`${altData}`">
+	<div v-if="isView" class="banner-box">
+		<div class="type-html" v-if="detailData.divobjGbCd === '30'" v-html="detailData.htmlFileCont">
+		</div>
+		<div class="type-img" v-if="detailData.divobjGbCd ==='20'">
+			<img :src="`https://img-stg.x2bee.com/${detailData.bnrImgPathNm}`" :alt="`${detailData.cpnNo}`">
+		</div> 
+		<div class="type-text" v-if="detailData.divobjGbCd ==='10'">
+			{{ detailData.textDivobjNm }}
+		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: "PlanHtmlBox",
+	name: "PlanBannerBox",
 	props: {
-		imgData : {
-			type:String,
+		detailData : {
+			type:Object,
 			defaultValue : undefined
-		},
-		altData : {
-			type:String,
-			default:undefined
 		}
 	},
 	data() {		
@@ -23,20 +26,21 @@ export default {
 	},
 	created() {},
 	mounted() {		
+		console.log(this.detailData)
 	},
 	methods: {		
+		
 	},
 	computed: {
-		isView() {
-			return(this.imgData ?? []).length > 0
+		isView(type, data) {
+			return this.detailData.divobjGbCd
 		}
 	}
 };
 </script>
 <style lang="scss">
-	.img-box {
+	.banner-box {		
 		margin-top:40px;
-		width:1200px;
 		p {
 			margin:0;
 		}

@@ -6,15 +6,18 @@
 			<button type="button" class="btn-like" @click="evtLike">좋아요</button >
 			<button type="button" class="btn-share">share</button>
 		</div>
-		<PlanHtmlBox :htmlCode="planTopHtml" />
+		<PlanHtmlBox :detailData="planData.titleHtml" />
 		<SelectBox>
-			<option v-for="(planData, planIndex) in planSelect" v-bind:key="`${planIndex}_${planData.id}`">{{ planData.divobjNm }}</option>
+			<option v-for="(planData, planIndex) in planData.planDivObjList" v-bind:key="`${planIndex}_${planData.id}`">{{ planData.divobjNm }}</option>
 		</SelectBox>
 		<PlanSection v-for="(detailData, detailIndex) in planDetail" v-bind:key="`${detailData}_${detailIndex.id}`">
-			<PlanHtmlBox :htmlCode="detailData.htmlFileCont" />
-			<PlanBannerBox :imgData="detailData.bnrImgPathNm" :altData="detailData.divobjNm"/>
-			<PlanProductList :productData="detailData.goodsList"/>
+			<PlanBannerBox :detailData="detailData" />
+			<PlanProductList :detailData="detailData">
+				<PlanProductItem v-for="(pdData,pdIndex) in detailData.goodsList" v-bind:key="`${pdIndex}_${pdData.id}`" :pdData="pdData"/>
+			</PlanProductList>
+			<PlanCoupon :detailData="detailData"/>
 		</PlanSection>
+		<PlanListSLide :detailData ="planList"/>
   </div>
 </template>
 <script>
@@ -23,11 +26,12 @@ export default {
 	path: "/detail/:mkdpNo",
 	layout : 'PlanDetail',
 	async asyncData({$axios,route}) {
-		const planDetailData = await apiData.getplanDetail(route.params.detail);				
+		const planDetailData = await apiData.getplanDetail(route.params.detail);	
+		const planResultData = await apiData.getPlanResult();
 		return { 
-			planSelect : planDetailData?.data?.planDivObjList?? [], // 기획전 바로가기
-			planTopHtml : planDetailData?.data?.titleHtml, // 상단 html data
+			planData:planDetailData?.data , // 기획전 기본 데이터
 			planDetail:planDetailData?.data?.planDivObjList?? [], // 각 기획전 data
+			planList : planResultData?.data.payload?.planInfoList ?? [],
 		}
 	},
 	created() {		
@@ -36,6 +40,7 @@ export default {
 	},
 	data() {
 		return {				
+			planData : [],
 			planDetail : []
 		};
 	},

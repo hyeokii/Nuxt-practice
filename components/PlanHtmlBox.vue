@@ -1,5 +1,5 @@
 <template>
-	<div class="html-box" v-html="htmlCode" v-if="isView">
+	<div class="html-box" v-html="detailData">
 	</div>
 </template>
 
@@ -7,7 +7,7 @@
 export default {
 	name: "PlanHtmlBox",
 	props: {
-		htmlCode : {
+		detailData : {
 			type:String,
 			defaultValue : undefined
 		}
@@ -23,7 +23,6 @@ export default {
 	},
 	computed: {
 		isView() {
-			return(this.htmlCode ?? []).length > 0
 		}
 	}
 };

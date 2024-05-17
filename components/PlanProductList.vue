@@ -1,6 +1,6 @@
-<template>
-	<div class="product-list">
-		<PlanProductItem v-for="(pdData,pdIndex) in productData" v-bind:key="`${pdIndex}_${pdData.id}`" :pdData="pdData"/>
+<template>	
+	<div class="product-list" v-if="isView">
+		<slot></slot>
 	</div>
 </template>
 <!--  
@@ -10,16 +10,12 @@
 	40: 판매종료
 -->
 <script>
-import PlanProductItem from "./PlanProductItem"
 export default {
 	name: "PlanProductList",
-	components: {
-		PlanProductItem,
-	},
 	props: {
-		productData : {
+		detailData : {
 			type:Object,
-			defaultValue:undefined
+			defaultValut: undefined
 		}
 	},
 	data() {		
@@ -33,7 +29,7 @@ export default {
 	},
 	computed: {
 		isView() {
-			
+			return this.detailData
 		}
 	}
 };
@@ -42,7 +38,8 @@ export default {
 	.product-list {
 		display:grid;
 		grid-template-columns: repeat(4,1fr);
-		gap:24px 40px;
+		gap:40px 24px;
+		margin-top:20px;
 	}
 </style>
 

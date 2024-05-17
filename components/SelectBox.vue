@@ -31,7 +31,7 @@ export default {
 <style lang="scss">
 	.select {
 		margin:20px 0 0 auto;
-		width:320px;
+		width:320px;		
 	}
 </style>
 

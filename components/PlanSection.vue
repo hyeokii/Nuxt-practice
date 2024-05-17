@@ -25,7 +25,7 @@ export default {
 </script>
 <style lang="scss">
 	.box-section {
-		margin-top:40px;
+		margin:40px auto 0;
 	}
 </style>
 
