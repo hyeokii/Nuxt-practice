@@ -57,13 +57,11 @@ export default {
       curScroll: "0",
     };
   },
-  async asyncData({ route, $axios, store }) {
+  async asyncData({ route, store }) {
     const params = route.params;
     const planData = await apiData.fetchPlanDetail(params.id);
 
-    const goodsFavoriteData = await $axios.get(
-      "http://localhost:3001/goods?loginId=ccomo07071"
-    );
+    const goodsFavoriteData = await apiData.getGoodsFavorite();
     store.commit("SET_GOODS_FAVORITE", goodsFavoriteData.data);
 
     //PlanList 데이터

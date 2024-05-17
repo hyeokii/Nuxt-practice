@@ -21,11 +21,6 @@
       "mkdpNo": "55148"
     },
     {
-      "id": "55138",
-      "loginId": "ccomo07071",
-      "mkdpNo": "55138"
-    },
-    {
       "id": "55128",
       "loginId": "ccomo07071",
       "mkdpNo": "55128"
@@ -36,40 +31,14 @@
       "mkdpNo": "45016"
     },
     {
-      "id": {
-        "isTrusted": true
-      },
+      "id": "45098",
       "loginId": "ccomo07071",
-      "mkdpNo": {
-        "isTrusted": true
-      }
+      "mkdpNo": "45098"
     },
     {
-      "id": {
-        "isTrusted": true
-      },
+      "id": "55118",
       "loginId": "ccomo07071",
-      "mkdpNo": {
-        "isTrusted": true
-      }
-    },
-    {
-      "id": {
-        "isTrusted": true
-      },
-      "loginId": "ccomo07071",
-      "mkdpNo": {
-        "isTrusted": true
-      }
-    },
-    {
-      "id": {
-        "isTrusted": true
-      },
-      "loginId": "ccomo07071",
-      "mkdpNo": {
-        "isTrusted": true
-      }
+      "mkdpNo": "55118"
     }
   ],
   "goods": [
@@ -92,16 +61,6 @@
       "id": "4",
       "loginId": "song",
       "mkdpNo": "10795357"
-    },
-    {
-      "id": "10670305",
-      "loginId": "ccomo07071",
-      "goodsNo": "10670305"
-    },
-    {
-      "id": "10670875",
-      "loginId": "ccomo07071",
-      "goodsNo": "10670875"
     },
     {
       "id": "10673015",
