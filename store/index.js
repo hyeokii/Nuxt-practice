@@ -6,9 +6,6 @@ export const state = () => ({
 });
 
 export const mutations = {
-  SET_PLAN_FAVORITE(state, planFavoriteData) {
-    state.planFavoriteData = planFavoriteData;
-  },
   ADD_PLAN_FAVORITE(state, newPlan) {
     state.planFavoriteData.push({ ...newPlan });
   },
@@ -18,9 +15,6 @@ export const mutations = {
     );
   },
 
-  SET_GOODS_FAVORITE(state, goodsFavoriteData) {
-    state.goodsFavoriteData = goodsFavoriteData;
-  },
   ADD_GOODS_FAVORITE(state, newGoods) {
     state.goodsFavoriteData.push({ ...newGoods });
   },
