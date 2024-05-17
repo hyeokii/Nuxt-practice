@@ -15,8 +15,11 @@
       @click="routeToUrl(goods.goodsNo)"
     />
     <div class="likeBtnContainer">
-      <span class="likeBtn" @click="setIsLike"
-        ><img src="../public/like_full.png" alt="likeImg" v-if="isLike" /><img
+      <span class="likeBtn" @click="setIsLike(goods.goodsNo)"
+        ><img
+          src="../public/like_full.png"
+          alt="likeImg"
+          v-if="isLike(goods.goodsNo)" /><img
           v-else
           src="../public/like.png"
           alt="likeImg"
@@ -39,7 +42,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState(["goodsFavoriteData"]),
+  },
+
   props: {
     goods: Object,
   },
@@ -47,8 +55,24 @@ export default {
     routeToUrl(goodsNo) {
       alert(`goods/detail/${goodsNo}로 이동`);
     },
-    setIsLike() {
-      this.isLike = !this.isLike;
+    setIsLike(goodsNo) {
+      if (this.isLike(goodsNo)) {
+        const obj = this.goodsFavoriteData.find(
+          (goods) => goods.goodsNo === goodsNo
+        );
+        const id = obj.id;
+        this.$store.dispatch("deleteGoodsFavorite", id);
+      } else {
+        this.$store.dispatch("addGoodsFavorite", {
+          id: goodsNo,
+          loginId: "ccomo07071",
+          goodsNo: goodsNo,
+        });
+      }
+    },
+    isLike(goodsNo) {
+      const arr = this.goodsFavoriteData.map((goods) => goods.goodsNo);
+      return arr.includes(goodsNo);
     },
     getImgSrc(imgPath) {
       if (imgPath.endsWith(".svg")) {
@@ -57,11 +81,6 @@ export default {
         return `https://img-stg.x2bee.com/${imgPath}`;
       }
     },
-  },
-  data() {
-    return {
-      isLike: false,
-    };
   },
 };
 </script>

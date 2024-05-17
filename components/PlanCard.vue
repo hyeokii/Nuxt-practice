@@ -1,6 +1,5 @@
 <template>
   <div v-if="plan" :class="['planCardContainer', type]">
-    {{ this.$store.state.planFavoriteData }}
     <NuxtLink :to="`/plan/${plan.mkdpNo}`">
       <img
         :src="`https://img-stg.x2bee.com/${plan.imageList[0].bnrImgPathNm}`"
@@ -56,6 +55,7 @@ export default {
         this.$store.dispatch("deletePlanFavorite", id);
       } else {
         this.$store.dispatch("addPlanFavorite", {
+          id: mkdpNo,
           loginId: "ccomo07071",
           mkdpNo: mkdpNo,
         });

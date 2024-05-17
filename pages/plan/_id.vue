@@ -1,5 +1,6 @@
 <template>
   <div class="planDetailContainer" v-if="planDataList">
+    <!-- {{ this.$store.state.goodsFavoriteData }} -->
     <div class="planTitle">기획전</div>
     <div class="btnContainer">
       <span class="likeBtn" @click="setIsLike"
@@ -50,9 +51,14 @@ export default {
       isLike: false,
     };
   },
-  async asyncData({ route }) {
+  async asyncData({ route, $axios, store }) {
     const params = route.params;
     const planData = await apiData.fetchPlanDetail(params.id);
+
+    const goodsFavoriteData = await $axios.get(
+      "http://localhost:3001/goods?loginId=ccomo07071"
+    );
+    store.commit("SET_GOODS_FAVORITE", goodsFavoriteData.data);
 
     //PlanList 데이터
     return {

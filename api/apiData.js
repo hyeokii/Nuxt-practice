@@ -44,15 +44,19 @@ export default {
     );
   },
 
-  async getPlanFavorite() {
-    return axios.get("http://localhost:3001/plan?loginId=ccomo07071");
-  },
-
   async addPlanFavorite(newPlan) {
     return axios.post("http://localhost:3001/plan", newPlan);
   },
 
   async deletePlanFavorite(id) {
     return axios.delete(`http://localhost:3001/plan/${id}`);
+  },
+
+  async addGoodsFavorite(newGoods) {
+    return axios.post("http://localhost:3001/goods", newGoods);
+  },
+
+  async deleteGoodsFavorite(id) {
+    return axios.delete(`http://localhost:3001/goods/${id}`);
   },
 };
