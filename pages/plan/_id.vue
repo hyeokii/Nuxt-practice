@@ -3,11 +3,14 @@
     <!-- {{ this.$store.state.goodsFavoriteData }} -->
     <div class="planTitle">기획전</div>
     <div class="btnContainer">
-      <span class="likeBtn" @click="setIsLike"
+      <span class="likeBtn" @click="setIsLike(mkdpNo)"
         ><img
           src="../../public/like_full.png"
           alt="likeImg"
-          v-if="isLike" /><img v-else src="../../public/like.png" alt="likeImg"
+          v-if="isLike(mkdpNo)" /><img
+          v-else
+          src="../../public/like.png"
+          alt="likeImg"
       /></span>
       <span class="shareBtn"
         ><img src="../../public/share.png" alt="shareImg"
@@ -40,15 +43,18 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import apiData from "../../api/apiData";
 export default {
+  computed: {
+    ...mapState(["planFavoriteData"]),
+  },
   data() {
     return {
       planDataList: [],
       planDivList: [],
       mkdpNo: "",
       curScroll: "0",
-      isLike: false,
     };
   },
   async asyncData({ route, $axios, store }) {
@@ -76,8 +82,23 @@ export default {
       this.$router.push("/plan");
     },
 
-    setIsLike() {
-      this.isLike = !this.isLike;
+    setIsLike(mkdpNo) {
+      if (this.isLike(mkdpNo)) {
+        const id = this.planFavoriteData.filter(
+          (plan) => plan.mkdpNo === mkdpNo
+        )[0].id;
+        this.$store.dispatch("deletePlanFavorite", id);
+      } else {
+        this.$store.dispatch("addPlanFavorite", {
+          id: mkdpNo,
+          loginId: "ccomo07071",
+          mkdpNo: mkdpNo,
+        });
+      }
+    },
+    isLike(mkdpNo) {
+      const arr = this.planFavoriteData.map((plan) => plan.mkdpNo);
+      return arr.includes(mkdpNo);
     },
   },
 };
