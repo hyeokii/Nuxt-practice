@@ -59,7 +59,6 @@ export default {
       if (!this.sortOpen) {
         document.addEventListener("click", this.handleClickOutside);
       } else {
-        console.log("destroy");
         document.removeEventListener("click", this.handleClickOutside);
       }
       this.sortOpen = !this.sortOpen;

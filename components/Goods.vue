@@ -2,17 +2,18 @@
   <div class="goods">
     <div class="goos-imgWrap">
       <img
+        v-if="isView"
         loading="lazy"
         class="goods-img"
         :src="imageUrl(item.goodsRepImgPathNm)"
-        alt=""
+        :alt="item.goodsNo"
       />
       <div v-if="item.saleStatCd === '20'" class="overlay">
         <span>품절</span>
       </div>
     </div>
-    <div class="goods-like" @click="handleLike()">
-      <img src="https://fo.x2bee.com/images/icons/like.svg" alt="" />
+    <div class="goods-like" @click="handleLike(item.goodsNo)">
+      <img :src="likeIconSrc" alt="like" />
     </div>
 
     <div :class="{ 'goods-des': true, 'no-rate': item.dcRate === 0 }">
@@ -27,13 +28,32 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   props: {
     item: {
       type: Object,
     },
   },
+  computed: {
+    ...mapState(["goodsFavorite"]),
+    isView() {
+      return this.item?.goodsRepImgPathNm;
+    },
+    isFavorite() {
+      return this.goodsFavorite.some(
+        (goods) => goods.goodsNo === this.item.goodsNo
+      );
+    },
+    likeIconSrc() {
+      return this.isFavorite
+        ? "https://fo.x2bee.com/images/icons/like_active.svg"
+        : "https://fo.x2bee.com/images/icons/like.svg";
+    },
+  },
   methods: {
+    ...mapActions(["addGoodsFavorite", "deleteGoodsFavorite"]),
     imageUrl(src) {
       if (src.endsWith(".png") || src.endsWith(".jpg")) {
         return `https://img-stg.x2bee.com/${src}`;
@@ -41,8 +61,12 @@ export default {
         return `https://fo.x2bee.com/${src}`;
       }
     },
-    handleLike() {
-      alert("좋아요!!");
+    async handleLike(id) {
+      if (this.isFavorite) {
+        await this.deleteGoodsFavorite(id);
+      } else {
+        await this.addGoodsFavorite(id);
+      }
     },
   },
 };

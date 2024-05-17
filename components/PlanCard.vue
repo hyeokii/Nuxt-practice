@@ -1,15 +1,16 @@
 <template>
-  <div @click="moveDetail(plan.mkdpNo)">
+  <div>
     <img
       v-if="isView"
       class="plan-img"
       loading="lazy"
       :src="imageUrl(image.bnrImgPathNm)"
       :alt="image.mkdpNo"
+      @click="moveDetail(plan.mkdpNo)"
     />
     <div class="plan-like">
-      <div @click="handleLike()">
-        <img src="https://fo.x2bee.com/images/icons/like.svg" alt="" />
+      <div @click="handleLike(plan.mkdpNo)">
+        <img :src="likeIconSrc" alt="like" />
       </div>
       <div @click="handleShare()">
         <img src="https://fo.x2bee.com/images/icons/ico_share02.svg" alt="" />
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   props: {
     plan: {
@@ -29,19 +32,33 @@ export default {
     },
   },
   computed: {
+    ...mapState(["planFavorite"]),
     isView() {
       return this.image?.bnrImgPathNm;
     },
     image() {
       return this.plan?.imageList?.at(0);
     },
+    isFavorite() {
+      return this.planFavorite.some((plan) => plan.mkdpNo === this.plan.mkdpNo);
+    },
+    likeIconSrc() {
+      return this.isFavorite
+        ? "https://fo.x2bee.com/images/icons/like_active.svg"
+        : "https://fo.x2bee.com/images/icons/like.svg";
+    },
   },
   methods: {
+    ...mapActions(["addPlanFavorite", "deletePlanFavorite"]),
     imageUrl(src) {
       return `https://img-stg.x2bee.com/${src}`;
     },
-    handleLike() {
-      alert("좋아요!!");
+    async handleLike(id) {
+      if (this.isFavorite) {
+        await this.deletePlanFavorite(id);
+      } else {
+        await this.addPlanFavorite(id);
+      }
     },
     handleShare() {
       alert("공유!!");

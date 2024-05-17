@@ -1,100 +1,141 @@
-// export const state = () => ({
-//   planList: [],
-//   brandNo: null,
-//   sortType: "recent",
-//   dispGrpNo: "",
-//   pageNo: 1,
-//   brandNo: "",
-//   totalCount: 0,
-//   showPlan: 0,
-// });
+export const state = () => ({
+  currentLoginId: "re2volution",
+  planFavorite: [],
+  goodsFavorite: [],
+});
 
-// export const mutations = {
-//   setPlanList(state, data) {
-//     state.planList = data;
-//   },
-//   setDispGrpNo(state, data) {
-//     state.dispGrpNo = data;
-//   },
-//   setShowPlan(state, data) {
-//     if (data === 0) {
-//       state.showPlan = 0;
-//     } else {
-//       state.showPlan += data;
-//     }
-//   },
-//   setTotalCount(state, data) {
-//     state.totalCount = data;
-//   },
-//   setSortType(state, option) {
-//     if (option === "최신순") {
-//       state.sortType = "recent";
-//     } else if (option === "마감순") {
-//       state.sortType = "close";
-//     }
-//   },
-//   addPlanList(state, data) {
-//     state.planList.payload.planInfoList = [
-//       ...state.planList.payload.planInfoList,
-//       ...data,
-//     ];
-//   },
-//   setPageNo(state, pageNo) {
-//     state.pageNo = pageNo;
-//   },
-// };
+export const mutations = {
+  SET_PLANFAVORITE(state, plans) {
+    state.planFavorite = plans;
+  },
+  ADD_PLANFAVORITE(state, plan) {
+    state.planFavorite.push(plan);
+  },
+  DELETE_PLANFAVORITE(state, planId) {
+    state.planFavorite = state.planFavorite.filter(
+      (plan) => plan.mkdpNo !== planId
+    );
+  },
 
-// export const actions = {
-//   async nuxtServerInit({ commit }) {
-//     try {
-//       const res = await this.$axios.get(
-//         `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=1&sortType=recent&dispGrpNo=&brandNo=`
-//       );
-//       commit("setPlanList", res.data);
-//       commit("setTotalCount", res.data.payload.totalCount);
-//       commit("setShowPlan", res.data.payload.planInfoList.length);
-//     } catch (error) {
-//       console.error("Error fetching initial plans:", error);
-//       throw error;
-//     }
-//   },
+  SET_GOODSFAVORITE(state, goods) {
+    state.goodsFavorite = goods;
+  },
+  ADD_GOODSFAVORITE(state, good) {
+    state.goodsFavorite.push(good);
+  },
+  DELETE_GOODSFAVORITE(state, goodsNo) {
+    state.goodsFavorite = state.goodsFavorite.filter(
+      (good) => good.goodsNo !== goodsNo
+    );
+  },
+};
 
-//   async getPlanList({ commit, state }) {
-//     commit("setPageNo", 1);
-//     const res = await this.$axios.get(
-//       `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
-//     );
-//     commit("setPlanList", res.data);
-//     commit("setShowPlan", 0);
-//     commit("setShowPlan", res.data.payload.planInfoList.length);
-//     commit("setTotalCount", res.data.payload.totalCount);
-//   },
+export const actions = {
+  async nuxtServerInit({ commit, state }) {
+    try {
+      const res = await this.$axios.get(
+        `http://localhost:3001/plan?loginId=${state.currentLoginId}`
+      );
+      commit("SET_PLANFAVORITE", res.data);
+      const res2 = await this.$axios.get(
+        `http://localhost:3001/goods?loginId=${state.currentLoginId}`
+      );
+      commit("SET_GOODSFAVORITE", res2.data);
+    } catch (error) {
+      console.error("Error fetching initial plans:", error);
+      throw error;
+    }
+  },
 
-//   async addPlanList({ commit, state }) {
-//     const res = await this.$axios.get(
-//       `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}`
-//     );
-//     commit("addPlanList", res.data.payload.planInfoList);
-//     commit("setShowPlan", res.data.payload.planInfoList.length);
-//   },
+  async getPlanFavorite({ commit, state }) {
+    const res = await this.$axios.get(
+      `http://localhost:3001/plan?loginId=${state.currentLoginId}`
+    );
+    commit("SET_PLANFAVORITE", res.data);
+  },
 
-//   async getSortPlanList({ commit, state }) {
-//     if (state.pageNo !== 1) {
-//       const size = 9 * state.pageNo;
-//       const res = await this.$axios.get(
-//         `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=${size}&pageNo=1&dispGrpNo=${state.dispGrpNo}&sortType=${state.sortType}`
-//       );
-//       commit("setPlanList", res.data);
-//     } else {
-//       const res = await this.$axios.get(
-//         `https://gw.x2bee.com/api/display/v1/plan/planList?dispMediaCd=99&progressYn=Y&pageSize=9&pageNo=${state.pageNo}&dispGrpNo=${state.dispGrpNo}&sortType=${state.sortType}`
-//       );
-//       commit("setPlanList", res.data);
-//     }
-//   },
+  async getGoodsFavorite({ commit, state }) {
+    const res = await this.$axios.get(
+      `http://localhost:3001/goods?loginId=${state.currentLoginId}`
+    );
+    commit("SET_GOODSFAVORITE", res.data);
+  },
 
-//   async getMoreList({ commit, dispatch, state }) {
-//     commit("setPageNo", state.pageNo + 1);
-//     await dispatch("addPlanList");
-//   },
-// };
+  async addPlanFavorite({ commit, state }, planId) {
+    try {
+      const allPlanRes = await this.$axios.get(`http://localhost:3001/plan`);
+      const allPlan = allPlanRes.data;
+
+      const maxId = allPlan.length
+        ? Math.max(...allPlan.map((plan) => parseInt(plan.id, 10)))
+        : 0;
+      const addPlan = {
+        id: String(maxId + 1),
+        loginId: state.currentLoginId,
+        mkdpNo: planId,
+      };
+
+      const res = await this.$axios.post(`http://localhost:3001/plan`, addPlan);
+      commit("ADD_PLANFAVORITE", res.data);
+    } catch (error) {
+      console.error("Error adding plan:", error);
+      throw error;
+    }
+  },
+
+  async addGoodsFavorite({ commit, state }, goodsNo) {
+    try {
+      const allGoodsRes = await this.$axios.get(`http://localhost:3001/goods`);
+      const allGoods = allGoodsRes.data;
+
+      const maxId = allGoods.length
+        ? Math.max(...allGoods.map((good) => parseInt(good.id, 10)))
+        : 0;
+
+      const addGood = {
+        id: String(maxId + 1),
+        loginId: state.currentLoginId,
+        goodsNo: goodsNo,
+      };
+
+      const res = await this.$axios.post(
+        `http://localhost:3001/goods`,
+        addGood
+      );
+      commit("ADD_GOODSFAVORITE", res.data);
+    } catch (error) {
+      console.error("Error adding good:", error);
+      throw error;
+    }
+  },
+
+  async deletePlanFavorite({ commit, state }, planId) {
+    try {
+      const planToRemove = state.planFavorite.find(
+        (plan) => plan.mkdpNo === planId
+      );
+
+      await this.$axios.delete(`http://localhost:3001/plan/${planToRemove.id}`);
+      commit("DELETE_PLANFAVORITE", planId);
+    } catch (error) {
+      console.error("Error removing plan:", error);
+      throw error;
+    }
+  },
+
+  async deleteGoodsFavorite({ commit, state }, goodsNo) {
+    try {
+      const goodsToRemove = state.goodsFavorite.find(
+        (good) => good.goodsNo === goodsNo
+      );
+
+      await this.$axios.delete(
+        `http://localhost:3001/goods/${goodsToRemove.id}`
+      );
+      commit("DELETE_GOODSFAVORITE", goodsNo);
+    } catch (error) {
+      console.error("Error removing good:", error);
+      throw error;
+    }
+  },
+};
