@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:3001";
+
 export const state = () => ({
   currentLoginId: "re2volution",
   planFavorite: [],
@@ -34,11 +36,11 @@ export const actions = {
   async nuxtServerInit({ commit, state }) {
     try {
       const res = await this.$axios.get(
-        `http://localhost:3001/plan?loginId=${state.currentLoginId}`
+        `${BASE_URL}/plan?loginId=${state.currentLoginId}`
       );
       commit("SET_PLANFAVORITE", res.data);
       const res2 = await this.$axios.get(
-        `http://localhost:3001/goods?loginId=${state.currentLoginId}`
+        `${BASE_URL}/goods?loginId=${state.currentLoginId}`
       );
       commit("SET_GOODSFAVORITE", res2.data);
     } catch (error) {
@@ -49,21 +51,21 @@ export const actions = {
 
   async getPlanFavorite({ commit, state }) {
     const res = await this.$axios.get(
-      `http://localhost:3001/plan?loginId=${state.currentLoginId}`
+      `${BASE_URL}/plan?loginId=${state.currentLoginId}`
     );
     commit("SET_PLANFAVORITE", res.data);
   },
 
   async getGoodsFavorite({ commit, state }) {
     const res = await this.$axios.get(
-      `http://localhost:3001/goods?loginId=${state.currentLoginId}`
+      `${BASE_URL}/goods?loginId=${state.currentLoginId}`
     );
     commit("SET_GOODSFAVORITE", res.data);
   },
 
   async addPlanFavorite({ commit, state }, planId) {
     try {
-      const allPlanRes = await this.$axios.get(`http://localhost:3001/plan`);
+      const allPlanRes = await this.$axios.get(`${BASE_URL}/plan`);
       const allPlan = allPlanRes.data;
 
       const maxId = allPlan.length
@@ -75,7 +77,7 @@ export const actions = {
         mkdpNo: planId,
       };
 
-      const res = await this.$axios.post(`http://localhost:3001/plan`, addPlan);
+      const res = await this.$axios.post(`${BASE_URL}/plan`, addPlan);
       commit("ADD_PLANFAVORITE", res.data);
     } catch (error) {
       console.error("Error adding plan:", error);
@@ -85,7 +87,7 @@ export const actions = {
 
   async addGoodsFavorite({ commit, state }, goodsNo) {
     try {
-      const allGoodsRes = await this.$axios.get(`http://localhost:3001/goods`);
+      const allGoodsRes = await this.$axios.get(`${BASE_URL}/goods`);
       const allGoods = allGoodsRes.data;
 
       const maxId = allGoods.length
@@ -98,10 +100,7 @@ export const actions = {
         goodsNo: goodsNo,
       };
 
-      const res = await this.$axios.post(
-        `http://localhost:3001/goods`,
-        addGood
-      );
+      const res = await this.$axios.post(`${BASE_URL}/goods`, addGood);
       commit("ADD_GOODSFAVORITE", res.data);
     } catch (error) {
       console.error("Error adding good:", error);
@@ -115,7 +114,7 @@ export const actions = {
         (plan) => plan.mkdpNo === planId
       );
 
-      await this.$axios.delete(`http://localhost:3001/plan/${planToRemove.id}`);
+      await this.$axios.delete(`${BASE_URL}/plan/${planToRemove.id}`);
       commit("DELETE_PLANFAVORITE", planId);
     } catch (error) {
       console.error("Error removing plan:", error);
@@ -129,9 +128,7 @@ export const actions = {
         (good) => good.goodsNo === goodsNo
       );
 
-      await this.$axios.delete(
-        `http://localhost:3001/goods/${goodsToRemove.id}`
-      );
+      await this.$axios.delete(`${BASE_URL}/goods/${goodsToRemove.id}`);
       commit("DELETE_GOODSFAVORITE", goodsNo);
     } catch (error) {
       console.error("Error removing good:", error);

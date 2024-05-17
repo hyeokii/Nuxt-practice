@@ -4,6 +4,11 @@
       "id": "1",
       "loginId": "song",
       "mkdpNo": "55118"
+    },
+    {
+      "id": "2",
+      "loginId": "re2volution",
+      "mkdpNo": "55118"
     }
   ],
   "goods": [
@@ -11,6 +16,16 @@
       "id": "1",
       "loginId": "song",
       "goodsNo": "10673015"
+    },
+    {
+      "id": "2",
+      "loginId": "re2volution",
+      "goodsNo": "10673015"
+    },
+    {
+      "id": "3",
+      "loginId": "re2volution",
+      "goodsNo": "10673016"
     }
   ]
 }
