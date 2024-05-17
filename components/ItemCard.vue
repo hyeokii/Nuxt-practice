@@ -8,7 +8,7 @@
       품절
     </div>
     <img
-      :src="`https://img-stg.x2bee.com/${goods.goodsRepImgPathNm}`"
+      :src="getImgSrc(goods.goodsRepImgPathNm)"
       alt="productImg"
       class="productImg"
       v-if="goods.goodsRepImgPathNm"
@@ -49,6 +49,15 @@ export default {
     },
     setIsLike() {
       this.isLike = !this.isLike;
+    },
+    getImgSrc(imgPath) {
+      if (imgPath.endsWith(".png")) {
+        return `https://img-stg.x2bee.com/${imgPath}`;
+      } else if (imgPath.endsWith(".svg")) {
+        return `https://fo.x2bee.com/${imgPath}`;
+      } else {
+        return "";
+      }
     },
   },
   data() {

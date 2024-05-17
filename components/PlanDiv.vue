@@ -88,6 +88,8 @@ export default {
 .planDivHtml::v-deep {
   p {
     margin: 0;
+    display: flex;
+    flex-direction: column;
   }
   img {
     width: 1240px;
