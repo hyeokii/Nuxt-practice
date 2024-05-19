@@ -2,8 +2,8 @@
   <div class="planDetail-wrap">
     <h1 class="planDetail-title">기획전</h1>
     <div class="plan-like">
-      <div @click="handleLike()">
-        <img src="https://fo.x2bee.com/images/icons/like.svg" alt="" />
+      <div @click="handleLike(res.mkdpNo)">
+        <img :src="likeIconSrc" alt="like" />
       </div>
       <div @click="handleShare()">
         <img src="https://fo.x2bee.com/images/icons/ico_share02.svg" alt="" />
@@ -36,12 +36,24 @@ import { getPlanDetail } from "../../api";
 import PlanDetail from "../../components/PlanDetail.vue";
 import SelectScroll from "../../components/SelectScroll.vue";
 import RecentPlanList from "../../components/RecentPlanList.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
     PlanDetail,
     SelectScroll,
     RecentPlanList,
+  },
+  computed: {
+    ...mapState(["planFavorite"]),
+    isFavorite() {
+      return this.planFavorite.some((plan) => plan.mkdpNo === this.res.mkdpNo);
+    },
+    likeIconSrc() {
+      return this.isFavorite
+        ? "https://fo.x2bee.com/images/icons/like_active.svg"
+        : "https://fo.x2bee.com/images/icons/like.svg";
+    },
   },
   async asyncData({ params }) {
     try {
@@ -53,8 +65,13 @@ export default {
     }
   },
   methods: {
-    handleLike() {
-      alert("좋아요!!");
+    ...mapActions(["addPlanFavorite", "deletePlanFavorite"]),
+    async handleLike(id) {
+      if (this.isFavorite) {
+        await this.deletePlanFavorite(id);
+      } else {
+        await this.addPlanFavorite(id);
+      }
     },
     handleShare() {
       alert("공유!!");
