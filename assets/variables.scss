@@ -119,3 +119,25 @@ em {
     border-radius: 0;
   }
 }
+.like-btn-area {
+  display:flex;
+  justify-content: flex-end;
+  margin-top:8px;
+  gap:0 12px;
+  button {
+    font-size:0;				
+  }
+  .btn-like {
+    width:20px;
+    height:20px;
+    background:url('https://fo.x2bee.com/images/icons/like.svg') no-repeat;
+    &.on {
+      background:url('https://fo.x2bee.com/images/icons/like_active.svg') no-repeat;
+    }
+  }
+  .btn-share {
+    width:20px;
+    height:20px;
+    background:url('https://fo.x2bee.com/images/icons/ico_share02.svg') no-repeat;
+  }
+}

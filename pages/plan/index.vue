@@ -16,9 +16,10 @@
 </template>
 <script>
 import apiData from "../../api/apiData";
+import { mapMutations } from 'vuex';
 export default {
 	layout : 'Plan',
-	async asyncData({$axios,route}) {
+	async asyncData({$axios,route,store}) {
 		const pageNo = route.query.pageNo ? route.query.pageNo : 1; // 페이지 번호 기본 값 
 		const sortType = route.query.sortType ? route.query.sortType : 'recent'; // sort type 기본 값
 		const planGroupData = await $axios.get("https://gw.x2bee.com/api/display/v1/plan/group")
@@ -26,6 +27,11 @@ export default {
 		const planResultData = await apiData.getPlanResult(1, 9 * pageNo, route.query.groupNo, sortType);
 
 		const totalPageCount = Math.ceil(planResultData?.data?.payload?.totalCount/9);
+
+		const planLikeData = await $axios.get("http://localhost:3001/plan?loginId=song");
+    store.commit("setPlanList", planLikeData.data);
+
+
 		return {
 			planGroup : planGroupData?.data ?? [],
 			planList: planResultData?.data?.payload?.planInfoList ?? [], // 컴포넌트 안에 있어야함

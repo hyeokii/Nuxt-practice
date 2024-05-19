@@ -1,19 +1,19 @@
 <template>
-	<div v-if="isView" class="box-slide type-card">
+	<div class="box-slide type-card">
 		<swiper class="swiper" :option="planSwiperOptions">
 			<swiper-slide v-for="(planData ,planIndex) in detailData" v-bind:key="`${planIndex}_${planData.id}`" class="plan-item">
-				<a :href="`plan/${detailData.mkdpNo}`">
+				<a :href="`plan/${planData.mkdpNo}`">
 					<div class="img-box">
-						<img :src="`https://img-stg.x2bee.com/${detailData.imageList[0].bnrImgPathNm}`" :alt="`${detailData.mkdpNm} 이미지`"/>
+						<img :src="`https://img-stg.x2bee.com/${planData.imageList[0].bnrImgPathNm}`" :alt="`${planData.mkdpNm} 이미지`"/>
 					</div>
 					<div class="btn-area">
-						<button type="button" class="btn-like" :class="{on : isActive}" @click="evtLike">좋아요</button >
+						<button type="button" class="btn-like" :class="{on : isActive}" @click="evtLike">좋아요</button>
 						<button type="button" class="btn-share">share</button>
 					</div>
-					<p class="name">{{ detailData.mkdpNm }}</p>
-					<p class="desc">{{ detailData.introConts }}</p>
+					<p class="name">{{ planData.mkdpNm }}</p>
+					<p class="desc">{{ planData.introConts }}</p>
 					<div class="date">
-						<span>{{date(detailData.startDate)}}</span>~<span>{{date(detailData.endDate)}}</span>
+						<span>{{date(planData.startDate)}}</span>~<span>{{date(planData.endDate)}}</span>
 					</div>
 				</a>
 			</swiper-slide>
@@ -24,14 +24,14 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
-	name: "LinkList",
+	name: "PlanListSlide",
 	components: {
     Swiper,
     SwiperSlide,
   },
 	props: {
 		detailData: {
-			type: Object,
+			type: Array,
 			defaultValue: undefined,
 		},
   },
@@ -40,8 +40,8 @@ export default {
 			rangeDate : null,
 			isActive: false,
 			planSwiperOptions: {
-        slidesPerView: 2,
-        spaceBetween: 24,
+        slidesPerView: 4,
+        spaceBetween: 12,
         loop: false,
         navigation: {
           prevEl: ".swiper-button-prev.banner",

@@ -1,24 +1,44 @@
 <template>
 	<section class="box-section">
-		<slot></slot>
+		<PlanBannerBox :detailData="detailData" />
+		<PlanSortArea @getSelectData="sortChangeEvent"/>
+		<PlanProductList :goodsList="goodsList"/>
+		<PlanCoupon :detailData="detailData"/>
 	</section>
 </template>
 <script>
-
+import apiData from "@/api/apiData";
 export default {
 	name: "planSection",
 	props: {
-		
+		detailData: {
+			type:Object,
+			defaultValue:undefined
+		},
+		mkdpNo : {
+			type:Object,
+			defaultValue:undefined
+		}
 	},
 	data() {		
 		return {
-			
+			goodsList:[]
 		};
 	},
 	created() {},
-	mounted() {		
+	mounted() {
+		this.goodsList = this.detailData.goodsList
 	},
 	methods: {		
+		async getPlanDetailGoodsList(sortType) {
+			const planResultData = await apiData.getPlanDetailResult(this.mkdpNo, this.detailData.divobjNo, sortType);
+			console.log(planResultData);
+			this.goodsList = planResultData.data[0].goodsList;
+		},
+		//정렬 select
+		sortChangeEvent(sortType) { // sortType을 받아서 getPlanList 에 넣어주기
+			this.getPlanDetailGoodsList(sortType)
+		},
 	},
 	computed: {}
 };

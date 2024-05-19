@@ -17,6 +17,7 @@
 	</div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
 	name: "LinkList",
 	props: {
@@ -33,7 +34,19 @@ export default {
   },
   created() {		
 	},
-  mounted() {},
+  mounted() {
+		console.log(this.planList);
+
+		const map = this.planList.reduce((acc, curr) => { // component?? vuex ?? where??
+				acc.set(curr.mkdpNo, curr);
+				return acc;
+		}, new Map());
+
+		const data = map.get(this.planListData.mkdpNo);
+		if(data) {
+			this.isActive = true;
+		}
+	},
   methods: {
 		date(date) {
 			const rangeDate = new Date(date)
@@ -43,11 +56,14 @@ export default {
 				rangeDate.getDate().toString().padStart(2,'0')
 			)
 		},
-		evtLike :function() {
+		evtLike :function($event) {
+			$event.preventDefault();
+			
 			this.isActive = !this.isActive;
 		}
 	},
-  computed: {				
+  computed: {	
+		...mapState(["planList"]),			
   }
 };
 </script>

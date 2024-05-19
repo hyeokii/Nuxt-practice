@@ -19,11 +19,11 @@ export default {
   async getplanDetail(mkdpNo) {
     return await axios.get("https://gw.x2bee.com/api/display/v1/plan/planDetail/"+ mkdpNo);
   },
-  async getPlanDetailResult() {
+  async getPlanDetailResult(mkdpNo, divobjNo, sort) {
     const planDetailData = {
-      mkdpNo: '55118', // 기획전 번호
-      divobjNo: '1',  // 구분자 번호
-      sort: '20', // 정렬코드
+      mkdpNo: mkdpNo, // 기획전 번호
+      divobjNo: divobjNo,  // 구분자 번호
+      sort: sort, // 정렬코드
       // 10: 최신순
       // 20: 판매 많은 순
       // 30: 높은 가격순
@@ -31,6 +31,7 @@ export default {
       // 50: 상품평 많은순
       dispMediaCd: '99' // 미디어코드 (고정)
     };
-    const planDetailResultData = await axios.get("https://gw.x2bee.com/api/display/v1/plan/planGoodsInfo" , {params:planDetailData})
+    const planDetailResultData = await axios.get("https://gw.x2bee.com/api/display/v1/plan/planGoodsInfo" , {params:planDetailData});
+    return planDetailResultData;
   }
 };

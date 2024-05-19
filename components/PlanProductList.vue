@@ -1,6 +1,6 @@
 <template>	
 	<div class="product-list" v-if="isView">
-		<slot></slot>
+		<PlanProductItem v-for="(pdData,pdIndex) in goodsList" v-bind:key="`${pdIndex}_${pdData.id}`" :pdData="pdData"/>
 	</div>
 </template>
 <!--  
@@ -13,8 +13,8 @@
 export default {
 	name: "PlanProductList",
 	props: {
-		detailData : {
-			type:Object,
+		goodsList : {
+			type:Array,
 			defaultValut: undefined
 		}
 	},
@@ -29,7 +29,7 @@ export default {
 	},
 	computed: {
 		isView() {
-			return this.detailData
+			return this.goodsList ?? []
 		}
 	}
 };

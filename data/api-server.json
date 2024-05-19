@@ -1,0 +1,46 @@
+{
+  "plan": [
+    {
+      "id": "1",
+      "loginId": "song",
+      "mkdpNo": "55128"
+    },
+    {
+      "id": "2",
+      "loginId": "re2volution",
+      "mkdpNo": "55128"
+    },
+    {
+      "id": "3",
+      "loginId": "ccomo07071",
+      "mkdpNo": "55118"
+    },
+    {
+      "id": "4",
+      "loginId": "song",
+      "mkdpNo": "55138"
+    }
+  ],
+  "goods": [
+    {
+      "id": "1",
+      "loginId": "song",
+      "goodsNo": "10670875"
+    },
+    {
+      "id": "2",
+      "loginId": "re2volution",
+      "mkdpNo": "10795355"
+    },
+    {
+      "id": "3",
+      "loginId": "ccomo07071",
+      "mkdpNo": "10795357"
+    },
+    {
+      "id": "4",
+      "loginId": "song",
+      "mkdpNo": "10795357"
+    }
+  ]
+}

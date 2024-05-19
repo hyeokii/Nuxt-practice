@@ -1,23 +1,17 @@
 <template>
 	<div class="pg-plan">
 		<h2>기획전</h2>
-		<div class="btn-area">
-			<!-- <button type="button" class="btn-like" :class="{on : isActive}" @click="evtLike">좋아요</button > -->
-			<button type="button" class="btn-like" @click="evtLike">좋아요</button >
+		<div class="like-btn-area">
+			<button type="button" class="btn-like" :class="{on : isActive}" @click="evtLike">좋아요</button >
+			<!-- <button type="button" class="btn-like" @click="evtLike">좋아요</button > -->
 			<button type="button" class="btn-share">share</button>
 		</div>
 		<PlanHtmlBox :detailData="planData.titleHtml" />
 		<SelectBox>
 			<option v-for="(planData, planIndex) in planData.planDivObjList" v-bind:key="`${planIndex}_${planData.id}`">{{ planData.divobjNm }}</option>
 		</SelectBox>
-		<PlanSection v-for="(detailData, detailIndex) in planDetail" v-bind:key="`${detailData}_${detailIndex.id}`">
-			<PlanBannerBox :detailData="detailData" />
-			<PlanProductList :detailData="detailData">
-				<PlanProductItem v-for="(pdData,pdIndex) in detailData.goodsList" v-bind:key="`${pdIndex}_${pdData.id}`" :pdData="pdData"/>
-			</PlanProductList>
-			<PlanCoupon :detailData="detailData"/>
-		</PlanSection>
-		<PlanListSLide :detailData ="planList"/>
+		<PlanSection v-for="(detailData, detailIndex) in planDetail" v-bind:key="`${detailData}_${detailIndex.id}`" :detailData="detailData" :mkdpNo="planData.mkdpNo"/>
+		<PlanListSlide :detailData="recentPlanList"/>
   </div>
 </template>
 <script>
@@ -27,11 +21,10 @@ export default {
 	layout : 'PlanDetail',
 	async asyncData({$axios,route}) {
 		const planDetailData = await apiData.getplanDetail(route.params.detail);	
-		const planResultData = await apiData.getPlanResult();
 		return { 
 			planData:planDetailData?.data , // 기획전 기본 데이터
 			planDetail:planDetailData?.data?.planDivObjList?? [], // 각 기획전 data
-			planList : planResultData?.data.payload?.planInfoList ?? [],
+			recentPlanList : planDetailData?.data.recentPlanList ?? [],
 		}
 	},
 	created() {		
@@ -41,7 +34,9 @@ export default {
 	data() {
 		return {				
 			planData : [],
-			planDetail : []
+			planDetail : [],
+			recentPlanList: [],
+			isActive: false
 		};
 	},
 	computed : {
@@ -49,8 +44,8 @@ export default {
 	},
 	methods : {
 		evtLike :function() {
-			// this.isActive = !this.isActive;
-		}
+			this.isActive = !this.isActive;
+		},	
 	}
 }
 </script>
@@ -88,4 +83,4 @@ export default {
 			background:url('https://fo.x2bee.com/images/icons/ico_share02.svg') no-repeat;
 		}
 	}
-</style>
+</style>c
