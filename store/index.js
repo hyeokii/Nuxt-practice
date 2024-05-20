@@ -9,8 +9,8 @@ export const mutations = {
   SET_PLAN_FAVORITE(state, planFavoriteData) {
     state.planFavoriteData = planFavoriteData;
   },
-  ADD_PLAN_FAVORITE(state, newPlan) {
-    state.planFavoriteData.push({ ...newPlan });
+  ADD_PLAN_FAVORITE(state, newObj) {
+    state.planFavoriteData.push({ ...newObj });
   },
   DELETE_PLAN_FAVORITE(state, id) {
     state.planFavoriteData = state.planFavoriteData.filter(
@@ -21,8 +21,8 @@ export const mutations = {
   SET_GOODS_FAVORITE(state, goodsFavoriteData) {
     state.goodsFavoriteData = goodsFavoriteData;
   },
-  ADD_GOODS_FAVORITE(state, newGoods) {
-    state.goodsFavoriteData.push({ ...newGoods });
+  ADD_GOODS_FAVORITE(state, newObj) {
+    state.goodsFavoriteData.push({ ...newObj });
   },
   DELETE_GOODS_FAVORITE(state, id) {
     state.goodsFavoriteData = state.goodsFavoriteData.filter(
@@ -33,8 +33,8 @@ export const mutations = {
 
 export const actions = {
   async addPlanFavorite({ commit }, newPlan) {
-    await apiData.addPlanFavorite(newPlan);
-    commit("ADD_PLAN_FAVORITE", newPlan);
+    const newObj = await apiData.addPlanFavorite(newPlan);
+    commit("ADD_PLAN_FAVORITE", newObj.data);
   },
 
   async deletePlanFavorite({ commit }, id) {
@@ -43,8 +43,8 @@ export const actions = {
   },
 
   async addGoodsFavorite({ commit }, newGoods) {
-    await apiData.addGoodsFavorite(newGoods);
-    commit("ADD_GOODS_FAVORITE", newGoods);
+    const newObj = await apiData.addGoodsFavorite(newGoods);
+    commit("ADD_GOODS_FAVORITE", newObj.data);
   },
 
   async deleteGoodsFavorite({ commit }, id) {
@@ -52,3 +52,6 @@ export const actions = {
     commit("DELETE_GOODS_FAVORITE", id);
   },
 };
+
+// getter를 만들어서 computed처럼 쓸 수 있음.
+// key, value로 좋아요 데이터 관리.

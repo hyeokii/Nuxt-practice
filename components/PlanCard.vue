@@ -49,16 +49,18 @@ export default {
   methods: {
     setIsLike(mkdpNo) {
       if (this.isLike(mkdpNo)) {
+        console.log(this.planFavoriteData);
         const obj = this.planFavoriteData.find(
           (plan) => plan.mkdpNo === mkdpNo
         );
+        console.log(obj);
         const id = obj.id;
         this.$store.dispatch("deletePlanFavorite", id);
       } else {
         this.$store.dispatch("addPlanFavorite", {
-          id: mkdpNo,
           loginId: "ccomo07071",
           mkdpNo: mkdpNo,
+          // ?
         });
       }
     },

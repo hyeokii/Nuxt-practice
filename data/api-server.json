@@ -1,44 +1,14 @@
 {
   "plan": [
     {
-      "id": "1",
-      "loginId": "song",
-      "mkdpNo": "55128"
-    },
-    {
-      "id": "2",
-      "loginId": "re2volution",
-      "mkdpNo": "55128"
-    },
-    {
-      "id": "4",
-      "loginId": "song",
+      "id": "1686",
+      "loginId": "ccomo07071",
       "mkdpNo": "55138"
     },
     {
-      "id": "55128",
-      "loginId": "ccomo07071",
-      "mkdpNo": "55128"
-    },
-    {
-      "id": "45056",
-      "loginId": "ccomo07071",
-      "mkdpNo": "45056"
-    },
-    {
-      "id": "55118",
+      "id": "1a0f",
       "loginId": "ccomo07071",
       "mkdpNo": "55118"
-    },
-    {
-      "id": "55148",
-      "loginId": "ccomo07071",
-      "mkdpNo": "55148"
-    },
-    {
-      "id": "45098",
-      "loginId": "ccomo07071",
-      "mkdpNo": "45098"
     }
   ],
   "goods": [
@@ -68,14 +38,19 @@
       "goodsNo": "10673016"
     },
     {
+      "id": "10795356",
+      "loginId": "ccomo07071",
+      "goodsNo": "10795356"
+    },
+    {
       "id": "10673015",
       "loginId": "ccomo07071",
       "goodsNo": "10673015"
     },
     {
-      "id": "10795356",
+      "id": "63f2",
       "loginId": "ccomo07071",
-      "goodsNo": "10795356"
+      "goodsNo": "10795346"
     }
   ]
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="planWrapper">
-    <!-- {{ this.$store.state.planFavoriteData }} -->
     <ul class="categoryContainer">
       <li
         class="category"
@@ -19,10 +18,10 @@
         {{ group.dispGrpNm }}
       </li>
     </ul>
-    <sortSelectBox
-      @updatePlanList="updatePlanList"
-      :planList="planList"
-      :sortType="sortType"
+    <Selectbox
+      :options="planSortData"
+      :defaultOption="defaultOption"
+      @change="updatePlanList"
     />
     <PlanList
       :planList="planList"
@@ -47,11 +46,17 @@ export default {
       pageNo: 1,
       selectedGroup: "0",
       // query에 저장(O)
+      // 겹치는 값이 있음.
       sortType: "recent",
       totalCount: 0,
       curPageNo: 1,
       // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
       planFavoriteData: [],
+      planSortData: [
+        { label: "최신순", value: "recent" },
+        { label: "마감순", value: "close" },
+      ],
+      defaultOption: { label: "최신순", value: "recent" },
     };
   },
   async asyncData({ route, store, $axios }) {
@@ -109,9 +114,20 @@ export default {
     },
 
     async updatePlanList(sortType) {
-      // sort api 호출
+      const currentRoute = this.$router.currentRoute;
+      const { query } = currentRoute;
+      const { pageNo = "1", pageSize = "9", dispGrpNo = "" } = query;
+
+      const newQuery = {
+        ...query,
+        sortType,
+      };
+
+      this.$router.push({
+        path: "/plan",
+        query: newQuery,
+      });
       this.sortType = sortType;
-      const query = this.$router.currentRoute.query;
       try {
         const responseData = await apiData.fetchSortPlan(
           this.sortType,

@@ -16,10 +16,10 @@
       /></span>
     </div>
     <div class="titleImg" v-html="planDataList.titleHtmlPc"></div>
-    <ScrollSelectBox
-      :planDivList="planDivList"
-      :curScroll="curScroll"
-      @moveToDiv="moveToDiv"
+    <Selectbox
+      :options="scrollOptions"
+      :defaultOption="scrollDefaultOption"
+      @change="moveToDiv"
     />
     <PlanDiv
       class="planDiv"
@@ -52,8 +52,9 @@ export default {
     return {
       planDataList: [],
       planDivList: [],
+      scrollOptions: [],
       mkdpNo: "",
-      curScroll: "0",
+      scrollDefaultOption: { label: "선택해주세요", value: null },
     };
   },
   async asyncData({ route, $axios, store }) {
@@ -72,24 +73,35 @@ export default {
       mkdpNo: params.id,
     };
   },
+  mounted() {
+    this.planDivList.map((planDiv) =>
+      this.scrollOptions.push({
+        label: planDiv.divobjNm,
+        value: planDiv.divobjNo,
+      })
+    );
+  },
   methods: {
     moveToDiv(newScroll) {
       this.$refs.planDivs[newScroll - 1].$el.scrollIntoView();
     },
 
     goToMain() {
-      this.$router.push("/plan");
+      this.$router.go(-1);
+      // 뒤로가기로 하는 게 좋음.
+      // parameter 가지고 가게.
     },
 
-    setIsLike(mkdpNo) {
+    async setIsLike(mkdpNo) {
       if (this.isLike(mkdpNo)) {
-        const id = this.planFavoriteData.filter(
+        const obj = this.planFavoriteData.find(
           (plan) => plan.mkdpNo === mkdpNo
-        )[0].id;
+        );
+        const id = obj.id;
+
         this.$store.dispatch("deletePlanFavorite", id);
       } else {
         this.$store.dispatch("addPlanFavorite", {
-          id: mkdpNo,
           loginId: "ccomo07071",
           mkdpNo: mkdpNo,
         });

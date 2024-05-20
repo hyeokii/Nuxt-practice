@@ -40,7 +40,7 @@ export default {
 
   methods: {
     async loadMore() {
-      // 상위로 이벤트를 보낸 다음에 처리(?)
+      // 상위로 이벤트를 보낸 다음에 처리(?????)
       const query = this.$router.currentRoute.query;
       this.$router.push({
         path: "/plan",

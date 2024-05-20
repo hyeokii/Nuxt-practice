@@ -1,14 +1,26 @@
 <template>
   <div class="selectContainer">
     <div class="custom-select-wrapper">
-      <select class="custom-select" v-model="newScroll" @change="moveToDiv">
-        <option value="0" hidden>선택해 주세요.</option>
+      <select
+        class="custom-select"
+        v-model="selectedOption"
+        @change="handleOptionChange"
+      >
         <option
-          v-for="(planDiv, idx) in planDivList"
-          :key="`${idx}${planDiv.divobjGbCd}`"
-          :value="planDiv.divobjNo"
+          v-if="defaultOption"
+          :value="defaultOption.value"
+          disabled
+          hidden
         >
-          {{ planDiv.divobjNm }}
+          {{ defaultOption.label }}
+        </option>
+        <option
+          v-for="option in options"
+          :value="option.value"
+          :key="option.value"
+          :selected="selectedOption === option.value"
+        >
+          {{ option.label }}
         </option>
       </select>
       <span class="arrow">&#9660;</span>
@@ -16,26 +28,23 @@
   </div>
 </template>
 
-<!-- 기본 selectbox 구현  -->
-
 <script>
 export default {
   props: {
-    planDivList: { type: Array, required: true },
-    curScroll: { type: String },
+    options: { type: Array, required: true }, // 옵션
+    defaultOption: { type: Object, required: true }, // 디폴트 옵션
   },
 
   data() {
     return {
-      newScroll: this.curScroll,
+      selectedOption:
+        this.$router.currentRoute.query.sortType ?? this.defaultOption.value,
     };
   },
 
   methods: {
-    async moveToDiv() {
-      if (this.newScroll !== "0") {
-        this.$emit("moveToDiv", this.newScroll);
-      }
+    handleOptionChange() {
+      this.$emit("change", this.selectedOption);
     },
   },
 };
@@ -44,7 +53,6 @@ export default {
 <style lang="scss" scoped>
 .selectContainer {
   width: 1240px;
-
   margin: 2rem 0;
   display: flex;
   justify-content: end;

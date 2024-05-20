@@ -21,9 +21,14 @@
 
     <!-- goods -->
     <div>
-      <GoodsSortSelectBox
+      <!-- <GoodsSortSelectBox
         :sortType="sortType"
         @updateGoodsList="updateGoodsList"
+      /> -->
+      <Selectbox
+        :options="goodsSortOptions"
+        :defaultOption="goodsSortDefaultOption"
+        @change="updateGoodsList"
       />
       <div class="goodsListContainer">
         <ItemCard
@@ -53,6 +58,14 @@ export default {
     return {
       sortType: "10",
       newGoodsList: [...this.goodsList],
+      goodsSortOptions: [
+        { label: "최신순", value: "10" },
+        { label: "판매 많은순", value: "20" },
+        { label: "높은 가격순", value: "30" },
+        { label: "낮은 가격순", value: "40" },
+        { label: "상품평 많은순", value: "50" },
+      ],
+      goodsSortDefaultOption: { label: "최신순", value: "10" },
     };
   },
   props: {

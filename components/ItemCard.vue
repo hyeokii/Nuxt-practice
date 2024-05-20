@@ -64,7 +64,6 @@ export default {
         this.$store.dispatch("deleteGoodsFavorite", id);
       } else {
         this.$store.dispatch("addGoodsFavorite", {
-          id: goodsNo,
           loginId: "ccomo07071",
           goodsNo: goodsNo,
         });
@@ -72,6 +71,7 @@ export default {
     },
     isLike(goodsNo) {
       const arr = this.goodsFavoriteData.map((goods) => goods.goodsNo);
+      // map이 너무 많이??
       return arr.includes(goodsNo);
     },
     getImgSrc(imgPath) {

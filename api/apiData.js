@@ -21,6 +21,8 @@ export default {
     );
   },
 
+  // api 합쳐서
+
   async fetchPlanList(sortType, pageNo, dispGrpNo) {
     // 2페이지 이상일 경우
     return axios.get(
