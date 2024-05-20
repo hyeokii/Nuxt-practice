@@ -16,9 +16,29 @@
       "mkdpNo": "55138"
     },
     {
+      "id": "55128",
+      "loginId": "ccomo07071",
+      "mkdpNo": "55128"
+    },
+    {
+      "id": "45056",
+      "loginId": "ccomo07071",
+      "mkdpNo": "45056"
+    },
+    {
       "id": "55118",
       "loginId": "ccomo07071",
       "mkdpNo": "55118"
+    },
+    {
+      "id": "55148",
+      "loginId": "ccomo07071",
+      "mkdpNo": "55148"
+    },
+    {
+      "id": "45098",
+      "loginId": "ccomo07071",
+      "mkdpNo": "45098"
     }
   ],
   "goods": [
@@ -43,19 +63,19 @@
       "mkdpNo": "10795357"
     },
     {
+      "id": "10673016",
+      "loginId": "ccomo07071",
+      "goodsNo": "10673016"
+    },
+    {
       "id": "10673015",
       "loginId": "ccomo07071",
       "goodsNo": "10673015"
     },
     {
-      "id": "10670875",
+      "id": "10795356",
       "loginId": "ccomo07071",
-      "goodsNo": "10670875"
-    },
-    {
-      "id": "10670305",
-      "loginId": "ccomo07071",
-      "goodsNo": "10670305"
+      "goodsNo": "10795356"
     }
   ]
 }

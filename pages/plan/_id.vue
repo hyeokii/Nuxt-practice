@@ -1,6 +1,5 @@
 <template>
   <div class="planDetailContainer" v-if="planDataList">
-    <!-- {{ this.$store.state.goodsFavoriteData }} -->
     <div class="planTitle">기획전</div>
     <div class="btnContainer">
       <span class="likeBtn" @click="setIsLike(mkdpNo)"

@@ -49,9 +49,10 @@ export default {
   methods: {
     setIsLike(mkdpNo) {
       if (this.isLike(mkdpNo)) {
-        const id = this.planFavoriteData.filter(
+        const obj = this.planFavoriteData.find(
           (plan) => plan.mkdpNo === mkdpNo
-        )[0].id;
+        );
+        const id = obj.id;
         this.$store.dispatch("deletePlanFavorite", id);
       } else {
         this.$store.dispatch("addPlanFavorite", {
