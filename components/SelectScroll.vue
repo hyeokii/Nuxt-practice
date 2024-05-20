@@ -44,7 +44,9 @@ export default {
       this.sortOpen = !this.sortOpen;
     },
     handleRef(value) {
+      this.sortSelected = value;
       this.$emit("getRef", value);
+      this.sortOpen = false;
     },
     handleClickOutside(event) {
       if (!this.$refs.dropdown.contains(event.target)) {
