@@ -3,6 +3,8 @@ import apiData from "../api/apiData";
 export const state = () => ({
   planFavoriteData: [],
   goodsFavoriteData: [],
+  planList: [],
+  goodsList: [],
 });
 
 export const mutations = {
@@ -29,6 +31,10 @@ export const mutations = {
       (goods) => goods.id !== id
     );
   },
+
+  SET_PLAN_LIST(state, planList) {
+    state.planList = planList;
+  },
 };
 
 export const actions = {
@@ -50,6 +56,21 @@ export const actions = {
   async deleteGoodsFavorite({ commit }, id) {
     await apiData.deleteGoodsFavorite(id);
     commit("DELETE_GOODS_FAVORITE", id);
+  },
+};
+
+export const getters = {
+  planObjList: (state) => {
+    const arr = [];
+    state.planList.forEach((plan) => {
+      arr.push({
+        mkdpNo: plan.mkdpNo,
+        favorite: state.planFavoriteData.some(
+          (favorite) => favorite.mkdpNo === plan.mkdpNo
+        ),
+      });
+    });
+    return arr;
   },
 };
 

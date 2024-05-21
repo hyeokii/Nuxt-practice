@@ -37,10 +37,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
+
 export default {
   computed: {
     ...mapState(["planFavoriteData"]),
+    ...mapGetters(["planObjList"]),
   },
   props: {
     plan: { type: Object, required: true },
@@ -63,8 +65,7 @@ export default {
       }
     },
     isLike(mkdpNo) {
-      const arr = this.planFavoriteData.map((plan) => plan.mkdpNo);
-      return arr.includes(mkdpNo);
+      return this.planObjList.find((plan) => plan.mkdpNo === mkdpNo).favorite;
     },
   },
 };

@@ -1,5 +1,7 @@
 <template>
   <div class="planWrapper">
+    {{ planObjList }}
+    <!-- {{ this.$store.state.planFavoriteData }} -->
     <ul class="categoryContainer">
       <li
         class="category"
@@ -51,7 +53,7 @@ export default {
       totalCount: 0,
       curPageNo: 1,
       // 자식 컴포넌트에 props로 내려서 관리(emit) => 자식 컴포넌트는 따로 선언할 필요 X (O)
-      planFavoriteData: [],
+      // planFavoriteData: [],
       planSortData: [
         { label: "최신순", value: "recent" },
         { label: "마감순", value: "close" },
@@ -75,6 +77,7 @@ export default {
       "http://localhost:3001/plan?loginId=ccomo07071"
     );
     store.commit("SET_PLAN_FAVORITE", planFavoriteData.data);
+    store.commit("SET_PLAN_LIST", totalData.data.payload.planInfoList);
 
     //PlanList 데이터
     return {
