@@ -28,28 +28,24 @@ export default {
       required: true,
     },
   },
-  computed: {
-    group() {
-      return this.$route.query.group ?? "";
-    },
-    sortOption() {
-      return this.$route.query.sortOption;
-    },
-  },
+
   data() {
     return {
       activeBtn: this.$route.query.group || "",
+      group: this.$route.query.group ?? "",
+      sortOption: this.$route.query.sortOption ?? "recent",
+      pageNo: this.$route.query.pageNo ?? "1",
     };
   },
 
   methods: {
     goToCategory(categoryId) {
       this.activeBtn = categoryId;
-      const query = { pageNo: 1, group: categoryId };
+      const query = { group: categoryId };
+      query.pageNo = this.$route.query.pageNo;
       if (this.sortOption) {
         query.sortOption = this.sortOption;
       }
-
       EventBus.$emit("planList-event", "categoryId-event", categoryId, query);
     },
   },

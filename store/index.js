@@ -65,14 +65,7 @@ export const actions = {
 
   async addPlanFavorite({ commit, state }, planId) {
     try {
-      const allPlanRes = await this.$axios.get(`${BASE_URL}/plan`);
-      const allPlan = allPlanRes.data;
-
-      const maxId = allPlan.length
-        ? Math.max(...allPlan.map((plan) => parseInt(plan.id, 10)))
-        : 0; //빼고
       const addPlan = {
-        id: String(maxId + 1),
         loginId: state.currentLoginId,
         mkdpNo: planId,
       };
@@ -87,15 +80,7 @@ export const actions = {
 
   async addGoodsFavorite({ commit, state }, goodsNo) {
     try {
-      const allGoodsRes = await this.$axios.get(`${BASE_URL}/goods`);
-      const allGoods = allGoodsRes.data;
-
-      const maxId = allGoods.length
-        ? Math.max(...allGoods.map((good) => parseInt(good.id, 10)))
-        : 0;
-
       const addGood = {
-        id: String(maxId + 1),
         loginId: state.currentLoginId,
         goodsNo: goodsNo,
       };

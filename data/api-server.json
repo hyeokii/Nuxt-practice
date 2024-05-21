@@ -6,14 +6,24 @@
       "mkdpNo": "55118"
     },
     {
-      "id": "2",
+      "id": "4",
+      "loginId": "re2volution",
+      "mkdpNo": "55118"
+    },
+    {
+      "id": "5",
       "loginId": "re2volution",
       "mkdpNo": "55138"
     },
     {
-      "id": "4",
+      "id": "6",
       "loginId": "re2volution",
-      "mkdpNo": "55118"
+      "mkdpNo": "55148"
+    },
+    {
+      "id": "7",
+      "loginId": "re2volution",
+      "mkdpNo": "45016"
     }
   ],
   "goods": [
@@ -28,19 +38,9 @@
       "goodsNo": "10795346"
     },
     {
-      "id": "8",
-      "loginId": "re2volution",
-      "goodsNo": "10673015"
-    },
-    {
       "id": "9",
       "loginId": "re2volution",
       "goodsNo": "10673016"
-    },
-    {
-      "id": "10",
-      "loginId": "re2volution",
-      "goodsNo": "10670875"
     }
   ]
 }

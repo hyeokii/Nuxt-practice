@@ -54,7 +54,6 @@ export default {
 
   created() {
     EventBus.$on("planList-event", (eventType, data, query) => {
-      console.log(query);
       this.$router.push({
         path: this.$route.path,
         query: query,
@@ -73,7 +72,6 @@ export default {
       sortOption = this.sortOption,
       pageNo = this.pageNo,
     }) {
-      console.log(pageNo);
       this.planList = await getPlanList({
         dispGrpNo: categoryId,
         sortOption: sortOption,
