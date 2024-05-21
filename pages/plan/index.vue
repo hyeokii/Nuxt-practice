@@ -80,7 +80,7 @@ export default {
     return {
       categoryData: categoryData.data,
       planList: totalData.data.payload.planInfoList,
-      selectedGroup: query.selectedGrp || "0",
+      selectedGroup: query.dispGrpNo || "0",
       sortType: query.sortType || "recent",
       totalCount: totalData.data.payload.totalCount,
       curPageNo: query.pageNo || 1,
@@ -96,7 +96,7 @@ export default {
           sortType: this.sortType,
           pageNo: this.pageNo,
           dispGrpNo: newGrpNo,
-          selectedGrp: groupNo,
+          // selectedGrp: newGrpNo,
         },
       });
       try {
@@ -110,7 +110,7 @@ export default {
       } catch (error) {
         console.error("error", error);
       }
-      this.selectedGroup = groupNo;
+      this.selectedGroup = newGrpNo || "0";
     },
 
     async updatePlanList(sortType) {

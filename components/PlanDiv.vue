@@ -21,10 +21,6 @@
 
     <!-- goods -->
     <div>
-      <!-- <GoodsSortSelectBox
-        :sortType="sortType"
-        @updateGoodsList="updateGoodsList"
-      /> -->
       <Selectbox
         :options="goodsSortOptions"
         :defaultOption="goodsSortDefaultOption"
