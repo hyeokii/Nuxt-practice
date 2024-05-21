@@ -70,7 +70,7 @@ export const actions = {
 
       const maxId = allPlan.length
         ? Math.max(...allPlan.map((plan) => parseInt(plan.id, 10)))
-        : 0;
+        : 0; //빼고
       const addPlan = {
         id: String(maxId + 1),
         loginId: state.currentLoginId,
@@ -134,5 +134,24 @@ export const actions = {
       console.error("Error removing good:", error);
       throw error;
     }
+  },
+};
+
+export const getters = {
+  getPlanFavorite: function (state) {
+    const map = new Map();
+
+    state.planFavorite.forEach((item) => {
+      !map.has(item.mkdpNo) ? map.set(item.mkdpNo, item) : "";
+    });
+    return map;
+  },
+  getGoodsFavorite: function (state) {
+    const map = new Map();
+
+    state.goodsFavorite.forEach((item) => {
+      !map.has(item.goodsNo) ? map.set(item.goodsNo, item) : "";
+    });
+    return map;
   },
 };

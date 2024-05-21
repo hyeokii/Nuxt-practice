@@ -27,7 +27,7 @@
 
     <hr class="divider" />
 
-    <recentPlanList :data="res"></recentPlanList>
+    <RecentPlanList :data="res"></RecentPlanList>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import { getPlanDetail } from "../../api";
 import PlanDetail from "../../components/PlanDetail.vue";
 import SelectScroll from "../../components/SelectScroll.vue";
 import RecentPlanList from "../../components/RecentPlanList.vue";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -45,9 +45,9 @@ export default {
     RecentPlanList,
   },
   computed: {
-    ...mapState(["planFavorite"]),
+    ...mapGetters(["getPlanFavorite"]),
     isFavorite() {
-      return this.planFavorite.some((plan) => plan.mkdpNo === this.res.mkdpNo);
+      return this.getPlanFavorite.has(this.res.mkdpNo);
     },
     likeIconSrc() {
       return this.isFavorite

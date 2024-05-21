@@ -31,20 +31,14 @@ export default {
   data() {
     return {
       planList: {},
+      dispGrpNo: this.$route.query.group ?? "",
+      sortOption: this.$route.query.sortOption ?? "recent",
+      pageNo: this.$route.query.pageNo ?? 1,
     };
   },
   computed: {
-    dispGrpNo() {
-      return this.$route.query.group;
-    },
-    sortOption() {
-      return this.$route.query.sortOption;
-    },
     totalCount() {
       return this.planList?.payload?.totalCount ?? 0;
-    },
-    pageNo() {
-      return this.$route.query.pageNo ?? 1;
     },
     showPlan() {
       return this.planList?.payload?.planInfoList?.length ?? 0;
@@ -60,27 +54,30 @@ export default {
 
   created() {
     EventBus.$on("planList-event", (eventType, data, query) => {
+      console.log(query);
       this.$router.push({
         path: this.$route.path,
         query: query,
       });
       if (eventType === "categoryId-event") {
-        this.fetchPlans({ categoryId: data });
+        this.fetchPlans({ categoryId: data, pageNo: query.pageNo });
       } else if (eventType === "sort-event") {
-        this.fetchPlans({ sortOption: data });
+        this.fetchPlans({ sortOption: data, pageNo: query.pageNo });
       }
     });
-  },
+  }, //data 하나로
 
   methods: {
     async fetchPlans({
       categoryId = this.dispGrpNo,
       sortOption = this.sortOption,
+      pageNo = this.pageNo,
     }) {
+      console.log(pageNo);
       this.planList = await getPlanList({
         dispGrpNo: categoryId,
         sortOption: sortOption,
-        pageNo: this.pageNo,
+        pageNo: pageNo,
       });
     },
 

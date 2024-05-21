@@ -20,14 +20,13 @@
 </template>
 
 <script>
-import { EventBus } from "..";
 export default {
   props: {
     options: {
       type: Object,
       required: true,
     },
-    boxtype: {
+    sortOption: {
       type: String,
       required: true,
     },
@@ -38,15 +37,7 @@ export default {
       sortSelected: "최신순",
     };
   },
-  computed: {
-    sortOption() {
-      if (this.boxtype === "PlanMain") {
-        return this.$route.query.sortOption;
-      }
-    },
-  },
-
-  async fetch() {
+  created() {
     for (const key in this.options) {
       if (key === this.sortOption) {
         this.sortSelected = this.options[key];
@@ -63,29 +54,18 @@ export default {
       }
       this.sortOpen = !this.sortOpen;
     },
-    selectSort(key) {
-      if (this.boxtype === "PlanMain") {
-        this.selectMainSort(key);
-      } else if (this.boxtype === "planDetail") {
-        this.selectDetailSort(key);
-      }
-    },
-    selectMainSort(key) {
-      this.sortSelected = this.options[key];
-      const query = { ...this.$route.query };
-      query.sortOption = key;
-      EventBus.$emit("planList-event", "sort-event", key, query);
-      this.sortOpen = false;
-    },
-    selectDetailSort(key) {
-      this.sortSelected = this.options[key];
-      this.$emit("planDetail-event", key);
-      this.sortOpen = false;
-    },
     handleClickOutside(event) {
       if (!this.$refs.dropdown.contains(event.target)) {
         this.sortOpen = false;
+        document.removeEventListener("click", this.handleClickOutside);
       }
+    },
+
+    selectSort(key) {
+      this.sortSelected = this.options[key];
+      this.$emit("select-box", key);
+      this.sortOpen = false;
+      document.removeEventListener("click", this.handleClickOutside);
     },
   },
 };

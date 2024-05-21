@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -32,7 +32,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["planFavorite"]),
+    ...mapGetters(["getPlanFavorite"]),
     isView() {
       return this.image?.bnrImgPathNm;
     },
@@ -40,7 +40,7 @@ export default {
       return this.plan?.imageList?.at(0);
     },
     isFavorite() {
-      return this.planFavorite.some((plan) => plan.mkdpNo === this.plan.mkdpNo);
+      return this.getPlanFavorite.has(this.plan.mkdpNo);
     },
     likeIconSrc() {
       return this.isFavorite

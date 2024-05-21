@@ -11,9 +11,9 @@
     </div>
 
     <Selectbox
-      boxtype="planDetail"
       :options="detailSortOptionList"
-      @planDetail-event="fetchGoodsList"
+      :sortOption="sortOption"
+      @select-box="fetchGoodsList"
       class="detail-sort"
     ></Selectbox>
 
@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       goodsList: Array,
+      sortOption: "최신순",
       detailSortOptionList: {
         10: "최신순",
         20: "판매 많은순",

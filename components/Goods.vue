@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -37,14 +37,12 @@ export default {
     },
   },
   computed: {
-    ...mapState(["goodsFavorite"]),
+    ...mapGetters(["getGoodsFavorite"]),
     isView() {
       return this.item?.goodsRepImgPathNm;
     },
     isFavorite() {
-      return this.goodsFavorite.some(
-        (goods) => goods.goodsNo === this.item.goodsNo
-      );
+      return this.getGoodsFavorite.has(this.item.goodsNo);
     },
     likeIconSrc() {
       return this.isFavorite
